@@ -268,15 +268,20 @@
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            // Update displayed values
-            minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
-            maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
+            // Ensure minVal never exceeds maxVal
+            if (minVal > maxVal - 10) {
+                minVal = maxVal - 10;
+                minRange.value = minVal;
+            }
 
-            // Calculate percentages for slider fill
+            // Update displayed values
+            minValueDisplay.textContent = `{{ app('currencies')->getCurrency()->code }} ${minVal.toLocaleString()}`;
+            maxValueDisplay.textContent = `{{ app('currencies')->getCurrency()->code }} ${maxVal.toLocaleString()}`;
+
+            // Update track fill
             let minPercent = (minVal / {{$max_price}}) * 100;
             let maxPercent = (maxVal / {{$max_price}}) * 100;
 
-            // Blue fill should go from minVal → maxVal
             track.style.background = `linear-gradient(to right,
         #ddd ${0}%,
         #ddd ${minPercent}%,
@@ -287,6 +292,7 @@
         }
 
         updateRange();
+
 
     </script>
 @endsection
