@@ -265,8 +265,8 @@
             minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
             maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
 
-            let minPercent = ((minVal - 0) / (10000 - 0)) * 100;
-            let maxPercent = ((maxVal - 0) / (10000 - 0)) * 100;
+            let minPercent = ((minVal - 0) / ({{($max_price / 2 - 10) * 10}})) * 100;
+            let maxPercent = ((maxVal - 0) / ({{($max_price / 2 + 10) * 10}})) * 100;
             track.style.background = `linear-gradient(to right, #ddd ${minPercent}%, #A2E2FF ${minPercent}%, #A2E2FF ${maxPercent}%, #ddd ${maxPercent}%)`;
         }
         updateRange();
