@@ -5,3 +5,7 @@
 .choose-fav-car-type-slider .slick-slide img{
     max-height: 150px !important;
 }
+
+.car-type-brand-slide img{
+    object-fit: contain;
+}
