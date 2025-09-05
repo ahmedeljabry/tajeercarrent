@@ -252,9 +252,14 @@
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            if (minVal >= maxVal) {
-                minRange.value = maxVal - 100;
-                minVal = maxVal - 100;
+            if (minVal >= {{$max_price / 2 - 10}}) {
+                minRange.value = {{$max_price / 2 + 10}};
+                minVal = minRange.value;
+            }
+
+            if (maxVal <= {{$max_price / 2 + 10}}){
+                maxRange.value = {{$max_price / 2 + 10}};
+                maxVal = maxRange.value;
             }
 
             minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
