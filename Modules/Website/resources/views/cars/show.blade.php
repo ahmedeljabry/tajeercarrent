@@ -155,7 +155,7 @@
                                         {{__('lang.No. Of Luggage')}} / {{$car->bags}}
                                     </li>
                                     <li>
-                                        Insurance type / Full insurance
+                                        {{__('lang.Insurance Type')}} / {{__('lang.Full')}}
                                     </li>
                                 </ul>
                             </div>
@@ -211,404 +211,97 @@
                             <ul class="mt-3">
                                 @if ($car->company->payment_methods)
                                     <li>
-                                        {{__('lang.Payment Methods')}} / {{implode(', ', $car->company->payment_methods)}}
+                                        {{__('lang.Payment Methods')}} / {{collect(explode(',', $car->company->payment_methods))->map(function ($item){return __('admin.' . $item);})->implode(', ')}}
                                     </li>
                                 @endif
                                 <li>
-                                    Free Delivery Locations / Business bay - Marina - Dubai Airport -
+                                    <div class="times-group-container d-flex gap-2">
+                                        <p>{{__('lang.Delivery Locations')}} / </p> <div class="days">{!! $car->company->cities->chunk(5)->map(function ($item){return '<p>' . $item->map(function ($item){return $item->title;})->implode(' - ') . '</p>';})->implode('') !!}</div>
+                                    </div>
                                 </li>
                                 <li>
                                     {{__('lang.Salik Charges')}} / {{app('currencies')->convert($car->salik_fees)}} {{app('currencies')->getCurrency()->code}}
                                 </li>
                                 <li>
-                                    5% VAT / Not included
+                                    {{$car->company->vat_percentage}}% {{__('lang.VAT')}} / {{__('lang.Not Included')}}
                                 </li>
                                 <li>
-                                    Age Required / 21+
+                                    {{__('lang.Age Required')}} / {{$car->company->min_age}}+
                                 </li>
-                                <li>
-                                    Deposit refund / 30 days from car return
-                                </li>
-                                <li>
-                                    <div class="times-group-container d-flex gap-2">
-                                        <p>
-                                            Working hours & days /
-                                        </p>
-                                        <div class="days">
-                                            <p> Monday </p>
-                                            <p> Tuesday </p>
-                                            <p> Wednesday </p>
-                                            <p> Thursday </p>
-                                            <p> Friday </p>
-                                        </div>
-                                        <div class="hours">
-                                            <p> Monday </p>
-                                            <p> Tuesday </p>
-                                            <p> Wednesday </p>
-                                            <p> Thursday </p>
-                                            <p> Friday </p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="car-features">
-            <div class="container">
-                <div class="head-title-with-line">
-                    <h3>
-                        Car features
-                    </h3>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
-                        <ul class="mt-2">
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
-                        <ul class="mt-2">
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
-                        <ul class="mt-2">
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
-                        <ul class="mt-2">
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                            <li>Apdaptive Cruise Control</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-<section class="products-page">
-        <div class="container">
-            <div class="row">
-                @include('website::cars.parts.breadcrumb', [
-                    'breadcrumbs' => [
-                        app('settings')->get('page_car_brands_title') ?: __('lang.Car Brands') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
-                        $car->brand->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $car->brand])),
-                        $car->name => null
-                ]])
-                @include('website::layouts.parts.page-title',[
-                    "title"       => $car->name,
-                    "description" => $car->getDescription(),
-                ])
-            </div>
-
-            <div class="row mt-25">
-                <div class="col-lg-7">
-                    <div class="single_product_main_image">
-                    <div data-items-large="1" data-items-small="1" class="single-image-slider owl-carousel owl-theme">
-                    <div class="single_product_main_image-box" data-src="/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}" data-fancybox="gallery">
-                        <img alt="{{$car->name}}" src="/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}" />
-                        <div class="product__vertical_meta">
-                            <span class="wishlist wishlist-toggle" data-auth="" data-id="">@lang('lang.Save to wishlist')</span>
-                        </div>
-                    </div>
-                        @foreach($car->images as $image)
-                        <div data-src="/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}" data-fancybox="gallery">
-                            <img alt="{{$car->name}}" src="/storage/{{\App\Helpers\WebpImage::generateUrl($image->image)}}" />
-                        </div>
-                        @endforeach
-                    </div>
-
-                    </div>
-                    <div data-items-large="3" data-items-small="2" class="single_product_images owl-carousel owl-theme">
-                    @foreach($car->images as $image)
-                        <div class="single_product_images_item">
-                            <div data-src="/storage/{{\App\Helpers\WebpImage::generateUrl($image->image)}}" data-fancybox="gallery">
-                                <img alt="{{$car->name}}" src="/storage/{{\App\Helpers\WebpImage::generateUrl($image->image)}}" />
-                            </div>
-                        </div>
-                    @endforeach
-                    </div>
-
-                    <div class="notes_desktop">
-                        <div class="note__label_holder" style="margin-top:25px">
-                            <h6 class="note__label">{{__('lang.Please Note')}}</h6>
-                        </div>
-                           <p> {!! collect(explode( '•' ,  $car->customer_notes))->filter()->map(function($line) {
-                                return "• " . $line . "</br>";
-
-                           } )->implode('') !!} </p>
-
-                        <div class="sidebar company_terms_holder company_notes_holder car__notes_holder">
-                            <div class="widget">
-                                <div class="widget__content car__notes">
-                                    {!! app('settings')->get($car->type . "_notes") !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-lg-5">
-                    <div class="single_product_right">
-                        <h2>{{$car->name}}</h2>
-                        <!-- <p class="single_product__mini_description">
-                            {{$car->description}}
-                        </p> -->
-
-                        <div class="product__vertical product__horizontal">
-
-                            <div class="product__vertical_bottom">
-                                <div class="product__vertical_bottom_features">
-                                    <ul>
-                                        @if($car->brand  && $car->type != "yacht")
-                                        <li>{{__('lang.Brand')}} / {{$car->brand ? $car->brand->title : ""}}</li>
-                                        @endif
-                                        <li>{{__('lang.Model')}} / {{$car->model ? $car->model->title : ""}}</li>
-
-                                        @if($car->year && $car->type != "yacht")
-                                        <li>{{__('lang.Year')}} / {{$car->year ? $car->year->title : ""}}</li>
-                                        @endif
-
-                                        @if($car->type != "yacht")
-                                        <li>{{__('lang.Color')}} / {{$car->color ? $car->color->title : ""}}</li>
-                                        @endif
-                                        @if($car->type != 'yacht')
-                                        <li>{{__('lang.Doors')}} / {{$car->doors}}</li>
-                                        @endif
-                                        @if($car->passengers)
-                                        <li>{{$car->type == 'yacht' ? __('lang.Guests')  : __('lang.Passengers')}} / {{$car->passengers}}</li>
-                                        @endif
-                                        @if($car->bags)
-                                        <li>{{__('lang.No. Of Luggage')}} / {{$car->bags ? $car->bags : "-"}}</li>
-                                        @endif
-                                    </ul>
-                                    <ul>
-                                        <li>{{$car->type == "default" ? __('lang.Minimum of Days') : __('lang.Minimum of Hours') }} / {{$car->minimum_day_booking}}</li>
-                                        @if($car->type == "default")
-                                        <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                                        <li>
-                                            {{__('lang.KM Limit Day')}} / {{$car->km_per_day ? $car->km_per_day : 250}} KM
-                                        </li>
-                                        <li>
-                                            {{__('lang.KM Limit Month')}} / {{$car->km_per_month ? $car->km_per_month : 0}} KM
-                                        </li>
-
-                                        <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
-                                        @endif
-                                    </ul>
-                                </div>
-                                <div class="home__brands_item product__horizontal_fees single_car_prices">
-
-                                </div>
-
-                                <div class="product__vertical_actions">
-                                    <ul>
-                                        @include('website::layouts.parts.car-actions', ['car' => $car])
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="notes_mobile">
-                        <div class="note__label_holder" style="margin-top:25px">
-                            <h6 class="note__label">{{__('lang.Please Note')}}</h6>
-                        </div>
-
-                        <div class="sidebar company_terms_holder company_notes_holder car__notes_holder">
-                                    <div class="widget">
-                                        <div class="widget__content car__notes">
-
-
-                                        {!! app('settings')->get($car->type . "_notes") !!}
-
-                                        </div>
-                                    </div>
-
-                        </div>
-
-                    </div>
-
-                        <div class="sidebar company_terms_holder">
-
-                            <div class="widget">
-                                <div class="widget__content">
-                                    <ul class="car_company_terms">
-                                        @if( $car->type != "yacht")
-                                        <li>
-                                            <span class="link">
-                                                {{__('admin.Delivery Time')}} / {{$car->company->delivery_time}} {{__('lang.Hours')}}
-                                            </span>
-                                        </li>
-                                        @endif
-                                        @php
-                                            $payment_methods = explode(",", $car->company->payment_methods);
-                                        @endphp
-                                        <li>
-                                            <span class="link">
-                                                {{__('admin.Payment Methods')}} /
-                                                @foreach($payment_methods as $method)
-                                                {{__('admin.' . $method)}} @if(!$loop->last) - @endif
-                                                @endforeach
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="link">
-                                                {{$car->type == "yacht" ? __('lang.City') : __('lang.Delivery Locations')}} /
-                                                @foreach($car->company->cities as $city)
-                                                {{$city->title}} @if(!$loop->last) - @endif
-                                                @endforeach
-                                            </span>
-                                        </li>
-                                        @if($car->company->type == "default")
-                                        <li>
-                                            <span class="link">
-                                                {{__('admin.Salik Fees')}} / {{$car->company->salik_fees}} AED
-                                            </span>
-                                        </li>
-                                        @endif
-                                        <li>
-                                            <span class="link">
-                                            {{__('lang.VAT')}} / {{$car->company->vat_percentage}}% ({{__('lang.Not Included')}})
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="link">
-                                            {{__('lang.Age Required')}} / +{{$car->company->min_age}}
-                                            </a>
-                                        </li>
-                                        @if($car->company->type == "default")
-                                        <li>
-                                            <span class="link">
-                                            {{__('admin.Deposit Refund')}} / {{$car->company->deposit_refund}} ({{__('lang.Days')}})
-                                            </span>
-                                        </li>
-                                        @endif
-                                        <li>
-                                            <span class="link">
-                                                {{__('lang.working_hours_days')}} /
-                                                <ul>
-                                                    @foreach($car->company->hours()->where('type','!=','')->get() as $hour)
-                                                        <li>
-                                                            <span class="link">
-
-                                                                <div>
-                                                                    {{__('admin.' . $hour->day)}}
-                                                                    @if($hour->type == 'open')
-
-                                                                    @if($hour->time_from && $hour->time_to)
-                                                                        <span>{{__('admin.from')}} {{$hour->time_from->format('H:iA')}} {{__('admin.to')}} {{$hour->time_to->format('H:iA')}}</span>
-                                                                    @endif
-                                                                    @elseif($hour->type == '24')
-                                                                    {{__('admin.24')}}
-                                                                    @elseif($hour->type == 'holiday')
-                                                                    {{__('admin.holiday')}}
-                                                                    @endif
-                                                                </div>
-                                                            </span>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                @if($car->features->count() > 0)
-                <div class="col-lg-12">
-                    <div class="car__features">
-                        <div class="note__label_holder">
-                            <h6 class="note__label features">{{__('lang.Features')}}</h6>
-                        </div>
-                        <ul>
-                        @foreach($car->features as $item)
-                        <li>{{$item->name}}</li>
-                        @endforeach
-
-                        </ul>
-                    </div>
-                </div>
-                @endif
-
-            </div>
-
-            <div class="row mt-25">
-                <div class="col-lg-12">
-                    <div class="single_product__bottom">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <!-- <li class="nav-item">
-                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{__('lang.Description')}}</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{__('lang.Terms and Conditions')}}</a>
-                            </li> -->
-                          </ul>
-                          <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                @if($car->getFeatures())
-                                <div class="note__label_holder">
-                                    <h6 class="note__label features">{{$car->name}}</h6>
-                                </div>
-                                <div>
-                                    {!! $car->getFeatures()  !!}
-                                </div>
+                                @if($car->company->type == "default")
+                                    <li>
+                                        {{__('admin.Deposit Refund')}} / {{$car->company->deposit_refund}} ({{__('lang.Days')}})
+                                    </li>
                                 @endif
-
-
-                            </div>
-
-                          </div>
+                                @if ($car->company->hours()->where('type', '!=', 'holiday')->count())
+                                    <li>
+                                        <div class="times-group-container d-flex gap-2">
+                                            <p>
+                                                {{__('lang.working_hours_days')}} /
+                                            </p>
+                                            <div class="days">
+                                                @foreach($car->company->hours()->where('type', '!=', 'holiday')->get() as $day)
+                                                    <p> {{$day->day}} </p>
+                                                @endforeach
+                                            </div>
+                                            <div class="hours">
+                                                @foreach($car->company->hours()->where('type', '!=', '')->get() as $day)
+                                                    @if ($day->type == "24")
+                                                        <p> 24 {{__('lang.Hours')}} </p>
+                                                    @elseif ($day->type == "holiday")
+                                                        <p> {{__('admin.holiday')}}</p>
+                                                    @else
+                                                        <p>{{__('admin.from')}} {{$day->time_from->format('H:iA')}} {{__('admin.to')}} {{$day->time_to->format('H:iA')}}</p>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endif
+                            </ul>
+                            {!! $car->company->terms !!}
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
-    </section>
+        </section>
+        @if ($car->features->count() > 0)
+            <section class="car-features">
+                <div class="container">
+                    <div class="head-title-with-line">
+                        <h3>
+                            {{__('lang.Features')}}
+                        </h3>
+                    </div>
+                    <div class="row">
+                        @foreach ($car->features?->split(4) as $chunk)
+                            <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
+                                <ul class="mt-2">
+                                    @foreach ($chunk as $feature)
+                                        <li>{{$feature->name}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
+        @if ($car->getFeatures())
+            <section class="car-description py-5">
+                <div class="container">
+                    <div class="head-title-with-line">
+                        <h3>
+                            {{$car->name}}
+                        </h3>
+                    </div>
+                    <div class="car-content-desc mt-3">
+                        {!! $car->getFeatures()  !!}
+                    </div>
+                </div>
+            </section>
+        @endif
+    </main>
 
     @include('website::layouts.parts.suggested-cars', ['suggested_cars' => $suggested_cars])
 
@@ -622,23 +315,78 @@
 
 
 @endsection
-@section('libs')
-{{--<script  src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js" integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-{{--<script>--}}
-{{--    lightbox.option({--}}
-{{--      'resizeDuration': 0,--}}
-{{--      'wrapAround': true,--}}
-{{--      'fadeDuration':0,--}}
-{{--      'albumLabel:' : ''--}}
-{{--    })--}}
-{{--    </script>--}}
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<script>
-    Fancybox.bind("[data-fancybox]", {
-        // Your custom options
-    });
-</script>
+@section('js')
+    <script>
+        $('.rent-car-slider').each(function (index, element) {
+            var $slider = $(element);
+            var $parent = $slider.closest('.rent-car-slider-wrapper'); // Find the parent wrapper
+            var $nextArrow = $parent.find('.rent-car-next');
+            var $prevArrow = $parent.find('.rent-car-prev');
+
+            $slider.slick({
+                infinite: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                dots: false,
+                arrows: true,
+                nextArrow: $nextArrow,
+                prevArrow: $prevArrow,
+                responsive: [
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                            dots: true,
+                            centerMode: true,
+                            centerPadding: '60px',
+                        },
+                    },
+                    {
+                        breakpoint: 767.89,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                            dots: true,
+                            centerMode: true,
+                            centerPadding: '40px',
+                        }
+                    },
+                    {
+                        breakpoint: 424.89,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                            dots: true,
+                            centerMode: true,
+                            centerPadding: '20px',
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.slider-for-car-details').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.slider-nav-car-details'
+            });
+
+            $('.slider-nav-car-details').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for-car-details',
+                focusOnSelect: true,
+                infinite: false,
+            });
+        });
+    </script>
 @endsection
+
 @section('schemes')
 
         <script type="application/ld+json">{
