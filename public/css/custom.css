@@ -2,6 +2,11 @@
     font-size: 0.55rem;
 }
 
+.choose-fav-car-brand-slider .slick-slide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .choose-fav-car-type-slider .slick-slide img{
     max-height: 150px !important;
 }
