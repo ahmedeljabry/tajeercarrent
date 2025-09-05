@@ -14,7 +14,9 @@
     </picture>
     <div class="d-flex flex-column justify-content-between h-100 p-3">
         <div>
-            <h4>{{$car->name}}</h4>
+            <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
+                <h4>{{$car->name}}</h4>
+            </a>
             <ul>
                 @if ($car->brand)
                     <li>
