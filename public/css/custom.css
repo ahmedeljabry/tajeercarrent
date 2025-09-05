@@ -10,6 +10,7 @@
 .choose-fav-car-type-slider .slick-slide img{
     height: 150px !important;
     width: 300px !important;
+    object-fit: contain;
 }
 
 .car-type-brand-slide img{
