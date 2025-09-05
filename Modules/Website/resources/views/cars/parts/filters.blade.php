@@ -75,29 +75,29 @@
                             </ul>
                         </div>
                         <div class="price-range-container">
-                            <h3 class="text-start">@lang('lang.PRICE RANGE')</h3>
+                            <h3>@lang('lang.PRICE RANGE')</h3>
                             <div class="slider-wrapper">
                                 <div class="slider-track"></div>
-                                <input
-                                        type="range"
-                                        id="minRange"
-                                        min="0"
-                                        max="{{$max_price / 2 - 10}}"
-                                        value="{{ request('min_price', 0) }}"
-                                        step="10"
-                                        name="min_price"
-                                >
 
-                                <input
-                                        type="range"
-                                        id="maxRange"
-                                        min="{{$max_price / 2 + 10}}"
-                                        max="{{$max_price}}"
-                                        value="{{ request('max_price', $max_price) }}"
-                                        step="10"
-                                        name="max_price"
-                                >
+                                <!-- Left slider: only 0 → half -->
+                                <input type="range"
+                                       id="minRange"
+                                       min="0"
+                                       max="{{ $max_price / 2 }}"
+                                       value="{{ request('min_price', 0) }}"
+                                       step="10"
+                                       name="min_price">
+
+                                <!-- Right slider: only half → max -->
+                                <input type="range"
+                                       id="maxRange"
+                                       min="{{ $max_price / 2 }}"
+                                       max="{{ $max_price }}"
+                                       value="{{ request('max_price', $max_price) }}"
+                                       step="10"
+                                       name="max_price">
                             </div>
+
                             <div class="price-values">
                                 <span id="minValue">0 {{ app('currencies')->getCurrency()->code }}</span>
                                 <span id="maxValue">{{ $max_price }} {{ app('currencies')->getCurrency()->code }}</span>
@@ -255,30 +255,40 @@
         });
     </script>
     <script>
-        const minRange = document.getElementById("minRange"); // left handle
-        const maxRange = document.getElementById("maxRange"); // right handle
+        const minRange = document.getElementById("minRange");
+        const maxRange = document.getElementById("maxRange");
         const minValueDisplay = document.getElementById("minValue");
         const maxValueDisplay = document.getElementById("maxValue");
         const track = document.querySelector(".slider-track");
-
-        minRange.addEventListener("input", updateRange);
-        maxRange.addEventListener("input", updateRange);
+        const maxPrice = {{ $max_price }};
+        const halfPrice = maxPrice / 2;
 
         function updateRange() {
-            let minVal = parseInt(minRange.value);
-            let maxVal = parseInt(maxRange.value);
+            let minVal = parseInt(minRange.value, 10);
+            let maxVal = parseInt(maxRange.value, 10);
 
-            // Update displayed values
-            minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
-            maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
+            // Make sure left stays ≤ half
+            if (minVal > halfPrice) {
+                minVal = halfPrice;
+                minRange.value = halfPrice;
+            }
 
-            // Calculate percentages for slider fill
-            let minPercent = (minVal / {{$max_price}}) * 100;
-            let maxPercent = (maxVal / {{$max_price}}) * 100;
+            // Make sure right stays ≥ half
+            if (maxVal < halfPrice) {
+                maxVal = halfPrice;
+                maxRange.value = halfPrice;
+            }
 
-            // Blue fill should go from minVal → maxVal
+            // Update labels
+            minValueDisplay.textContent = `${minVal.toLocaleString()} {{ app('currencies')->getCurrency()->code }}`;
+            maxValueDisplay.textContent = `${maxVal.toLocaleString()} {{ app('currencies')->getCurrency()->code }}`;
+
+            // Update track fill
+            const minPercent = (minVal / maxPrice) * 100;
+            const maxPercent = (maxVal / maxPrice) * 100;
+
             track.style.background = `linear-gradient(to right,
-        #ddd ${0}%,
+        #ddd 0%,
         #ddd ${minPercent}%,
         #A2E2FF ${minPercent}%,
         #A2E2FF ${maxPercent}%,
@@ -286,7 +296,10 @@
         #ddd 100%)`;
         }
 
-        updateRange();
+        minRange.addEventListener("input", updateRange);
+        maxRange.addEventListener("input", updateRange);
 
+        // Initialize once
+        updateRange();
     </script>
 @endsection
