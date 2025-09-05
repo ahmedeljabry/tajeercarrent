@@ -20,3 +20,13 @@
 .blog-card-content img{
     height: 500px !important;
 }
+
+.rental-details-container .account-settings-card-main-picture{
+    height: 100%;
+}
+.rental-details-container .account-settings-card-main-picture img{
+    height: 100%;
+    object-fit: cover;
+}
+
+
