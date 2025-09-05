@@ -260,12 +260,14 @@
             let minPercent = (minVal / {{$max_price}}) * 100;
             let maxPercent = (maxVal / {{$max_price}}) * 100;
 
-            // Update track background
+            // Blue fill should go from minVal → maxVal
             track.style.background = `linear-gradient(to right,
+        #ddd ${0}%,
         #ddd ${minPercent}%,
         #A2E2FF ${minPercent}%,
         #A2E2FF ${maxPercent}%,
-        #ddd ${maxPercent}%)`;
+        #ddd ${maxPercent}%,
+        #ddd 100%)`;
         }
 
         updateRange();
