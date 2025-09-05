@@ -56,9 +56,6 @@ Route::group([
             Route::get("/account/logout", [UsersController::class, 'logout'])->name('website.account.logout');
         });
 
-
-        Route::get('/iframes', [HomeController::class, 'reviews']);
-
         Route::group([
             'prefix' => '{country?}/{city?}',
             'middleware' => \Modules\Website\App\Http\Middleware\CountryMiddleware::class,

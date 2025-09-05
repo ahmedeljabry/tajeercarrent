@@ -76,7 +76,7 @@
                                                 {{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}
                                             </li>
                                             <li>
-                                                {{__('lang.KM Limit Day')}} / {{$car->km_per_week ?: 250}} {{__('lang.KM')}}
+                                                {{__('lang.KM Limit Week')}} / {{$car->km_per_week ?: 250}} {{__('lang.KM')}}
                                             </li>
                                             @if ($car->extra_price)
                                                 <li>
@@ -130,21 +130,31 @@
                             </h1>
                             <div class="car-details-feat d-flex flex-column flex-md-row flex-wrap  gap-5">
                                 <ul>
-                                    <li>
-                                        {{__('lang.Brand')}} / {{$car->brand->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Model')}} / {{$car->model?->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Year')}} / {{$car->year->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Color')}}/ {{$car->color->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
-                                    </li>
+                                    @if ($car->brand)
+                                        <li>
+                                            {{__('lang.Brand')}} / {{$car->brand->title}}
+                                        </li>
+                                    @endif
+                                    @if ($car->model)
+                                        <li>
+                                            {{__('lang.Model')}} / {{$car->model->title}}
+                                        </li>
+                                    @endif
+                                    @if($car->year)
+                                        <li>
+                                            {{__('lang.Year')}} / {{$car->year->title}}
+                                        </li>
+                                    @endif
+                                    @if($car->color)
+                                        <li>
+                                            {{__('lang.Color')}}/ {{$car->color->title}}
+                                        </li>
+                                    @endif
+                                    @if($car->types)
+                                        <li>
+                                            {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
+                                        </li>
+                                    @endif
                                     <li>
                                         {{__('lang.Doors')}} / {{$car->doors}}
                                     </li>
@@ -180,7 +190,7 @@
                                 </div>
                                 <span>{{__('lang.Email')}}</span>
                             </a>
-                            <a href="tel:{{app('settings')->get('contact_phone')}}" tabindex="0">
+                            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}" tabindex="0">
                                 <div>
                                     <svg id="phone-svgrepo-com_1_" data-name="phone-svgrepo-com (1)" xmlns="http://www.w3.org/2000/svg"
                                          width="15.457" height="15.457" viewBox="0 0 15.457 15.457">

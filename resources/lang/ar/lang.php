@@ -3,6 +3,8 @@
 return [
     "contact-us-success-message" => "سوف نقوم بالتواصل معك قريبا!",
     "KM" => "كم",
+    "In" => "في",
+    "KM Limit Week" => "حد الكيلومتر الاسبوعي",
     "Salik Charges" => "رسوم سالك",
     "Details & Requirements" => "التفاصيل و المتطلبات",
     "Sales" => "المبيعات",

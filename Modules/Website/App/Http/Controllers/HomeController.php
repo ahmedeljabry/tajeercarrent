@@ -168,16 +168,6 @@ class HomeController extends Controller
         return $xml->asXML();
     }
 
-    public function reviews() {
-        // render and pass data to view
-        $gr = view('website::layouts.parts.gr',['src' => app('settings')->get('google_reviews_widget') ])->render();
-        $fb = view('website::layouts.parts.fb',['src' => app('settings')->get('facebook_reviews_widget') ])->render();
-
-        return response()->json([
-            'gr' => $gr,
-            'fb' => $fb
-        ]);
-    }
     public function index()
     {
         $types = Type::withCount('cars')

@@ -1,6 +1,8 @@
 @extends('website::layouts.master')
+
 @section('css')
-<link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet">
+    <link href="{{asset('/css/car-list.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asseT('/css/my-account.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @php
@@ -23,27 +25,9 @@
 @endsection
 
 @section("content")
-
-<section class="products-page">
+    <main id="car-list">
         <div class="container">
-            <div class="row">
-
-                @include('website::cars.parts.breadcrumb',[
-                    "title_1" => __('lang.Search'),
-                    "title_2" => request()->get('search') ?  __('lang.Rent') . ' ' . request()->get('search') : __('lang.Search')
-                ])
-
-                @include('website::layouts.parts.page-title',[
-                    "title"       =>  request()->get('search') ?  __('lang.Rent') . ' ' . request()->get('search') : __('lang.Search'),
-                    "description" => request()->get('search') ?  __('lang.Search results for') . ' ' . request()->get('search') : ""
-                ])
-
-
-            </div>
-
-
             <form action="{{route('website.cars.filter')}}" method="get">
-
                 <div class="row mt-50">
 
                     <div class="col-lg-3">
@@ -62,65 +46,22 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="products-page__content">
-                            @foreach($cars as $car)
-                                @include('website::cars.parts.car', ['car' => $car])
-                            @endforeach
+                        <div class="rental-details-container">
+                            <div class="account-settings-card-wrapper">
+                                @foreach($cars as $car)
+                                    @include('website::cars.parts.car', ['car' => $car])
+                                @endforeach
+                            </div>
                         </div>
-
-                        <div class="col-12">
-                            {{$cars->appends(request()->input())->links()}}
-                        </div>
-
                     </div>
 
                 </div>
             </form>
-
-
+            <div class="col-12">
+                {{$cars->appends(request()->input())->links()}}
+            </div>
         </div>
-    </section>
+    </main>
 
 
-    @include('website::layouts.parts.content', [
-        "content" => \App\Models\Content::where('type','home')->first()
-    ])
-
-
-    @include('website::layouts.parts.faq', [
-        "faq" => \App\Models\Faq::where('type','home')->get()
-    ])
-
-
-@endsection
-@section('js')
-<script>
-        var slider = document.getElementById('price-range');
-
-        noUiSlider.create(slider, {
-            start: [{{request()->get('min_price') ? request()->get('min_price') : 1}}, {{request()->get('max_price') ? request()->get('max_price') : 10000}}],
-            connect: true,
-            range: {
-                'min': 1,
-                'max': 10000
-            }
-        });
-
-        // Get the input fields
-        var input0 = document.getElementById('input-with-keypress-0');
-        var input1 = document.getElementById('input-with-keypress-1');
-
-        // When the slider value changes, update the input and span
-        slider.noUiSlider.on('update', function (values, handle) {
-            if (handle) {
-                input1.value = values[handle];
-            } else {
-                input0.value = values[handle];
-            }
-        });
-    </script>
-@endsection
-@section('libs')
-<script  src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
 @endsection

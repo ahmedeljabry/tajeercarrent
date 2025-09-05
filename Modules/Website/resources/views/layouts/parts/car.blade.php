@@ -110,7 +110,7 @@
             </div>
             <span>{{__('lang.Email')}}</span>
         </a>
-        <a href="tel:{{app('settings')->get('contact_phone')}}">
+        <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
             <div>
                 <i class="fa-solid fa-phone"></i>
             </div>

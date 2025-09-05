@@ -3,6 +3,8 @@
 return [
     "contact-us-success-message" => "We will contact you soon!",
     "KM" => "KM",
+    "In" => "In",
+    "KM Limit Week" => "KM Limit Week",
     "Salik Charges" => "Salik Charges",
     "Details & Requirements" => "Details & Requirements",
     "Sales" => "Sales",

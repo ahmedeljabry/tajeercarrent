@@ -372,7 +372,7 @@
             <div class="nav-icons my-2 my-lg-0 flex-column mt-5 mt-lg-0   ">
                 <ul class="mb-4 mb-lg-0 ">
                     <li>
-                        <a href="tel:{{app('settings')->get('contact_phone')}}">
+                        <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
                             <img width="36" height="36" alt="call"
                                  src="{{asset('/website/images/icons/call.png')}}">
                         </a>
@@ -831,7 +831,7 @@
 <section>
     <div class="container">
         <div class="social-icons-new-box">
-            <a href="tel:{{app('settings')->get('contact_phone')}}">
+            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
                 <picture>
                     <img src="{{asset('/assets/images/Group 2704.png')}}" alt="اتصال">
                 </picture>
@@ -910,7 +910,7 @@
                     </p>
                     <ul class="contact-footer p-0 " style="margin-top:20px;display:block">
                         <li class="list-unstyled ">
-                            <a href="tel:{{app('settings')->get('contact_phone')}}">
+                            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
                                 <i class="fa-solid fa-phone"></i>
                                 {{app('settings')->get('contact_phone')}}</a>
 

@@ -1,127 +1,117 @@
-    <div class="product__vertical product__horizontal">
-
-        <div class="product__vertical_top">
-
-            <div class="product__vertical_meta">
-                @if($car->is_refresh)
-                    <span class="bg-blue">{{__('lang.Featured')}}</span>
+<div class="account-settings-card mb-3">
+    <picture class="account-settings-card-main-picture">
+        <img alt="{{$car->name}}" src="{{ asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($car->image) }}"/>
+        <div class="rent-car-labels">
+            @if($car->is_refresh)
+                <div class="rent-car-label Featured">
+                    <span>{{__('lang.Featured')}}</span>
+                </div>
+            @endif
+            <div class="rent-car-label Verified">
+                <span>{{__("lang.Verified")}}</span>
+            </div>
+        </div>
+    </picture>
+    <div class="d-flex flex-column justify-content-between h-100 p-3">
+        <div>
+            <h4>{{$car->name}}</h4>
+            <ul>
+                @if ($car->brand)
+                    <li>
+                        {{__('lang.Brand')}} / {{$car->brand->title}}
+                    </li>
                 @endif
-                <span class="bg-orange">{{__('lang.Verified')}}</span>
-                <span class="wishlist wishlist-toggle" data-auth="{{auth()->guard('customers')->check() ? 1 : 0}}" data-id="{{$car->id}}">{{__('lang.Save to wishlist')}}</span>
-
-            </div>
-            <a aria-label="{{$car->name}}" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
-                <img alt="{{$car->name}}" src="{{ asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($car->image) }}"/>
+                @if ($car->model)
+                    <li>
+                        {{__('lang.Model')}} / {{$car->model->title}}
+                    </li>
+                @endif
+                @if($car->year)
+                    <li>
+                        {{__('lang.Year')}} / {{$car->year->title}}
+                    </li>
+                @endif
+                @if($car->color)
+                    <li>
+                        {{__('lang.Color')}}/ {{$car->color->title}}
+                    </li>
+                @endif
+                @if($car->types)
+                    <li>
+                        {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
+                    </li>
+                @endif
+                <li>
+                    {{__('lang.Doors')}} / {{$car->doors}}
+                </li>
+                <li>
+                    {{__('lang.Passengers')}} / {{$car->passengers}}
+                </li>
+                <li>
+                    {{__('lang.No. Of Luggage')}} / {{$car->bags}}
+                </li>
+                <li>Car deposit: 3000 AED</li>
+                <li>{{__("lang.Minimum of Days")}}: {{$car->minimum_day_booking}}</li>
+                <li>
+                    {{__('lang.Insurance Type')}} / {{__('lang.Full')}}
+                </li>
+                <li>
+                    {{__('lang.KM Limit Day')}} / {{$car->km_per_day ?: 250}} {{__('lang.KM')}}
+                </li>
+                <li>
+                    {{__('lang.KM Limit Week')}} / {{$car->km_per_week ?: 250}} {{__('lang.KM')}}
+                </li>
+                <li>
+                    {{__('lang.KM Limit Day')}} / {{$car->km_per_month ?: 250}} {{__('lang.KM')}}
+                </li>
+            </ul>
+        </div>
+        <div class="rent-car-slide-footer ">
+            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatsapp'))}}">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px"
+                         viewBox="0 0 24 24">
+                        <g>
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path fill-rule="nonzero"
+                                  d="M2.004 22l1.352-4.968A9.954 9.954 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.954 9.954 0 0 1-5.03-1.355L2.004 22zM8.391 7.308a.961.961 0 0 0-.371.1 1.293 1.293 0 0 0-.294.228c-.12.113-.188.211-.261.306A2.729 2.729 0 0 0 6.9 9.62c.002.49.13.967.33 1.413.409.902 1.082 1.857 1.971 2.742.214.213.423.427.648.626a9.448 9.448 0 0 0 3.84 2.046l.569.087c.185.01.37-.004.556-.013a1.99 1.99 0 0 0 .833-.231c.166-.088.244-.132.383-.22 0 0 .043-.028.125-.09.135-.1.218-.171.33-.288.083-.086.155-.187.21-.302.078-.163.156-.474.188-.733.024-.198.017-.306.014-.373-.004-.107-.093-.218-.19-.265l-.582-.261s-.87-.379-1.401-.621a.498.498 0 0 0-.177-.041.482.482 0 0 0-.378.127v-.002c-.005 0-.072.057-.795.933a.35.35 0 0 1-.368.13 1.416 1.416 0 0 1-.191-.066c-.124-.052-.167-.072-.252-.109l-.005-.002a6.01 6.01 0 0 1-1.57-1c-.126-.11-.243-.23-.363-.346a6.296 6.296 0 0 1-1.02-1.268l-.059-.095a.923.923 0 0 1-.102-.205c-.038-.147.061-.265.061-.265s.243-.266.356-.41a4.38 4.38 0 0 0 .263-.373c.118-.19.155-.385.093-.536-.28-.684-.57-1.365-.868-2.041-.059-.134-.234-.23-.393-.249-.054-.006-.108-.012-.162-.016a3.385 3.385 0 0 0-.403.004z">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
+                <span>{{__("lang.Whatsapp")}}</span>
+            </a>
+            <a href="mailto:{{app('settings')->get('contact_email')}}">
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <span>{{__("lang.Email")}}</span>
+            </a>
+            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
+                <div>
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <span>{{__("lang.Call")}}</span>
             </a>
         </div>
-        <div class="product__vertical_bottom">
-            <a aria-label="{{$car->name}}" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
-                <h2>{{$car->name}} </h2>
-            </a>
-            <div class="product__vertical_bottom_features">
-                <ul>
-
-                    @if($car->type == "yacht")
-
-                        <li>{{$car->type == "default" ? __('lang.Day') : __('lang.Hour')}} / {{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</li>
-
-                        @if($car->price_per_week)
-                        <li>
-                            @if(!$car->price_per_week) <s> @endif
-                            {{$car->type == "default" ? __('lang.Week') : "3 " . __('lang.Hours')}} / {{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}
-                            @if(!$car->price_per_week) </s> @endif
-                        </li>
-                        @endif
-
-                        @if($car->price_per_month)
-                        <li>
-                            @if(!$car->price_per_month) <s> @endif
-                            {{$car->type == "default" ? __('lang.Month') : "8 " . __('lang.Hours')}} / {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}
-                            @if(!$car->price_per_month) </s> @endif
-                        </li>
-                        @endif
-
-                        <li>
-                        {{$car->type == 'default' ? __('lang.Minimum of Days') : __('lang.Minimum of Hours') }} / {{$car->minimum_day_booking}}</li>
-
-                        <li>{{$car->type == 'yacht' ? __('lang.Guests')  : __('lang.Passengers')}} / {{$car->passengers}}</li>
-
-                    @else
-
-                        <li>{{__('lang.Minimum of Days')}} / {{$car->minimum_day_booking}}</li>
-                        <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                        <li>
-
-                            {{__('lang.KM Limit Day')}} / {{$car->km_per_day ? $car->km_per_day : 250}}
-
-                        </li>
-                        @if($car->km_per_month)
-                        <li>
-
-                            {{__('lang.KM Limit Month')}} / {{$car->km_per_month ? $car->km_per_month : 0}}
-
-                        </li>
-                        @else
-                        <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
-                        @endif
-
-                    @endif
-                </ul>
-
-                <div class="cm-logo">
-                    @if($car->company)
-                    <a href="{{LaravelLocalization::localizeUrl("/c/{$car->company->id}/{$car->company->slug}")}}" class="flex-1 link">
-                        <div class="home__brands_item">
-                                <img loading="lazy" alt="{{$car->company->name . rand(0,999)}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($car->company->image)}}"/>
-                                <h3>{{$car->company->name}}</h3>
-                        </div>
-                    </a>
-                    @endif
-                </div>
-
-                <div class="product__horizontal_right">
-                    <div class="home__brands_item product__horizontal_fees">
-
-                        @if($car->price_per_day)
-                        <h3>
-                            <span>{{$car->type == "default" ? __('lang.Day') : __('lang.Hour')}}</span>
-                            <span>{{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
-                        </h3>
-                        @endif
-
-                       @if(!$car->price_per_week) <s> @endif
-                            <h3>
-                                <span>{{$car->type == "default" ? __('lang.Week') : "3 " . __('lang.Hours')}}</span>
-                                <span>
-
-                                        {{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}
-
-                                </span>
-                            </h3>
-                        @if(!$car->price_per_week) </s> @endif
-
-
-                        @if(!$car->price_per_month) <s> @endif
-                        <h3>
-                            <span>{{$car->type == "default" ? __('lang.Month') : "8 " . __('lang.Hours')}}</span>
-                            <span>
-
-                                {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}
-
-                            </span>
-                        </h3>
-                        @if(!$car->price_per_month) </s> @endif
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="product__vertical_actions">
-                <ul>
-                    @include('website::layouts.parts.car-actions', ['car' => $car])
-                </ul>
-            </div>
+    </div>
+    <div class="rent-car-slide-description-blue-boxes p-3">
+        <div class="rent-car-slide-description-blue-box">
+            <span>{{__("lang.Day")}}</span>
+            <span>{{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
         </div>
+        <div class="rent-car-slide-description-blue-box">
+            <span>{{__("lang.Week")}}</span>
+            <span>{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
+        </div>
+        <div class="rent-car-slide-description-blue-box">
+            <span>{{__("lang.Month")}}</span>
+            <span>{{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
+        </div>
+        <picture class="rent-car-slide-icon">
+            <img src="{{asset("/assets/images/tajeer-app-icon.png")}}" alt="" class="mw-100">
+        </picture>
 
     </div>
+
+</div>

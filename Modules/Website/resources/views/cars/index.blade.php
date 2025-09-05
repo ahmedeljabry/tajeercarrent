@@ -1,12 +1,19 @@
 @extends('website::layouts.master')
 
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet" />
+    <link href="{{asset('/css/car-list.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asseT('/css/my-account.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @php
-    $cars = (clone $query)->paginate(10);
-    $max_price = app('currencies')->convert((clone $query)->max('price_per_day'))
+    $cars = (clone $query)
+       ->when(request('min_price'), function ($query, $min_price) {
+           $query->where('price_per_day', '>=' , app('currencies')->getAedAmount($min_price));
+       })
+       ->when(request('max_price'), function ($query, $max_price) {
+           $query->where('price_per_day', '<=' , app('currencies')->getAedAmount($max_price));
+       })->paginate(10);
+   $max_price = app('currencies')->convert((clone $query)->max('price_per_day'))
 @endphp
 
 @section('seo')
@@ -19,27 +26,31 @@
 @endsection
 
 @section("content")
-<section class="products-page">
-        <div class="container">
-            <div class="row">
-
-                @include('website::cars.parts.breadcrumb', [
-                    "title_1" => $resource_title,
-                    "title_2" => $resource?->title ?? ""
+    <main id="car-list">
+        @include('website::cars.parts.breadcrumb', [
+                    'breadcrumbs' => [
+                        __("lang.Car Brands") => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
+                        $resource->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $resource]))
+                    ]
                 ])
-
-                @include('website::layouts.parts.page-title', [
-                    "title"       => $resource_model?->page_title ?? $resource?->page_title ?? "",
-                    "description" => $resource_model?->page_description ?? $resource?->page_description ?? ""
-                ])
-
-                @include('website::cars.parts.models')
-
+        <div class="section-header container">
+            <div class="section-header-title">
+                <h1 class="fw-normal ">{{__('lang.Rent') . " " . ($resource_model?->title ?? $resource->title) . " " . __("lang.In") . " " . app('country')->getCity()->title}}</h1>
             </div>
+            @if ($description = $resource_model?->page_description ?? $resource?->page_description ?? "")
+                <div class="description-container">
+                    <p class="description-text">
+                        {!! $description !!}
+                    </p>
+                </div>
+            @endif
+        </div>
 
+        @include('website::cars.parts.models')
+
+        <div class="container">
             <form action="{{route('website.cars.filter')}}" method="get">
-
-            <div class="row mt-50">
+                <div class="row mt-50">
 
                     <div class="col-lg-3">
                         @include('website::cars.parts.filters')
@@ -57,64 +68,32 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="products-page__content">
-                            @foreach($cars as $car)
-                                @include('website::cars.parts.car', ['car' => $car])
-                            @endforeach
+                        <div class="rental-details-container">
+                            <div class="account-settings-card-wrapper">
+                                @foreach($cars as $car)
+                                    @include('website::cars.parts.car', ['car' => $car])
+                                @endforeach
+                            </div>
                         </div>
-
-                        <div class="col-12">
-                            {{$cars->appends(request()->input())->links()}}
-                        </div>
-
                     </div>
 
                 </div>
             </form>
-
+            <div class="col-12">
+                {{$cars->appends(request()->input())->links()}}
+            </div>
         </div>
-    </section>
 
-    @include('website::layouts.parts.suggested-cars', ['suggested_cars' => $suggested_cars])
+        @include('website::layouts.parts.suggested-cars', ['suggested_cars' => $suggested_cars])
 
-    @include('website::layouts.parts.content', [
-        "content" => $content
-    ])
+        @include('website::layouts.parts.content', [
+            "content" => $content
+        ])
 
-    @include('website::layouts.parts.faq', [
-        "faq" => $faq
-    ])
+        @include('website::layouts.parts.faq', [
+            "faq" => $faq
+        ])
+    </main>
 
-@endsection
-@section('js')
-<script>
-    var slider = document.getElementById('price-range');
 
-    noUiSlider.create(slider, {
-        start: [{{request()->get('min_price') ? request()->get('min_price') : 1}}, {{request()->get('max_price') ? request()->get('max_price') : 10000}}],
-        connect: true,
-        range: {
-            'min': 1,
-            'max': 10000
-        }
-    });
-
-    // Get the input fields
-    var input0 = document.getElementById('input-with-keypress-0');
-    var input1 = document.getElementById('input-with-keypress-1');
-
-    // When the slider value changes, update the input and span
-    slider.noUiSlider.on('update', function (values, handle) {
-        if (handle) {
-            input1.value = values[handle];
-        } else {
-            input0.value = values[handle];
-        }
-    });
-</script>
-@endsection
-
-@section('libs')
-    <script  src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
 @endsection
