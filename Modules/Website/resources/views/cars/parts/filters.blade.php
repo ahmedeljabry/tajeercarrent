@@ -252,25 +252,25 @@
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            // prevent overlap at middle
-            const minLimit = {{$max_price / 2 - 10}};
-            const maxLimit = {{$max_price / 2 + 10}};
+            const middle = {{$max_price / 2}};
 
-            if (minVal >= maxLimit) {
-                minVal = maxLimit - 1;
+            // Prevent min slider from crossing middle
+            if (minVal >= middle) {
+                minVal = middle;
                 minRange.value = minVal;
             }
 
-            if (maxVal <= minLimit) {
-                maxVal = minLimit + 1;
+            // Prevent max slider from crossing middle
+            if (maxVal <= middle) {
+                maxVal = middle;
                 maxRange.value = maxVal;
             }
 
-            // update displayed values
+            // Update displayed values
             minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
             maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
 
-            // update track background based on percentage
+            // Update slider track background
             let minPercent = (minVal / {{$max_price}}) * 100;
             let maxPercent = (maxVal / {{$max_price}}) * 100;
 
