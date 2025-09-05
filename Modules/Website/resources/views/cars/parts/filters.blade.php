@@ -254,14 +254,14 @@
 
             const middle = {{$max_price / 2}};
 
-            // LEFT handle = maxRange → cannot go beyond middle
-            if (maxVal >= middle) {
+            // LEFT handle (maxRange) can only move up to middle
+            if (maxVal > middle) {
                 maxVal = middle;
                 maxRange.value = maxVal;
             }
 
-            // RIGHT handle = minRange → cannot go below middle
-            if (minVal <= middle) {
+            // RIGHT handle (minRange) can only move starting from middle
+            if (minVal < middle) {
                 minVal = middle;
                 minRange.value = minVal;
             }
