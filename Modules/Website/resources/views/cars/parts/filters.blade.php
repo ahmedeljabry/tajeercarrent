@@ -74,43 +74,35 @@
                                 @endforeach
                             </ul>
                         </div>
-
                         <div class="price-range-container">
                             <h3 class="text-start">@lang('lang.PRICE RANGE')</h3>
                             <div class="slider-wrapper">
                                 <div class="slider-track"></div>
-
-                                <!-- LEFT HANDLE (min) -->
                                 <input
                                         type="range"
                                         id="minRange"
                                         min="0"
-                                        max="{{ $max_price }}"
+                                        max="{{$max_price / 2 - 10}}"
                                         value="{{ request('min_price', 0) }}"
                                         step="10"
                                         name="min_price"
-                                        dir="ltr"
                                 >
 
-                                <!-- RIGHT HANDLE (max) -->
                                 <input
                                         type="range"
                                         id="maxRange"
-                                        min="0"
-                                        max="{{ $max_price }}"
+                                        min="{{$max_price / 2 + 10}}"
+                                        max="{{$max_price}}"
                                         value="{{ request('max_price', $max_price) }}"
                                         step="10"
                                         name="max_price"
-                                        dir="ltr"
                                 >
                             </div>
-
                             <div class="price-values">
                                 <span id="minValue">0 {{ app('currencies')->getCurrency()->code }}</span>
                                 <span id="maxValue">{{ $max_price }} {{ app('currencies')->getCurrency()->code }}</span>
                             </div>
                         </div>
-
 
                         <button type="submit" class="main-btn rounded-0 ">
                             {{__('lang.Find Car')}}
@@ -263,12 +255,11 @@
         });
     </script>
     <script>
-        const minRange = document.getElementById("minRange");
-        const maxRange = document.getElementById("maxRange");
+        const minRange = document.getElementById("minRange"); // left handle
+        const maxRange = document.getElementById("maxRange"); // right handle
         const minValueDisplay = document.getElementById("minValue");
         const maxValueDisplay = document.getElementById("maxValue");
         const track = document.querySelector(".slider-track");
-        const maxPrice = {{ $max_price }};
 
         minRange.addEventListener("input", updateRange);
         maxRange.addEventListener("input", updateRange);
@@ -277,26 +268,17 @@
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            // Ensure they don’t cross
-            if (minVal > maxVal - 10) {
-                minVal = maxVal - 10;
-                minRange.value = minVal;
-            }
-            if (maxVal < minVal + 10) {
-                maxVal = minVal + 10;
-                maxRange.value = maxVal;
-            }
+            // Update displayed values
+            minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
+            maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
 
-            // Update labels
-            minValueDisplay.textContent = `{{ app('currencies')->getCurrency()->code }} ${minVal.toLocaleString()}`;
-            maxValueDisplay.textContent = `{{ app('currencies')->getCurrency()->code }} ${maxVal.toLocaleString()}`;
+            // Calculate percentages for slider fill
+            let minPercent = (minVal / {{$max_price}}) * 100;
+            let maxPercent = (maxVal / {{$max_price}}) * 100;
 
-            // Update track fill
-            const minPercent = (minVal / maxPrice) * 100;
-            const maxPercent = (maxVal / maxPrice) * 100;
-
+            // Blue fill should go from minVal → maxVal
             track.style.background = `linear-gradient(to right,
-        #ddd 0%,
+        #ddd ${0}%,
         #ddd ${minPercent}%,
         #A2E2FF ${minPercent}%,
         #A2E2FF ${maxPercent}%,
@@ -305,5 +287,6 @@
         }
 
         updateRange();
+
     </script>
 @endsection
