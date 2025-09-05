@@ -246,7 +246,6 @@
         const track = document.querySelector(".slider-track");
 
         minRange.addEventListener("input", updateRange);
-        maxRange.addEventListener("input", updateRange);
 
         function updateRange() {
             let minVal = parseInt(minRange.value);
