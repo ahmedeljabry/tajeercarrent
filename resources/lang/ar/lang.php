@@ -1,6 +1,12 @@
 <?php 
 
 return [
+    "Rent a Car in" => "اجر سيارة في",
+    "Premium" => "مميز",
+    "Downloads" => "التنزيلات",
+    "Or" => "او",
+    "Location" => "المكان",
+    "Currency" => "العملة",
     "lang_en" => "اللغة الإنجليزية",
     "lang_ar" => "اللغة العربية",
     "lang_ru" => "اللغة الروسية",

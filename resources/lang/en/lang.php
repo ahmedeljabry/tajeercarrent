@@ -1,6 +1,12 @@
 <?php 
 
 return [
+    "Rent a Car in" => "Rent a Car In",
+    "Premium" => 'Premium',
+    "Downloads" => "Downloads",
+    "Or" => "Or",
+    "Location" => "Location",
+    "Currency" => "Currency",
     "lang_en" => "English ",
     "lang_ar" => "Arabic ",
     "lang_ru" => "Russian",

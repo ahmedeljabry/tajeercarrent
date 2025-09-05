@@ -1,52 +1,32 @@
     @if(count($faq) > 0)
-    <section class="home__features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__brands_title">
-                        <h3>{{__('lang.FAQ')}}</h3>
-
-                    </div>
-      
-                </div>
-
-                <div class="col-lg-12">
-                <div class="accordion" id="accordionExample">
-                    @foreach($faq as $f)
-                    <div class="card">
-                        <div class="card-header" id="headingOne{{$f->id}}">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne{{$f->id}}" aria-expanded="false" aria-controls="collapseOne{{$f->id}}">
-                                    {{$f->question}}
-                                    <i class="fa fa-plus icon"></i>
+        <section>
+            <div class="container mt-5">
+                <h2>{{__('lang.FAQ')}}</h2>
+            </div>
+            <div class="conatiner">
+                <div class="container accordion accordion-flush custom-accordion" id="faqsFlushExample">
+                    @foreach ($faq as $item)
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne-faq-{{$item->id}}" aria-expanded="false"
+                                        aria-controls="#collapseOne-faq-{{$item->id}}">
+                                    {{$item->question}}
+                                    <span class="accordion-btn">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <i class="fa-solid fa-minus"></i>
+                                </span>
                                 </button>
-                            </h2>
-                        </div>
-
-                        <div id="collapseOne{{$f->id}}" class="collapse" aria-labelledby="headingOne{{$f->id}}" data-parent="#accordionExample">
-                            <div class="card-body">
-                                {{$f->answer}}
+                            </h4>
+                            <div id="collapseOne-faq-{{$item->id}}" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne" data-bs-parent="#faqsFlushExample">
+                                <div class="accordion-body">
+                                    {!! $item->answer !!}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
-
-
-             
             </div>
-        </div>
-    </section>
+        </section>
     @endif
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // استهداف جميع العناصر التي تحتوي على collapse
-        $('.collapse').on('shown.bs.collapse', function () {
-            $(this).prev().find(".icon").removeClass("fa-plus").addClass("fa-minus");
-        });
-
-        $('.collapse').on('hidden.bs.collapse', function () {
-            $(this).prev().find(".icon").removeClass("fa-minus").addClass("fa-plus");
-        });
-    });
-</script>

@@ -45,7 +45,7 @@ Route::group([
         Route::get('/faq', [PagesController::class, 'faq'])->name('website.pages.faq');
         Route::any("/contact-us", [PagesController::class, 'contact'])->name('website.pages.contact-us');
         Route::get("/list-your-car", [PagesController::class, 'list_your_car'])->name('website.pages.list-your-car');
-
+        Route::get('terms-and-conditions', [PagesController::class, 'terms_and_conditions'])->name('website.pages.terms-and-conditions');
 
         Route::post("/signup", [UsersController::class, 'signup'])->name('website.account.register');
         Route::post("/login", [UsersController::class, 'login'])->name('website.account.login');

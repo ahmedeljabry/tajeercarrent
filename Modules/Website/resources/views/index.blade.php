@@ -10,209 +10,526 @@
 @endsection
 
 @section("content")
-
-    @include('website::layouts.parts.search')
-
-    <section class="home__brands">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__brands_title">
+    <main id="Home">
+        @include('website::layouts.parts.search')
+        <section class="car-type-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-header-title">
                         <h3>{{app('settings')->get('car_types_title')}}</h3>
-                        <div class="home_brands_view_all_holder">
-                            <a class="home_brands_view_all" href="#">
-                                View All
-                            </a>
-                        </div>
+                        <div class="black-line"></div>
+                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.index')) }}" class="view-all-btn">{{__('lang.View All')}}</a>
                     </div>
-                    <div class="home__brands_desc">
-                    {{app('settings')->get('car_types_description')}}
+                    <div class="description-container">
+                        <p class="description-text">
+                            {{app('settings')->get('car_types_description')}}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
                     </div>
-                    <span class="read-more" style="cursor: pointer;">{{__('lang.Read More')}}</span>
                 </div>
-
-                <div class="col-lg-12">
-                    <div data-items-large="6" data-is-loop="false" data-items-small="2" class="home__brands_content owl-carousel owl-theme">
-                        @foreach($types as $item)
+            </div>
+            <div class="choose-fav-car-slider-wrapper container">
+                <span href="" class=" choose-fav-car-type-prev">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </span>
+                <div class="container choose-fav-car-type-slider">
+                    @foreach($types as $item)
                         <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
-                            <div class="home__brands_item">
-                                <img width="174" height="100" loading="lazy" alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}"/>
-                                <h3>{{$item->title}}</h3>
+                            <picture>
+                                <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                            </picture>
+                            <div class="car-type-brand-slide-footer">
+                                <p>{{$item->title}}</p>
                             </div>
                         </a>
-                        @endforeach
+                    @endforeach
+                </div>
+                <span href="#" class=" choose-fav-car-type-next">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+            </div>
+        </section>
 
+        <section class="car-brand-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <h3>{{app('settings')->get('car_brands_title')}}</h3>
+                        <div class="black-line"></div>
+                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')) }}" class="view-all-btn">{{__('lang.View All')}}</a>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-text">
+                            {{app('settings')->get('car_brands_description')}}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="choose-fav-car-slider-wrapper container">
+                <span href="" class=" choose-fav-car-brand-prev">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </span>
+                <div class="container choose-fav-car-brand-slider">
+                    @foreach(app('cars')->brands as $item)
+                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
+                            <picture>
+                                <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                            </picture>
+                            <div class="car-brand-brand-slide-footer">
+                                <p>{{$item->title}}</p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+                <span href="#" class=" choose-fav-car-brand-next">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+            </div>
+        </section>
 
-    <section class="home__brands">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__brands_title">
-                        <h3>
-                            {{app('settings')->get('car_brands_title')}}
-                        </h3>
-                        <div class="home_brands_view_all_holder">
-                            <a class="home_brands_view_all" href="#">
-                                View All
-                            </a>
+
+        @foreach($sections as $section)
+            @include('website::layouts.parts.section', ['section' => $section])
+        @endforeach
+
+
+        @include('website::layouts.parts.banners',[
+            "banners" => $banners
+        ])
+
+        <section>
+            <div class="container home-main-boxes-topic">
+                <h3>{{app('settings')->get('find_your_car_title')}}</h3>
+                <p>{{app('settings')->get('find_your_car_description')}}</p>
+            </div>
+            <div class="container home-main-boxes">
+                <div class="home-main-box">
+                    <div>
+                        <i class="fa-solid fa-list"></i>
+                    </div>
+                    <h4>{{__('lang.Find Car')}}</h4>
+                    <p>{{__('lang.Select a car using search or catalog.')}}</p>
+                </div>
+                <picture>
+                    <img src="{{asset('/assets/images/chveron dashed top.png')}}" alt="">
+                </picture>
+                <div class="home-main-box">
+                    <div>
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                    <h4>{{__('lang.Contact Your Dealer')}}</h4>
+                </div>
+                <picture>
+                    <img src="{{asset('/assets/images/chevron dashed bottom.png')}}" alt="">
+                </picture>
+                <div class="home-main-box">
+                    <div>
+                        <i class="fa-regular fa-square-check"></i>
+                    </div>
+                    <h4>{{__('lang.Get Your Car')}}</h4>
+                </div>
+            </div>
+        </section>
+        <hr class="mt-5">
+
+        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title && $content->image && $content->description)
+            <section class="home-content-section">
+                <div class="container">
+                    <picture>
+                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image)}}" alt="">
+                    </picture>
+                    <div class="home-content-container">
+                        <div class="home-desc">
+                            @if ($content->title)
+                                <h2>{{$content->title}}</h2>
+                            @endif
+                            {!! $content->description !!}
+                        </div>
+                        <div class="main-btn">{{__('lang.Read More')}}</div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        @if ($left = app('settings')->get('book_your_next_trip_left') && $right = app('settings')->get('book_your_next_trip_right'))
+            <section class="booking-stpes-section">
+                <picture>
+                    <img src="{{asset('/assets/images/FerariF8TributoRedK2930FrontDet.png')}}" alt="">
+                </picture>
+                <div class="container booking-steps-content">
+                    <div>
+                        {!! $left !!}
+                    </div>
+                    <div>
+                        {!! $right !!}
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title_2 && $content->image_2 && $content->description_2)
+            <section class="home-content-section">
+                <div class="container">
+                    <picture>
+                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_2)}}" alt="">
+                    </picture>
+                    <div class="home-content-container">
+                        <div class="home-desc">
+                            <h2>{{$content->title_2}}</h2>
+                           {!! $content->description_2 !!}
+                        </div>
+                        <div class="main-btn">{{__('lang.Read More')}}</div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+        @endif
+
+        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title_3 && $content->image_3 && $content->description_3)
+            <section class="home-content-section">
+                <div class="container">
+                    <picture>
+                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_3)}}" alt="">
+                    </picture>
+                    <div class="home-content-container">
+                        <div class="home-desc">
+                            <h2>{{$content->title_3}}</h2>
+                            {!! $content->description_3 !!}
+                        </div>
+                        <div class="main-btn">{{__('lang.Read More')}}</div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+        @endif
+
+
+        @if(app('settings')->get('google_reviews_widget'))
+            <section>
+                <div class="container testimonials-container">
+                    <h4>{{__('lang.Testimonials')}}</h4>
+                    <h2>{{__('lang.Google Reviews')}}</h2>
+                    <div class="row">
+                        <div class="col-lg-12 gr" data-item="{{app('settings')->get('google_reviews_widget')}}">
                         </div>
                     </div>
-                    <div class="home__brands_desc">
-                        {{app('settings')->get('car_brands_description')}}
-                    </div>
-                    <span class="read-more" style="cursor: pointer;">{{__('lang.Read More')}}</span>
                 </div>
+        </section>
+        @endif
 
-                <div class="col-lg-12">
-                    <div data-items-large="6" data-is-loop="false" data-items-small="2" class="home__brands_content owl-carousel owl-theme">
-                        @foreach(app('cars')->brands as $item)
-                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
-                            <div class="home__brands_item">
-                                <img width="174" height="100"  loading="lazy" alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}"/>
-                                <h3>{{$item->title}}</h3>
-                            </div>
-                        </a>
-                        @endforeach
-
+        @if(app('settings')->get('facebook_reviews_widget'))
+        <section class="home__google_reviews">
+            <div class="container testimonials-container">
+                <h4>{{__('lang.Testimonials')}}</h4>
+                <h2>{{__('lang.Facebook Reviews')}}</h2>
+                <div class="row">
+                    <div class="col-lg-12 fb" data-item="{{app('settings')->get('facebook_reviews_widget')}}">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        @endif
 
-    @foreach($sections as $section)
-        @include('website::layouts.parts.section', ['section' => $section])
-    @endforeach
-
-
-    @include('website::layouts.parts.banners',[
-        "banners" => $banners
-    ])
-
-    @include('website::layouts.parts.content', [
-        "content" => \App\Models\Content::where('type','home')->first()
-    ])
-
-    <section class="home__find_your_car">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__find_your_car_top">
-                        <h2>{{app('settings')->get('find_your_car_title')}}</h2>
-                        <p>{{app('settings')->get('find_your_car_description')}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="home__find_your_car_item">
-                        <img width="55" height="55" alt="icon" src="{{asset("/website/images/icons/list.png")}}" />
-                        <h3>{{__('lang.Choose Your Car')}}</h3>
-                        <p>{{__('lang.Select a car using search or catalog.')}}</p>
-                    </div>
-                </div>
-                <div class="col-lg-1">
-                    <div class="home__find_your_car_line">
-                        <img width="187" height="35" alt="icon" src="{{asset("/website/images/curve_up.png")}}" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="home__find_your_car_item">
-                        <img width="55" height="55" alt="icon" src="{{asset("/website/images/icons/calendar.png")}}" />
-                        <h3>{{__('lang.Contact Your Dealer')}}</h3>
-                        <p>{{__('lang.After you’ve selected a car a dealer will contact you.')}}</p>
-                    </div>
-                </div>
-                <div class="col-lg-1">
-                    <div class="home__find_your_car_line">
-                        <img  width="187" height="35" alt="icon" src="{{asset("/website/images/curve_down.png")}}" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="home__find_your_car_item">
-                        <img  width="55" height="55" alt="icon" src="{{asset("/website/images/icons/check_ic.png")}}" />
-                        <h3>{{__('lang.Get Your Car')}}</h3>
-                        <p>{{__('lang.Here you are! Your car is book and waiting for you.')}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="home__book_your_next_trip">
-        <img class="bg" src="{{asset("/website/images/your_next_trip_bg.webp")}}" alt="bg" loading="lazy" />
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="home__book_your_next_trip_content">
-                        {!!app('settings')->get('book_your_next_trip_left')!!}
-                    </div>
-
-                </div>
-                <div class="col-lg-2">
-                    <div class="vertical-line">
-
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="home__book_your_next_trip_content">
-                        {!!app('settings')->get('book_your_next_trip_right')!!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    @if(app('settings')->get('google_reviews_widget'))
-    <section class="home__google_reviews">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__google_reviews_title">
-                        <p>{{__('lang.Testimonials')}}</p>
-                        <h3>{{__('lang.Google Reviews')}}</h3>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 gr" data-item="{{app('settings')->get('google_reviews_widget')}}">
+        @include('website::layouts.parts.faq', [
+            "faq" => \App\Models\Faq::where('type','home')->get()
+        ])
+    </main>
+@endsection
 
 
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
+@section("js")
+    <script>
+        $(function (){
+            $('.choose-fav-car-type-slider').slick({
+                infinite: false,
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                speed: 1000,
+                dots: false,
+                arrows: true,
+                nextArrow: $(".choose-fav-car-type-next"),
+                prevArrow: $(".choose-fav-car-type-prev"),
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            centerMode: false,
+                            centerPadding: '150px',
+                            focusOnSelect: true
+                        },
+                    },
+                    {
+                        breakpoint: 767.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            centerMode: false,
+                            centerPadding: '100px',
+                            focusOnSelect: true
+                        },
 
-    @if(app('settings')->get('facebook_reviews_widget'))
-    <section class="home__google_reviews">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__google_reviews_title">
-                        <p>{{__('lang.Testimonials')}}</p>
-                        <h3>{{__('lang.Facebook Reviews')}}</h3>
-                    </div>
+                    },
+                    {
+                        breakpoint: 576.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            centerMode: false,
+                            centerPadding: '50px',
+                            focusOnSelect: true
+                        },
+                    },
+                ]
+            });
+            $('.choose-fav-car-brand-slider').slick({
+                infinite: false,
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                speed: 1000,
+                dots: false,
+                arrows: true,
+                nextArrow: $(".choose-fav-car-brand-next"),
+                prevArrow: $(".choose-fav-car-brand-prev"),
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            focusOnSelect: true
+                        },
+                    },
+                    {
+                        breakpoint: 767.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            focusOnSelect: true
+                        },
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 fb" data-item="{{app('settings')->get('facebook_reviews_widget')}}">
+                    },
+                    {
+                        breakpoint: 576.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.5,
+                            focusOnSelect: true
+                        },
+                    },
+                ]
+            });
+            $('.rent-car-slider').each(function (index, element) {
+                var $slider = $(element);
+                var $parent = $slider.closest('.rent-car-slider-wrapper'); // Find the parent wrapper
+                var $nextArrow = $parent.find('.rent-car-next');
+                var $prevArrow = $parent.find('.rent-car-prev');
 
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif
+                $slider.slick({
+                    infinite: false,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    dots: false,
+                    arrows: true,
+                    nextArrow: $nextArrow,
+                    prevArrow: $prevArrow,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    responsive: [
+                        {
+                            breakpoint: 991.89,
+                            settings: {
+                                slidesToShow: 1,
+                                arrows: false,
+                                dots: true,
+                                centerMode: true,
+                                centerPadding: '60px',
+                            },
+                        },
+                        {
+                            breakpoint: 767.89,
+                            settings: {
+                                slidesToShow: 1,
+                                arrows: false,
+                                dots: true,
+                                centerMode: true,
+                                centerPadding: '40px',
+                            }
+                        },
+                        {
+                            breakpoint: 424.89,
+                            settings: {
+                                slidesToShow: 1,
+                                arrows: false,
+                                dots: true,
+                                centerMode: true,
+                                centerPadding: '20px',
+                            }
+                        }
+                    ]
+                });
+            });
+            $('.banner-slider-desktop').slick({
+                infinite: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: false,
+                arrows: true,
+                nextArrow: $(".banner-next-desktop"),
+                prevArrow: $(".banner-prev-desktop"),
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 1399.89,
+                        settings: {
+                            slidesToShow: 1,
+                        },
+                    },
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 1,
+                        },
+                    },
+                ]
+            });
+            $('.banner-slider-mobile').slick({
+                infinite: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: false,
+                arrows: true,
+                nextArrow: $(".banner-next-mobile"),
+                prevArrow: $(".banner-prev-mobile"),
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 1399.89,
+                        settings: {
+                            slidesToShow: 1,
+                        },
+                    },
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 1,
+                            centerMode: true,
+                            centerPadding: "20px",
+                        },
+                    },
+                ]
+            });
+            $('.testimonials-slider').slick({
+                infinite: false,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                speed: 1000,
+                dots: false,
+                arrows: true,
+                nextArrow: $(".testimonials-next"),
+                prevArrow: $(".testimonials-prev"),
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 1399.89,
+                        settings: {
+                            slidesToShow: 3,
+                        },
+                    },
+                    {
+                        breakpoint: 991.89,
+                        settings: {
+                            dots: true,
+                            slidesToShow: 2.3,
+                        },
+                    },
+                    {
+                        breakpoint: 767.89,
+                        settings: {
+                            slidesToShow: 1.5,
+                            dots: true,
+                        },
+                    },
+                    {
+                        breakpoint: 424.89,
+                        settings: {
+                            slidesToShow: 1,
+                            centerMode: true,
+                            centerPadding: '20px',
+                            dots: true,
+                        },
+                    },
 
-    @include('website::layouts.parts.faq', [
-        "faq" => \App\Models\Faq::where('type','home')->get()
-    ])
+                ]
+            });
+            document.querySelectorAll('.home-content-section').forEach(function (section) {
+                const contentWrapper = section.querySelector('.home-desc');
+                const btn = section.querySelector('.main-btn');
+                const image = section.querySelector('picture img');
 
+                function checkHeight() {
+                    const imageHeight = image.offsetHeight;
+                    const contentHeight = contentWrapper.scrollHeight;
+
+                    if (contentHeight <= imageHeight) {
+                        btn.style.display = 'none';
+                    } else {
+                        btn.style.display = 'block';
+                        contentWrapper.style.maxHeight = imageHeight + 'px';
+                    }
+                }
+
+                if (image.complete) {
+                    checkHeight();
+                } else {
+                    image.onload = checkHeight;
+                }
+
+                btn.addEventListener('click', function () {
+                    if (contentWrapper.classList.contains('show-more')) {
+                        contentWrapper.classList.remove('show-more');
+                        btn.textContent = '{{__('lang.Read More')}}';
+                        contentWrapper.style.maxHeight = image.offsetHeight + 'px';
+                    } else {
+                        contentWrapper.classList.add('show-more');
+                        btn.textContent = '{{__('lang.Read Less')}}';
+                        contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+
+@section('schemas')
+    <script type="application/ld+json">
+        @php
+            $data = [
+                "@context" => "https://schema.org",
+                "@type" => "FAQPage",
+                "mainEntity" => \App\Models\Faq::whereType('home')->get()->map(function ($faq){
+                    return [
+                        "@type" => "Question",
+                        "name" => $faq->question,
+                        "acceptedAnswer" => [
+                            "@type" => "Answer",
+                            "text" => $faq->answer
+                        ]
+                    ];
+                })
+            ]
+        @endphp
+        @json($data)
+    </script>
 @endsection

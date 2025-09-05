@@ -39,11 +39,6 @@ class WebsiteServiceProvider extends ServiceProvider
         $router->aliasMiddleware('country', Country::class);
         $router->aliasMiddleware('currency', Currencies::class);
 
-//        app('country')->setCountry(session('country_id', \App\Models\Country::whereDefault(true)->first()->id));
-//        app('country')->setCity(session('city_id', City::whereDefault(true)->first()->id));
-//        app('currencies')->setCurrency(session('currency_id', Currency::whereDefault(true)->first()->id));
-
-//        URL::defaults(['country' => app('country')->getCountry()->slug, 'city' => app('country')->getCity()->slug]);
 
     }
 
