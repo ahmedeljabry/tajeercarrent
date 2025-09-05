@@ -239,8 +239,8 @@
         });
     </script>
     <script>
-        const minRange = document.getElementById("minRange"); // right handle
-        const maxRange = document.getElementById("maxRange"); // left handle
+        const minRange = document.getElementById("minRange"); // left handle
+        const maxRange = document.getElementById("maxRange"); // right handle
         const minValueDisplay = document.getElementById("minValue");
         const maxValueDisplay = document.getElementById("maxValue");
         const track = document.querySelector(".slider-track");
@@ -252,35 +252,23 @@
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            const middle = {{$max_price / 2}};
-
-            // LEFT handle (maxRange) can only move up to middle
-            if (maxVal > middle) {
-                maxVal = middle;
-                maxRange.value = maxVal;
-            }
-
-            // RIGHT handle (minRange) can only move starting from middle
-            if (minVal < middle) {
-                minVal = middle;
-                minRange.value = minVal;
-            }
-
             // Update displayed values
             minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
             maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
 
-            // Update slider track background
+            // Calculate percentages for slider fill
             let minPercent = (minVal / {{$max_price}}) * 100;
             let maxPercent = (maxVal / {{$max_price}}) * 100;
 
+            // Update track background
             track.style.background = `linear-gradient(to right,
-        #ddd ${maxPercent}%,
-        #A2E2FF ${maxPercent}%,
+        #ddd ${minPercent}%,
         #A2E2FF ${minPercent}%,
-        #ddd ${minPercent}%)`;
+        #A2E2FF ${maxPercent}%,
+        #ddd ${maxPercent}%)`;
         }
 
         updateRange();
+
     </script>
 @endsection
