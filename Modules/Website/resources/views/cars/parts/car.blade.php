@@ -96,18 +96,24 @@
         </div>
     </div>
     <div class="rent-car-slide-description-blue-boxes p-3">
-        <div class="rent-car-slide-description-blue-box">
-            <span>{{__("lang.Day")}}</span>
-            <span>{{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
-        </div>
-        <div class="rent-car-slide-description-blue-box">
-            <span>{{__("lang.Week")}}</span>
-            <span>{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
-        </div>
-        <div class="rent-car-slide-description-blue-box">
-            <span>{{__("lang.Month")}}</span>
-            <span>{{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
-        </div>
+        @if ($car->price_per_day)
+            <div class="rent-car-slide-description-blue-box">
+                <span>{{__("lang.Day")}}</span>
+                <span>{{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
+            </div>
+        @endif
+        @if ($car->price_per_week)
+            <div class="rent-car-slide-description-blue-box">
+                <span>{{__("lang.Week")}}</span>
+                <span>{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
+            </div>
+        @endif
+        @if ($car->price_per_month)
+            <div class="rent-car-slide-description-blue-box">
+                <span>{{__("lang.Month")}}</span>
+                <span>{{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
+            </div>
+        @endif
         <picture class="rent-car-slide-icon">
             <img src="{{asset("/assets/images/tajeer-app-icon.png")}}" alt="" class="mw-100">
         </picture>

@@ -46,6 +46,11 @@ class CarsController extends Controller
 
     public function filter($country, $city){
         $query = Car::hasCompany()->with(['images','brand','model','color','types','company','year'])
+            ->when(request('search'), function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('cars.name->' . app()->getLocale(), 'like', '%' . $search . '%');
+                });
+            })
             ->when(request('order_by'), function ($query, $order) {
                 $query->orderBy('price_per_day', $order == "price_low" ? "asc" : "desc");
             })
