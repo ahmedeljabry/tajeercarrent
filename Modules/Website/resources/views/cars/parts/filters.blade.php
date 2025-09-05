@@ -78,8 +78,8 @@
                             <h3 class="text-start">@lang('lang.PRICE RANGE')</h3>
                             <div class="slider-wrapper">
                                 <div class="slider-track"></div>
-                                <input type="range" id="minRange" min="0" max="{{$max_price / 2}}" value="{{request('min_price', 0)}}" step="10" name="min_price">
-                                <input type="range" id="maxRange" min="{{$max_price / 2}}" max="{{$max_price}}" value="{{request('max_price', $max_price)}}" step="10" name="max_price">
+                                <input type="range" id="minRange" min="0" max="{{$max_price / 2 - 10}}" value="{{request('min_price', 0)}}" step="10" name="min_price">
+                                <input type="range" id="maxRange" min="{{$max_price / 2 + 10}}" max="{{$max_price}}" value="{{request('max_price', $max_price)}}" step="10" name="max_price">
                             </div>
                             <div class="price-values">
                                 <span id="minValue">{{0}} {{app('currencies')->getCurrency()->code}}</span>
