@@ -246,28 +246,41 @@
         const track = document.querySelector(".slider-track");
 
         minRange.addEventListener("input", updateRange);
+        maxRange.addEventListener("input", updateRange);
 
         function updateRange() {
             let minVal = parseInt(minRange.value);
             let maxVal = parseInt(maxRange.value);
 
-            if (minVal >= {{$max_price / 2 - 10}}) {
-                minRange.value = {{$max_price / 2 + 10}};
-                minVal = minRange.value;
+            // prevent overlap at middle
+            const minLimit = {{$max_price / 2 - 10}};
+            const maxLimit = {{$max_price / 2 + 10}};
+
+            if (minVal >= maxLimit) {
+                minVal = maxLimit - 1;
+                minRange.value = minVal;
             }
 
-            if (maxVal <= {{$max_price / 2 + 10}}){
-                maxRange.value = {{$max_price / 2 + 10}};
-                maxVal = maxRange.value;
+            if (maxVal <= minLimit) {
+                maxVal = minLimit + 1;
+                maxRange.value = maxVal;
             }
 
+            // update displayed values
             minValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${minVal.toLocaleString()}`;
             maxValueDisplay.textContent = `{{app('currencies')->getCurrency()->code}} ${maxVal.toLocaleString()}`;
 
-            let minPercent = 50;
-            let maxPercent = 50;
-            track.style.background = `linear-gradient(to right, #ddd ${minPercent}%, #A2E2FF ${minPercent}%, #A2E2FF ${maxPercent}%, #ddd ${maxPercent}%)`;
+            // update track background based on percentage
+            let minPercent = (minVal / {{$max_price}}) * 100;
+            let maxPercent = (maxVal / {{$max_price}}) * 100;
+
+            track.style.background = `linear-gradient(to right,
+        #ddd ${minPercent}%,
+        #A2E2FF ${minPercent}%,
+        #A2E2FF ${maxPercent}%,
+        #ddd ${maxPercent}%)`;
         }
+
         updateRange();
 
     </script>
