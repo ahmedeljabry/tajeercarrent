@@ -16,3 +16,7 @@
 .car-type-brand-slide img{
     object-fit: contain;
 }
+
+.blog-card-content img{
+    height: 500px !important;
+}
