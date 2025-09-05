@@ -1,6 +1,14 @@
 <?php 
 
 return [
+    "contact-us-success-message" => "We will contact you soon!",
+    "KM" => "KM",
+    "Salik Charges" => "Salik Charges",
+    "Details & Requirements" => "Details & Requirements",
+    "Sales" => "Sales",
+    "Payment Methods" => "Payment Methods",
+    "Car Types" => "Car Types",
+    "Featured Cars" => "Featured Cars",
     "Rent a Car in" => "Rent a Car In",
     "Premium" => 'Premium',
     "Downloads" => "Downloads",

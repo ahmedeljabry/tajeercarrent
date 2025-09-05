@@ -15,6 +15,10 @@
                             {{__('admin.yacht_rental')}}
                             @elseif($content->type == "listcar")
                             {{__('admin.add_your_car')}}
+                            @elseif($content->type == "car-types")
+                                {{__('admin.Car Types')}}
+                            @elseif($content->type == "car-brands")
+                                {{__('admin.Car Brands')}}
                             @endif
                         </h4>
                         <button class="btn btn-primary btn-rounded">

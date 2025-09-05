@@ -7,16 +7,17 @@
     ])
 @endsection
 @section("content")
-
-
     @include('website::layouts.parts.page-banner',[
         "title" => app('settings')->get('faq_title')
     ])
 
+    @include('website::cars.parts.breadcrumb', [
+      'breadcrumbs' => [
+          app('settings')->get('faq_title') ?? __('lang.FAQ') =>  null
+      ]
+    ])
 
     @include('website::layouts.parts.faq', [
         "faq" => \App\Models\Faq::where('type','home')->get()
     ])
-
-
 @endsection

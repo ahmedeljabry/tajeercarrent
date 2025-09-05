@@ -8,63 +8,57 @@
     ])
 @endsection
 
-@section("content")
+@section('css')
+    <link href="{{asset('/css/rent.css')}}" rel="stylesheet" type="text/css" />
+@endsection
+    @section("content")
+    <main id="rent">
+        @include('website::layouts.parts.page-banner', [
+            "title" => app('settings')->get('driver_title') ?? __('lang.Rent a car with driver')
+        ])
 
-<section class="products-page">
-        <div class="container">
-            <div class="row">
+        @include('website::cars.parts.breadcrumb',[
+            'breadcrumbs' => [
+                app('settings')->get('driver_title') ?? __('lang.Rent a car with driver') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers'))
+            ]
+        ])
 
-                @include('website::cars.parts.breadcrumb',[
-                    "title_1" => app('settings')->get('driver_title'),
-                    "title_2" => ""
-                ])
-
-                @include('website::layouts.parts.page-title',[
-                    "title"       =>  app('settings')->get('driver_title'),
-                    "description" =>  app('settings')->get('driver_description')
-                ])
-
-
+        <section class="mb-5">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <h3>{{app('settings')->get('driver_title')}}</h3>
+                        <div class="black-line"></div>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-text">
+                            {!! app('settings')->get('driver_description') !!}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="rent-car-slider-wrapper container">
+                <div class="rent-car-slider rent-container-section container">
+                    @foreach($cars as $car)
+                        @include('website::layouts.parts.car', ['car' => $car])
+                    @endforeach
+                </div>
             </div>
 
+            <div class="col-12">
+                {{$cars->appends(request()->input())->links()}}
+            </div>
+        </section>
+        <hr>
+        @include('website::layouts.parts.content', [
+            "content" => \App\Models\Content::where('type','driver')->first()
+        ])
 
-                <div class="row mt-50">
-
-                    <div class="col-lg-12">
-
-
-                        <div class="products-page__content">
-                            <div class="row">
-                                @foreach($cars as $car)
-                                    <div class="col-lg-4 mb-3">
-                                        @include('website::layouts.parts.car', ['car' => $car, 'class' => 'card_type_1'])
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-12">
-                        {{$cars->appends(request()->input())->links()}}
-                    </div>
-
-                </div>
-
-
-        </div>
-    </section>
-
-
-    @include('website::layouts.parts.content', [
-        "content" => \App\Models\Content::where('type','driver')->first()
-    ])
-
-    @include('website::layouts.parts.faq', [
-        "faq" => \App\Models\Faq::where('type','driver')->get()
-    ])
-
-
+        @include('website::layouts.parts.faq', [
+            "faq" => \App\Models\Faq::where('type','driver')->get()
+        ])
+    </main>
 @endsection
 
 @section('schemes')
@@ -141,3 +135,7 @@
         @endif
 
     @endsection
+
+@section('js')
+
+@endsection

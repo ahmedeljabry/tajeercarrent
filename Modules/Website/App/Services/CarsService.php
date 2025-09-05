@@ -9,6 +9,7 @@ class CarsService
     public function __construct()
     {
         $this->brands = \App\Models\Brand::withCount('cars')->orderBy('cars_count', 'desc')->get();
+        $this->types = \App\Models\Type::withCount('cars')->orderBy('cars_count', 'desc')->get();
     }
 
 }

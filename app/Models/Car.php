@@ -138,6 +138,7 @@ class Car extends Model implements Sitemapable
         'slug',
         'extra_price',
         'km_per_day',
+        'km_pre_day',
         'km_per_month',
         'insurance_type',
     ];

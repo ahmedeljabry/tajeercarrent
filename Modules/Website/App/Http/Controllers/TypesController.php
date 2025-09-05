@@ -15,7 +15,25 @@ class TypesController extends Controller
     use HasSuggestedCars;
 
     public function index(){
-
+        $breadcrumbs = [
+            __('lang.Car Types') => route('website.cars.types.index')
+        ];
+        return view('website::types.index')->with([
+            'cars'         => null,
+            'resource'     => null,
+            'resource_type' => 'brand',
+            'resource_sub_type' => 'models',
+            'resource_title' => null,
+            'resource_model' => null,
+            'models'       => null,
+            'selected_types' => null,
+            'suggested_cars' => null,
+            'seo'          => null,
+            'content'      => null,
+            'faq'          => null,
+            'canonical'   =>  '/types',
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
 
     public function show($country, $city, Type $type){

@@ -193,6 +193,12 @@
                             <li>
                                 <a href="{{url('/')}}/admin/content/listcar"> {{__('admin.add_your_car')}}</a>
                             </li>
+                            <li>
+                                <a href="{{url('/')}}/admin/content/car-types"> {{__('admin.Car Types')}}</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/')}}/admin/content/car-brands"> {{__('admin.Car Brands')}}</a>
+                            </li>
                         </ul>
                     </li>
                     @endcan

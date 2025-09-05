@@ -1,6 +1,10 @@
 <?php
 
 return [
+    "Car Types" => "Car Types",
+    "Car Brands" => "Car Brands",
+    "About Us" => "About Us",
+    "Contact Us" => "Contact Us",
     "add" => "Add",
     "banner" => "Banner",
     "save"   => "Save",
@@ -136,6 +140,7 @@ return [
     "Car" => "Car",
     "Date" => "Date",
     "KM Per Day" => "KM Per Day",
+    "KM Per Week" => "KM Per Week",
     "KM Per Month" => "KM Per Month",
     "from" => "From",
     "to" => "To",

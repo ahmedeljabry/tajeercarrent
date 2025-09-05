@@ -1,6 +1,14 @@
 <?php 
 
 return [
+    "contact-us-success-message" => "سوف نقوم بالتواصل معك قريبا!",
+    "KM" => "كم",
+    "Salik Charges" => "رسوم سالك",
+    "Details & Requirements" => "التفاصيل و المتطلبات",
+    "Sales" => "المبيعات",
+    "Payment Methods" => "طرق الدفع",
+    "Car Types" => "انواع السيارات",
+    "Featured Cars" => "السيارات المميزة",
     "Rent a Car in" => "اجر سيارة في",
     "Premium" => "مميز",
     "Downloads" => "التنزيلات",

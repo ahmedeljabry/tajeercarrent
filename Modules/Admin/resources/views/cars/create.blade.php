@@ -102,7 +102,15 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-4">
+                                            <div class="form-group row mb-4">
+                                                <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.KM Per Week')}}</label>
+                                                <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                    <input  type="number"  value="0"  class="form-control" name="km_per_week" >
+                                                </div>
+                                            </div>
+
+
+                                                <div class="form-group row mb-4">
                                             <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.price')}} {{__('admin.month')}} ({{__('admin.aed')}})</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">
                                                 <input  type="number"  class="form-control" name="price_per_month" >

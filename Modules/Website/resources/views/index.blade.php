@@ -89,7 +89,7 @@
         </section>
 
 
-        @foreach($sections as $section)
+        @foreach($sections as $index => $section)
             @include('website::layouts.parts.section', ['section' => $section])
         @endforeach
 
@@ -189,9 +189,6 @@
         @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title_3 && $content->image_3 && $content->description_3)
             <section class="home-content-section">
                 <div class="container">
-                    <picture>
-                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_3)}}" alt="">
-                    </picture>
                     <div class="home-content-container">
                         <div class="home-desc">
                             <h2>{{$content->title_3}}</h2>
@@ -199,6 +196,9 @@
                         </div>
                         <div class="main-btn">{{__('lang.Read More')}}</div>
                     </div>
+                    <picture>
+                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_3)}}" alt="">
+                    </picture>
                 </div>
             </section>
             <hr>

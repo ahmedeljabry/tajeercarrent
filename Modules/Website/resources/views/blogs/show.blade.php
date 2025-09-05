@@ -13,15 +13,13 @@
     ])
 
     <section class="home__about list__item">
+        @include('website::cars.parts.breadcrumb', [
+            'breadcrumbs' => [
+                  app('settings')->get('blog_title') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.blogs.index')),
+                  $blog->title => null
+            ]
+        ])
         <div class="container">
-            <div class="row">
-
-                @include('website::cars.parts.breadcrumb', [
-                    "title_1" => app('settings')->get('blog_title'),
-                    "title_2" =>  $blog->getTranslation("title", \App::getLocale())
-                ])
-
-            </div>
             <div class="row mt-50">
                 <div class="col-lg-12">
 

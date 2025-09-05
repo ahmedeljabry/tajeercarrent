@@ -75,16 +75,6 @@ class CarsController extends Controller
                 });
             })
             ->where('type', 'default');
-
-
-//        $cars = (clone $query)->when(request('min_price'), function ($query, $min_price) {
-//            $query->where('price_per_day', '>=' , app('currencies')->getAedAmount($min_price));
-//        })
-//        ->when(request('max_price'), function ($query, $max_price) {
-//            $query->where('price_per_day', '<=' , app('currencies')->getAedAmount($max_price));
-//        })
-//        ->paginate(10);
-//
         return view('website::cars.search')->with([
             'query'         => $query,
             'models'       => [],

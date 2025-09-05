@@ -2,7 +2,7 @@
     <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
         <div class="car-rent-title">
             <picture>
-                <img src="./assets/images/rent-four.jpg" alt="">
+                <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($car->image)}}" alt="">
                 <div class="rent-car-labels">
                     @if ($car->is_refresh)
                         <div class="rent-car-label Featured">
@@ -82,7 +82,7 @@
         </div>
     </a>
     <div class="rent-car-slide-footer">
-        <a href="https://wa.me/{{app('settings')->get('contact_phone')}}" target="_blank" rel="noopener">
+        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}" target="_blank" rel="noopener">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px"
                      viewBox="0 0 24 24">

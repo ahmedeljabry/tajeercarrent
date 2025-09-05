@@ -360,10 +360,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <a class="dropdown-item"
-                               href="{{ LaravelLocalization::localizeUrl("/contact") }}">{{__('lang.Contact Us')}}</a>
+                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
                             @foreach(app('settings')->getHeaderPages() as $item)
                                 <a class="dropdown-item"
-                                   href="{{ LaravelLocalization::localizeUrl("/p/{$item->id}/{$item->slug}") }}">{{$item->name}}</a>
+                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
                             @endforeach
                         </ul>
                     </div>
@@ -874,10 +874,6 @@
                         <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Contact Us')}}"
                            href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
                     </li>
-                    <li>
-                        <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Terms and Conditions')}}"
-                           href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.terms-and-conditions')) }}">{{__('lang.Terms and Conditions')}}</a>
-                    </li>
                 </ul>
                 <ul>
                     @foreach(app('settings')->getFooterPages() as $key => $item)
@@ -920,7 +916,7 @@
 
                         </li>
                         <li class="list-unstyled ">
-                            <a href="https://wa.me/{{app('settings')->get('contact_whatasapp')}}">
+                            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
                                 <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
                             </a>
                         </li>
@@ -962,13 +958,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.read-more-btn').forEach(btn => {
             const descriptionText = btn.previousElementSibling;
-            const style = window.getComputedStyle(descriptionText);
-            const lineHeight = parseFloat(style.lineHeight);
-            const height = descriptionText.scrollHeight;
-            if (height <= Math.ceil(lineHeight * 2)){
-                btn.classList.add('d-none');
-                return;
-            }
 
             btn.addEventListener('click', function () {
                 if (descriptionText.classList.contains('expanded')) {

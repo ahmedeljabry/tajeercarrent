@@ -111,6 +111,10 @@ class Setting extends Model
         "car_types_description",
         "car_brands_title",
         "car_brands_description",
+        "page_contact_us_title",
+        "page_contact_us_description",
+        "page_car_types_title",
+        "page_car_brands_title",
         "car_companies_title",
         "car_companies_description",
         "book_your_next_trip_left",
@@ -119,7 +123,7 @@ class Setting extends Model
         "find_your_car_description",
         "default_notes",
         "driver_notes",
-        "yacht_notes",
+        "yacht_notes"
     ];
 
     protected $fillable = [
@@ -160,6 +164,10 @@ class Setting extends Model
         "default_notes",
         "driver_notes",
         "yacht_notes",
+        "page_car_types_title",
+        "page_car_brands_title",
+        "page_contact_us_title",
+        "page_contact_us_description",
     ];
 
     protected $hidden = ['created_at', 'updated_at','header_logo','footer_logo'];

@@ -34,15 +34,6 @@
                                         </div>
                                         @endforeach
 
-                                        @foreach(\Config::get("app.languages") as $key => $value)
-                                        <div class="form-group row mb-4">
-                                            <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.content')}} {{__('admin.page')}} {{$value}}</label>
-                                            <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <textarea  class="form-control body" name="content_{{$key}}" ></textarea>
-                                            </div>
-                                        </div>
-                                        @endforeach
-
                                         <div class="form-group row mb-4">
                                             <label for="hPassword" class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.image')}}</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">

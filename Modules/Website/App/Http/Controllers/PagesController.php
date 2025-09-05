@@ -26,7 +26,7 @@ class PagesController extends Controller
         return view('website::faq');
     }
 
-    public function contact() {
+    public function contact(Request $request) {
         if (\request()->method() == 'POST') {
             $data = $request->all();
             \App\Models\Message::create($data);

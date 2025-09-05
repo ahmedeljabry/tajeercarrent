@@ -1,22 +1,26 @@
-@if(count($suggested_cars) > 0)
-    <section class="home__features">
+@if (count($suggested_cars) > 0)
+    <section class="mb-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="home__brands_title">
-                        <h3>{{__('lang.Suggested Car Rental')}}</h3>
-                    </div>
+            <div class="section-header">
+                <div class="section-header-title">
+                    <h3>{{__('lang.Featured Cars')}}</h3>
+                    <div class="black-line"></div>
                 </div>
-
-                <div class="col-lg-12">
-                    <div data-stage="15" data-items-large="3" data-items-small="1"  class="home__features_content owl-carousel owl-theme">
-                        @foreach($suggested_cars as $car)
-                            @include('website::layouts.parts.car', ['car' => $car])
-                        @endforeach
-                    </div>
-                </div>
-
             </div>
         </div>
+        <div class="rent-car-slider-wrapper container">
+                <span href="" class=" rent-car-prev">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </span>
+            <div class="rent-car-slider container">
+                @foreach($suggested_cars as $car)
+                    @include('website::layouts.parts.car', ['car' => $car])
+                @endforeach
+            </div>
+            <span href="" class=" rent-car-next">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+        </div>
     </section>
+    <hr>
 @endif

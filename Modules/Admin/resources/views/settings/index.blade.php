@@ -257,7 +257,93 @@
 
                                 </div>
                             </div>
-                        </div>  
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="page__header_title custom__page_header_title mt-20">
+                                <h4>{{__('admin.page')}} {{__('admin.Car Types')}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="statbox widget box box-shadow">
+
+                                <div class="widget-content widget-content-area">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+
+                                            @foreach(\Config::get("app.languages") as $key => $value)
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.title')}} {{__('admin.page')}} {{$value}}</label>
+                                                    <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                        <input value='{{$settings->getTranslation("page_car_types_title",$key)}}' type="text" class="form-control" name="page_car_types_title_{{$key}}" >
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="page__header_title custom__page_header_title mt-20">
+                                <h4>{{__('admin.page')}} {{__('admin.Car Brands')}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="statbox widget box box-shadow">
+
+                                <div class="widget-content widget-content-area">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                            @foreach(\Config::get("app.languages") as $key => $value)
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.title')}} {{__('admin.page')}} {{$value}}</label>
+                                                    <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                        <input value='{{$settings->getTranslation("page_car_brands_title",$key)}}' type="text" class="form-control" name="page_car_brands_title_{{$key}}" >
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="page__header_title custom__page_header_title mt-20">
+                                <h4>{{__('admin.page')}} {{__('admin.Contact Us')}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="statbox widget box box-shadow">
+
+                                <div class="widget-content widget-content-area">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                            @foreach(\Config::get("app.languages") as $key => $value)
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.title')}} {{__('admin.page')}} {{$value}}</label>
+                                                    <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                        <input value='{{$settings->getTranslation("page_contact_us_title",$key)}}' type="text" class="form-control" name="page_contact_us_title_{{$key}}" >
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                            @foreach(\Config::get("app.languages") as $key => $value)
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.description')}} {{__('admin.page')}} {{$value}}</label>
+                                                    <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                        <textarea class="form-control" name="page_contact_us_description_{{$key}}" >{{$settings->getTranslation("page_contact_us_description",$key)}}</textarea>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div class="page__header_title custom__page_header_title mt-20">
                                 <h4>{{__('admin.page')}} {{__('admin.yacht_rental')}}</h4>

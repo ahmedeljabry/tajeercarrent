@@ -42,11 +42,6 @@ Route::group([
         Route::get('/currency/{currency?}/switch', [HomeController::class, 'switchCurrency'])->name('website.switch.currency');
         Route::get('/city/{city?}/switch', [HomeController::class, 'switchCity'])->name('website.switch.city');
 
-        Route::get('/faq', [PagesController::class, 'faq'])->name('website.pages.faq');
-        Route::any("/contact-us", [PagesController::class, 'contact'])->name('website.pages.contact-us');
-        Route::get("/list-your-car", [PagesController::class, 'list_your_car'])->name('website.pages.list-your-car');
-        Route::get('terms-and-conditions', [PagesController::class, 'terms_and_conditions'])->name('website.pages.terms-and-conditions');
-
         Route::post("/signup", [UsersController::class, 'signup'])->name('website.account.register');
         Route::post("/login", [UsersController::class, 'login'])->name('website.account.login');
         Route::get("/login/{provider}", [UsersController::class, 'login_with_provider'])->name('website.account.login_with_provider');
@@ -98,6 +93,10 @@ Route::group([
                 Route::get('/', 'index')->name('website.blogs.index');
                 Route::get('/{blog}', 'show')->name('website.blogs.show');
             });
+
+            Route::get('/faq', [PagesController::class, 'faq'])->name('website.pages.faq');
+            Route::any("/contact-us", [PagesController::class, 'contact'])->name('website.pages.contact-us');
+            Route::get("/list-your-car", [PagesController::class, 'list_your_car'])->name('website.pages.list-your-car');
 
             Route::get('/{page}', [PagesController::class, 'show'])->name('website.pages.show');
         });
