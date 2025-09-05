@@ -1,3 +1,7 @@
 .map-box h5{
     font-size: 0.55rem;
 }
+
+.choose-fav-car-type-slider .slick-slide img{
+    max-height: 150px !important;
+}
