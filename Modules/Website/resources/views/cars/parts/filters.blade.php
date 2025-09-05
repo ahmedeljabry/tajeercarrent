@@ -239,8 +239,8 @@
         });
     </script>
     <script>
-        const minRange = document.getElementById("minRange");
-        const maxRange = document.getElementById("maxRange");
+        const minRange = document.getElementById("minRange"); // right handle
+        const maxRange = document.getElementById("maxRange"); // left handle
         const minValueDisplay = document.getElementById("minValue");
         const maxValueDisplay = document.getElementById("maxValue");
         const track = document.querySelector(".slider-track");
@@ -254,16 +254,16 @@
 
             const middle = {{$max_price / 2}};
 
-            // Prevent min slider from crossing middle
-            if (minVal >= middle) {
-                minVal = middle;
-                minRange.value = minVal;
-            }
-
-            // Prevent max slider from crossing middle
-            if (maxVal <= middle) {
+            // LEFT handle = maxRange → cannot go beyond middle
+            if (maxVal >= middle) {
                 maxVal = middle;
                 maxRange.value = maxVal;
+            }
+
+            // RIGHT handle = minRange → cannot go below middle
+            if (minVal <= middle) {
+                minVal = middle;
+                minRange.value = minVal;
             }
 
             // Update displayed values
@@ -275,13 +275,12 @@
             let maxPercent = (maxVal / {{$max_price}}) * 100;
 
             track.style.background = `linear-gradient(to right,
-        #ddd ${minPercent}%,
-        #A2E2FF ${minPercent}%,
+        #ddd ${maxPercent}%,
         #A2E2FF ${maxPercent}%,
-        #ddd ${maxPercent}%)`;
+        #A2E2FF ${minPercent}%,
+        #ddd ${minPercent}%)`;
         }
 
         updateRange();
-
     </script>
 @endsection
