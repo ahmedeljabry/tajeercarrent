@@ -17,7 +17,8 @@ class CarsController extends Controller
     public function show($country, $city, Car $car)
     {
         $suggested_cars = Car::hasCompany()->with(['images','brand','model','color','types','company','year'])
-        ->where(function($query) use ($car) {
+            ->orderBy('refreshed_at', 'desc')
+            ->where(function($query) use ($car) {
             if($car->brand_id) {
                 $query->where('brand_id',$car->brand_id);
             }
@@ -46,6 +47,7 @@ class CarsController extends Controller
 
     public function filter($country, $city){
         $query = Car::hasCompany()->with(['images','brand','model','color','types','company','year'])
+            ->orderBy('refreshed_at', 'desc')
             ->when(request('search'), function ($query, $search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('cars.name->' . app()->getLocale(), 'like', '%' . $search . '%');
@@ -88,7 +90,9 @@ class CarsController extends Controller
     }
 
     public function with_driver(){
-        $cars = Car::hasCompany()->where('type', 'driver')->paginate(10);
+        $cars = Car::hasCompany()->where('type', 'driver')
+            ->orderBy('refreshed_at', 'desc')
+            ->paginate(10);
         return view('website::cars.cars_with_driver', ['cars' => $cars]);
     }
 }

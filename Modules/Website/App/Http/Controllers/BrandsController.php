@@ -41,6 +41,7 @@ class BrandsController extends Controller
     public function show($country, $city, Brand $brand){
         $query = $brand->cars()->hasCompany()->where(function ($query){
             $query->where('type', 'default');
+            $query->orderBy('refreshed_at', 'desc');
         });
         $resource = $brand;
         $selected_types = [];
@@ -76,6 +77,7 @@ class BrandsController extends Controller
     public function model($country, $city, Brand $brand, Models $model){
         $query = $brand->models()->findOrFail($model->id)->cars()->where(function ($query){
             $query->where('type', 'default');
+            $query->orderBy('refreshed_at', 'desc');
         });
         $resource = $brand;
         $selected_types = [];

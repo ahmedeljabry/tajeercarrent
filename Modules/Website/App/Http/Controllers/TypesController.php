@@ -43,7 +43,7 @@ class TypesController extends Controller
         if ($type->slug == "with-driver")
             return redirect()->route('website.cars.with-drivers');
 
-        $query = $type->cars()->hasCompany()->where('type', 'default');
+        $query = $type->cars()->hasCompany()->orderBy('refreshed_at', 'desc')->where('type', 'default');
         $resource = $type;
         $selected_types = [$resource->slug];
         $seo      = \App\Models\SEO::where('type','type')->where('resource_id',$resource->id)->first();
@@ -79,6 +79,7 @@ class TypesController extends Controller
         $query = $type->cars()->where(function ($query) use ($model){
             $query->where('model_id',$model->id);
             $query->where('type', 'default');
+            $query->orderBy('refreshed_at', 'desc');
         });
         $resource = $type;
         $selected_types = [$resource->slug];
