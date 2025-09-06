@@ -293,4 +293,12 @@
         // Initialize once
         updateRange();
     </script>
+
+    <script>
+        $(function (){
+            $('.order-by').on('change', function(){
+                $(this).closest('form').submit();
+            });
+        });
+    </script>
 @endsection

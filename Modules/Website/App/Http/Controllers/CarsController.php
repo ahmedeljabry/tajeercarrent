@@ -16,7 +16,7 @@ class CarsController extends Controller
     use HasSuggestedCars;
     public function show($country, $city, Car $car)
     {
-        $suggested_cars = Car::hasCompany()->with(['images','brand','model','color','types','company','year'])
+        $suggested_cars = Car::with(['images','brand','model','color','types','company','year'])
             ->orderBy('refreshed_at', 'desc')
             ->where(function($query) use ($car) {
             if($car->brand_id) {
@@ -28,10 +28,10 @@ class CarsController extends Controller
         })
         ->limit(10)->get();
 
-        $car->company->views()->create([
-            'car_id' => $car->id,
-            'user_id' => \Auth::user()?->id ?? null
-        ]);
+//        $car->company->views()->create([
+//            'car_id' => $car->id,
+//            'user_id' => \Auth::user()?->id ?? null
+//        ]);
 
         if($car->model) {
             $description = \App\Models\Content::where('type','model')->where('resource_id', $car->model->id)->first();
@@ -46,8 +46,7 @@ class CarsController extends Controller
     }
 
     public function filter($country, $city){
-        $query = Car::hasCompany()->with(['images','brand','model','color','types','company','year'])
-            ->orderBy('refreshed_at', 'desc')
+        $query = Car::with(['images','brand','model','color','types','company','year'])
             ->when(request('search'), function ($query, $search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('cars.name->' . app()->getLocale(), 'like', '%' . $search . '%');
@@ -81,7 +80,9 @@ class CarsController extends Controller
                     $query->where('slug', $color);
                 });
             })
+            ->orderBy('refreshed_at', 'desc')
             ->where('type', 'default');
+
         return view('website::cars.search')->with([
             'query'         => $query,
             'models'       => [],
@@ -90,7 +91,7 @@ class CarsController extends Controller
     }
 
     public function with_driver(){
-        $cars = Car::hasCompany()->where('type', 'driver')
+        $cars = Car::where('type', 'driver')
             ->orderBy('refreshed_at', 'desc')
             ->paginate(10);
         return view('website::cars.cars_with_driver', ['cars' => $cars]);

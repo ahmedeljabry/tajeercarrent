@@ -14,7 +14,7 @@ class YachtsController extends Controller
 {
     use HasSuggestedCars;
     public function index(){
-        $yachts = Car::hasCompany()->where('type', 'yacht')->paginate(10);
+        $yachts = Car::where('type', 'yacht')->paginate(10);
         return view("website::yachts.index", ['yachts' => $yachts]);
     }
     public function show($country, $city, Car $yacht)
