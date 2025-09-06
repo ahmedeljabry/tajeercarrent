@@ -83,7 +83,7 @@
                                 <input type="range"
                                        id="minRange"
                                        min="0"
-                                       max="{{ $max_price / 2 }}"
+                                       max="{{ $max_price / 2 - 10}}"
                                        value="{{ request('min_price', 0) }}"
                                        step="10"
                                        name="min_price">
@@ -91,7 +91,7 @@
                                 <!-- Right slider: only half → max -->
                                 <input type="range"
                                        id="maxRange"
-                                       min="{{ $max_price / 2 }}"
+                                       min="{{ $max_price / 2 + 10 }}"
                                        max="{{ $max_price }}"
                                        value="{{ request('max_price', $max_price) }}"
                                        step="10"
@@ -267,17 +267,6 @@
             let minVal = parseInt(minRange.value, 10);
             let maxVal = parseInt(maxRange.value, 10);
 
-            // Make sure left stays ≤ half
-            if (minVal > halfPrice) {
-                minVal = halfPrice;
-                minRange.value = halfPrice;
-            }
-
-            // Make sure right stays ≥ half
-            if (maxVal < halfPrice) {
-                maxVal = halfPrice;
-                maxRange.value = halfPrice;
-            }
 
             // Update labels
             minValueDisplay.textContent = `${minVal.toLocaleString()} {{ app('currencies')->getCurrency()->code }}`;
@@ -286,6 +275,8 @@
             // Update track fill
             const minPercent = (minVal / maxPrice) * 100;
             const maxPercent = (maxVal / maxPrice) * 100;
+
+            console.log(minPercent, maxPercent)
 
             track.style.background = `linear-gradient(to right,
         #ddd 0%,
