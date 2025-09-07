@@ -47,7 +47,7 @@ input[type="range"] {
     background: transparent;
     pointer-events: none;
     z-index: 2;
-    width: 55%;
+    width: 50%;
 }
 
 #maxRange{
