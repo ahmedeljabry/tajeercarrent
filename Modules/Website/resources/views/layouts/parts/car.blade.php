@@ -40,7 +40,7 @@
                 @endif
                 @if($car->price_per_week)
                     <div class="rent-car-slide-description-blue-box">
-                        <span>{{__('lang.Day')}}/{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
+                        <span>{{__('lang.Week')}}/{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
                     </div>
                 @endif
                 @if($car->price_per_month)

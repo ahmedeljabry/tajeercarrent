@@ -72,7 +72,7 @@
                                 @endif
                                 @if($car->price_per_week)
                                     <div class="car-details-pricing-card">
-                                        <h4 class="text-center">{{__('lang.Day')}}</h4>
+                                        <h4 class="text-center">{{__('lang.Week')}}</h4>
                                         <ul>
                                             <li>
                                                 {{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}
@@ -91,13 +91,13 @@
 
                                 @if($car->price_per_month)
                                     <div class="car-details-pricing-card">
-                                        <h4 class="text-center">{{__('lang.Day')}}</h4>
+                                        <h4 class="text-center">{{__('lang.Month')}}</h4>
                                         <ul>
                                             <li>
                                                 {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}
                                             </li>
                                             <li>
-                                                {{__('lang.KM Limit Day')}} / {{$car->km_per_month ?: 250}} {{__('lang.KM')}}
+                                                {{__('lang.KM Limit Month')}} / {{$car->km_per_month ?: 250}} {{__('lang.KM')}}
                                             </li>
                                             @if ($car->extra_price)
                                                 <li>
@@ -388,7 +388,7 @@
             "image": [
                 "{{secure_url('/')}}/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}"
             ],
-            "url": "{{secure_url('/')}}/{{$car->id}}/{{$car->slug}}",
+            "url": "{{route('website.cars.show', ['car' => $car])}}",
             "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",

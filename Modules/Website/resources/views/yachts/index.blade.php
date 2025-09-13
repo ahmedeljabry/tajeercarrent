@@ -1,4 +1,5 @@
 @extends('website::layouts.master')
+
 @section('seo')
     @include('website::layouts.parts.seo', [
         'seo' => \App\Models\SEO::where('type','yacht')->first(),
@@ -6,65 +7,59 @@
         "image" => secure_url('/') . '/storage/'. app('settings')->get('header_logo')
     ])
 @endsection
+
+@section('css')
+    <link href="{{asset('/css/rent.css')}}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section("content")
+    <main id="rent">
+        @include('website::layouts.parts.page-banner', [
+            "title" => app('settings')->get('yacht_title') ?? __('lang.Rent yacht')
+        ])
 
-<section class="products-page">
-        <div class="container">
-            <div class="row">
+        @include('website::cars.parts.breadcrumb',[
+            'breadcrumbs' => [
+                app('settings')->get('yacht_title') ?? __('lang.Rent a car with driver') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.yachts.index'))
+            ]
+        ])
 
-                @include('website::cars.parts.breadcrumb',[
-                    "title_1" => app('settings')->get('yacht_title'),
-                    "title_2" => ""
-                ])
-
-                @include('website::layouts.parts.page-title',[
-                    "title"       => app('settings')->get('yacht_title'),
-                    "description" => app('settings')->get('yacht_description')
-                ])
-
-
+        <section class="mb-5">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <h3>{{app('settings')->get('yacht_title')}}</h3>
+                        <div class="black-line"></div>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-text">
+                            {!! app('settings')->get('driver_description') !!}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="rent-car-slider-wrapper container">
+                <div class="rent-car-slider rent-container-section container">
+                    @foreach($yachts as $yacht)
+                        @include('website::yachts.parts.yacht', ['car' => $yacht])
+                    @endforeach
+                </div>
             </div>
 
+            <div class="col-12">
+                {{$yachts->appends(request()->input())->links()}}
+            </div>
+        </section>
+        <hr>
+        @include('website::layouts.parts.content', [
+            "content" => \App\Models\Content::where('type','yacht')->first()
+        ])
 
-                <div class="row mt-50">
-
-                    <div class="col-lg-12">
-
-
-                        <div class="products-page__content">
-                            <div class="row">
-                                @foreach($yachts as $yacht)
-                                    <div class="col-lg-4 mb-3">
-                                        @include('website::yachts.parts.yacht', ['yacht' => $yacht])
-                                    </div>
-                                    @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-12">
-                        {{$yachts->appends(request()->input())->links()}}
-                    </div>
-
-                </div>
-
-
-        </div>
-    </section>
-
-
-    @include('website::layouts.parts.content', [
-        "content" => \App\Models\Content::where('type','yacht')->first()
-    ])
-
-    @include('website::layouts.parts.faq', [
-        "faq" => \App\Models\Faq::where('type','yacht')->get()
-    ])
-
-
-
-
+        @include('website::layouts.parts.faq', [
+            "faq" => \App\Models\Faq::where('type','yacht')->get()
+        ])
+    </main>
 @endsection
 
 @section('schemes')
@@ -81,7 +76,7 @@
             "image": [
                 "{{secure_url('/')}}/storage/{{\App\Helpers\WebpImage::generateUrl($yacht->image)}}"
             ],
-            "url": "{{secure_url('/')}}/{{$yacht->id}}/{{$yacht->slug}}",
+            "url": "{{route('website.yachts.show', ['yacht' => $yacht])}}",
             "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",

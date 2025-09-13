@@ -11,7 +11,8 @@
 @section('css')
     <link href="{{asset('/css/rent.css')}}" rel="stylesheet" type="text/css" />
 @endsection
-    @section("content")
+
+@section("content")
     <main id="rent">
         @include('website::layouts.parts.page-banner', [
             "title" => app('settings')->get('driver_title') ?? __('lang.Rent a car with driver')
@@ -75,7 +76,7 @@
             "image": [
                 "{{secure_url('/')}}/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}"
             ],
-            "url": "{{secure_url('/')}}/{{$car->id}}/{{$car->slug}}",
+            "url": "{{route('website.cars.show', ['car' => $car])}}",
             "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",
