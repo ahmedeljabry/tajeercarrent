@@ -33,22 +33,39 @@
                 </li>
             </ul>
             <div class="rent-car-slide-description-blue-boxes">
-                @if ($car->price_per_day)
-                    <div class="rent-car-slide-description-blue-box">
-                        <span>{{__('lang.Day')}} / {{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
-                    </div>
+                @if ($car->type != "driver")
+                    @if ($car->price_per_day)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>{{__('lang.Day')}} / {{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
+                    @if($car->price_per_week)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>{{__('lang.Week')}}/{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
+                    @if($car->price_per_month)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>{{__('lang.Month')}} / {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
+                @else
+                    @if ($car->price_per_day)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>{{__('lang.Hour')}} / {{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
+                    @if($car->price_per_week)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>3 {{__('lang.Hours')}}/{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
+                    @if($car->price_per_month)
+                        <div class="rent-car-slide-description-blue-box">
+                            <span>8 {{__('lang.Hours')}} / {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
+                        </div>
+                    @endif
                 @endif
-                @if($car->price_per_week)
-                    <div class="rent-car-slide-description-blue-box">
-                        <span>{{__('lang.Week')}}/{{app('currencies')->convert($car->price_per_week)}} {{app('currencies')->getCurrency()->code}}</span>
-                    </div>
-                @endif
-                @if($car->price_per_month)
-                    <div class="rent-car-slide-description-blue-box">
-                        <span>{{__('lang.Month')}} / {{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
-                    </div>
-                @endif
-
             </div>
         </div>
     </a>
