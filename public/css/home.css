@@ -919,12 +919,8 @@ section {
   cursor: pointer;
 }
 
-/* .rent-car-slide-description ul {
-  height: 230px;
-  overflow-y: hidden;
-} */
 .rent-car-slide-description ul {
-  padding-inline-start: 2.2rem;
+  padding-inline-start: 0;
 }
 
 @media (max-width: 575px) {

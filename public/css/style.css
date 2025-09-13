@@ -3938,14 +3938,6 @@ section {
   cursor: pointer;
 }
 
-/* .rent-car-slide-description ul {
-    height: 230px;
-    overflow-y: hidden;
-  } */
-.rent-car-slide-description ul {
-  padding-inline-start: 2.2rem;
-}
-
 @media (max-width: 768px) {
   .rent-car-slide-description {
     flex-direction: row;

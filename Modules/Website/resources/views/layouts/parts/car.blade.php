@@ -23,42 +23,19 @@
         </div>
         <div class="rent-car-slide-description">
             <ul>
-                @if ($car->price_per_day)
-                    <li>{{__('lang.Day')}} / {{app('currencies')->convert($car->price_per_day)}} {{app('currencies')->getCurrency()->code}}</li>
-                @endif
-                @if ($car->brand)
-                    <li>{{__('lang.Brand')}} / {{$car->brand->title}}</li>
-                @endif
-                @if ($car->model)
-                    <li>{{__('lang.Model')}} / {{$car->model->title}}</li>
-                @endif
-                @if ($car->color)
-                    <li>{{__('lang.Color')}} / {{$car->color->title}}</li>
+                @if ($car->security_deposit)
+                    <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
                 @endif
                 @if($car->minimum_day_booking)
                     <li>
                         {{__('lang.Minimum of Days')}} / {{$car->minimum_day_booking}}
                     </li>
                 @endif
+                <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
                 @if ($car->km_per_day)
                     <li>
                         {{__('lang.KM Limit Day')}} / {{$car->km_per_day}}
                     </li>
-                @endif
-                @if($car->km_per_month)
-                    <li>
-                        {{__('lang.KM Limit Month')}} / {{$car->km_per_month}}
-                    </li>
-                @endif
-                @if ($car->security_deposit)
-                    <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                @endif
-                <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
-                @if ($car->year)
-                    <li>{{__('lang.Year')}} / {{$car->year->title}}</li>
-                @endif
-                @if ($car->passengers)
-                    <li>{{__('lang.Passengers')}} / {{$car->passengers}}</li>
                 @endif
             </ul>
             <div class="rent-car-slide-description-blue-boxes">
