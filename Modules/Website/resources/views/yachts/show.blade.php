@@ -154,9 +154,6 @@
                                 <li>
                                     {{$yacht->company->vat_percentage}}% {{__('lang.VAT')}} / {{__('lang.Not Included')}}
                                 </li>
-                                <li>
-                                    {{__('lang.Age Required')}} / {{$yacht->company->min_age}}+
-                                </li>
                                 @if ($yacht->company->hours()->where('type', '!=', 'holiday')->count())
                                     <li>
                                         <div class="times-group-container d-flex gap-2">
