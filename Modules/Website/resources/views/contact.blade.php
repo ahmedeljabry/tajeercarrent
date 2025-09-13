@@ -24,7 +24,7 @@
         <section>
             @if (app('settings')->get('page_contact_us_title'))
                 <div class="container">
-                    <h4>{{app('settings')->get('page_contact_us_title')}}</h4>
+                    <h1>{{app('settings')->get('page_contact_us_title')}}</h1>
                     <p>{!! app('settings')->get('page_contact_us_description') !!}</p>
                 </div>
             @endif
