@@ -1,6 +1,7 @@
 <?php 
 
 return [
+    "For Inquires and Support" => "For Inquires & Support",
     "contact-us-success-message" => "We will contact you soon!",
     "KM" => "KM",
     "In" => "In",
@@ -13,7 +14,7 @@ return [
     "Featured Cars" => "Featured Cars",
     "Rent a Car in" => "Rent a Car In",
     "Premium" => 'Premium',
-    "Downloads" => "Downloads",
+    "Downloads" => "Download On App Store & Google Play",
     "Or" => "Or",
     "Location" => "Location",
     "Currency" => "Currency",

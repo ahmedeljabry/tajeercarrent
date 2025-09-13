@@ -1,6 +1,7 @@
 <?php 
 
 return [
+    "For Inquires and Support" => "للتفاصيل و الدعم",
     "contact-us-success-message" => "سوف نقوم بالتواصل معك قريبا!",
     "KM" => "كم",
     "In" => "في",
@@ -13,7 +14,7 @@ return [
     "Featured Cars" => "السيارات المميزة",
     "Rent a Car in" => "اجر سيارة في",
     "Premium" => "مميز",
-    "Downloads" => "التنزيلات",
+    "Downloads" => "قم بالتحميل علي متجر جوجل و متجر ابل",
     "Or" => "او",
     "Location" => "المكان",
     "Currency" => "العملة",

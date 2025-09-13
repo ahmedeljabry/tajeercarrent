@@ -889,12 +889,31 @@
                         </li>
                     @endforeach
                 </ul>
+                <ul class="justify-content-center">
+                    <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
+                    <li>
+                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
+                            <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
+                            <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:{{app('settings')->get('contact_email')}}">
+                            <i class="fa-solid fa-envelope"></i>
+                            {{app('settings')->get('contact_email')}}
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="col-lg-3">
-                <div class="footer-apps">
+            <div class="col-lg-3 d-flex align-items-end justify-content-center">
+                <div class="footer-apps" style="max-width: 170px">
                     <p>
-                        <span class="text-white ">{{__('lang.Downloads')}}</span>
+                        <span class="text-white" style="display: inline-block; text-align: start">{{__('lang.Downloads')}}</span>
                         <a style="margin-top:15px;display:block"
                            href="{{app('settings')->get('app_google_play')}}">
                             <img alt="app" width="125" height="37"
@@ -906,38 +925,14 @@
 
                         </a>
                     </p>
-                    <ul class="contact-footer p-0 " style="margin-top:20px;display:block">
-                        <li class="list-unstyled ">
-                            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
-                                <i class="fa-solid fa-phone"></i>
-                                {{app('settings')->get('contact_phone')}}</a>
-
-                        </li>
-                        <li class="list-unstyled ">
-                            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
-                                <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
-                            </a>
-                        </li>
-                        <li class="list-unstyled ">
-                            <a href="mailto:{{app('settings')->get('contact_email')}}">
-                                <i class="fa-solid fa-envelope"></i>
-                                {{app('settings')->get('contact_email')}}
-                            </a>
-                        </li>
-
-
-                    </ul>
-                    <ul>
-                       <li>{{__('lang.For')}}</li>
-                    </ul>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer-bottom">
-                    <p>
-                        {{app('settings')->get('footer_address')}}
+                    <p class="fs-6">
+                        <i class="fa fa-location-dot text-white mx-2"></i> {{app('settings')->get('footer_address')}}
                     </p>
                 </div>
             </div>
