@@ -37,7 +37,7 @@
                     {{__('lang.Doors')}} / {{$car->doors}}
                 </li>
                 <li>
-                    {{__('lang.Passengers')}} / {{$car->passengers}}
+                    {{__('lang.Seats')}} / {{$car->passengers}}
                 </li>
                 <li>
                     {{__('lang.No. Of Luggage')}} / {{$car->bags}}
