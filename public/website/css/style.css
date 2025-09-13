@@ -2417,7 +2417,8 @@ a:hover {
 .new-pages-banner {
   padding: 0;
   position: relative;
-  height: 200px;
+  height: 300px;
+  object-fit: contain;
 }
 
 .new-pages-banner::after {
