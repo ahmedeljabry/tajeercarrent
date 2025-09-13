@@ -814,20 +814,21 @@
         const contentWrapper = section.querySelector('.home-desc');
         const btn = section.querySelector('.main-btn');
         const image = section.querySelector('picture img');
+        let height = 500;
 
         function checkHeight() {
-            const imageHeight = image.offsetHeight;
+            height = image.offsetHeight || 500;
             const contentHeight = contentWrapper.scrollHeight;
 
-            if (contentHeight <= imageHeight) {
+            if (contentHeight <= height) {
                 btn.style.display = 'none';
             } else {
                 btn.style.display = 'block';
-                contentWrapper.style.maxHeight = imageHeight + 'px';
+                contentWrapper.style.maxHeight = height + 'px';
             }
         }
 
-        if (image.complete) {
+        if (!image.complete) {
             checkHeight();
         } else {
             image.onload = checkHeight;
@@ -837,7 +838,7 @@
             if (contentWrapper.classList.contains('show-more')) {
                 contentWrapper.classList.remove('show-more');
                 btn.textContent = '{{__('lang.Read More')}}';
-                contentWrapper.style.maxHeight = image.offsetHeight + 'px';
+                contentWrapper.style.maxHeight = height + 'px';
             } else {
                 contentWrapper.classList.add('show-more');
                 btn.textContent = '{{__('lang.Read Less')}}';
