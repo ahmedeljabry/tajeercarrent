@@ -170,9 +170,9 @@
 
 
 
-<div class="scroll-up">
-    <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}"/>
-</div>
+{{--<div class="scroll-up">--}}
+{{--    <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}"/>--}}
+{{--</div>--}}
 
 
 <header>
@@ -181,7 +181,7 @@
             <div class=" col-lg-6 col-xl-2 col-5">
                 <a href="{{url(app()->getLocale())}}">
                     <div class="logo">
-                        <img width="197" height="60" src="{{asset('/storage/ ' .  app("settings")->get("header_logo")) }}" alt="logo" class="mw-100">
+                        <img width="197" height="60" src="{{asset('/storage/' .  app("settings")->get("header_logo")) }}" alt="logo" class="mw-100">
                     </div>
                 </a>
             </div>

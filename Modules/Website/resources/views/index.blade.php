@@ -34,7 +34,7 @@
                 </span>
                 <div class="container choose-fav-car-type-slider">
                     @foreach($types as $item)
-                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
+                        <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
                             <picture>
                                 <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
                             </picture>
@@ -72,11 +72,11 @@
                 </span>
                 <div class="container choose-fav-car-brand-slider">
                     @foreach(app('cars')->brands as $item)
-                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
+                        <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
                             <picture>
                                 <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
                             </picture>
-                            <div class="car-brand-brand-slide-footer">
+                            <div class="car-type-brand-slide-footer">
                                 <p>{{$item->title}}</p>
                             </div>
                         </a>
