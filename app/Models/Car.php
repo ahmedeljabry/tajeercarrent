@@ -215,26 +215,7 @@ class Car extends Model implements Sitemapable
         . " " .  ($this->color ? $this->color->title : '')
         . " " . __('lang.Color')
         . " " . __('lang.Contact')
-        . " " . $this->company ? $this->company->name : ''
         . " " . __('lang.For Booking');
         return $carDescription . " <br/> " . $basicDescription;
-    }
-
-    public function getFeatures() {
-        $model = $this->model;
-        $basicFeatures = $model?->page_features;
-        $carFeatures   = __('lang.Rent')
-        . " " . $this->name
-        . " " .   ($this->year ? $this->year->title : '')
-        . " " .  ($this->color ? $this->color->title : '')
-        . " " . __('lang.Color')
-        . " " .  $this->doors . " " . __('lang.Doors') . ", "
-        . " " .  __('lang.Minimum of Days') . " " .  $this->minimum_day_booking . ", "
-        . " " .  $this->passengers . " " . __('lang.Passengers') . ", "
-        . " " .__('lang.Price') . " " .  __('lang.Day') . " " .  $this->price_per_day . ", "
-
-
-        . " " . __('lang.Contact') . " " . $this->company->name . " " . __('lang.For Booking');
-        return $carFeatures . " <br/> " . $basicFeatures;
     }
 }

@@ -14,7 +14,7 @@ if (isset($resource)) {
 
 @if(isset($car))
     @php
-        $desc = (explode("<br/>", explode("\n", $car->getFeatures())[0] ?? "")[0] ?: "") .  '#' . $car->id ;
+        $desc = $car?->model->features;
     @endphp
         <meta name="description" content="{{$desc}}">
         <meta property="og:description" content="{{$desc}}" />

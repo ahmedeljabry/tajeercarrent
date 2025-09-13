@@ -298,7 +298,7 @@
                 </div>
             </section>
         @endif
-        @if ($car->getFeatures())
+        @if ($features = $car?->model->page_features)
             <section class="car-description py-5">
                 <div class="container">
                     <div class="head-title-with-line">
@@ -307,7 +307,7 @@
                         </h3>
                     </div>
                     <div class="car-content-desc mt-3">
-                        {!! $car->getFeatures()  !!}
+                        {!! $features !!}
                     </div>
                 </div>
             </section>
