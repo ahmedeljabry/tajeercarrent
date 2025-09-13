@@ -330,6 +330,9 @@
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 responsive: [
                     {
                         breakpoint: 991.89,
@@ -363,6 +366,9 @@
                 slidesToScroll: 1,
                 arrows: false,
                 fade: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 asNavFor: '.slider-nav-car-details'
             });
 
@@ -371,6 +377,9 @@
                 slidesToScroll: 1,
                 asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 infinite: false,
             });
         });

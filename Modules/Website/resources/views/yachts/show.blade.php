@@ -237,6 +237,9 @@
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 dots: false,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
@@ -273,6 +276,9 @@
                 slidesToScroll: 1,
                 arrows: false,
                 fade: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 asNavFor: '.slider-nav-car-details'
             });
 
@@ -281,6 +287,9 @@
                 slidesToScroll: 1,
                 asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 infinite: false,
             });
         });

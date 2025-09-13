@@ -76,6 +76,9 @@
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
                 autoplay: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 autoplaySpeed: 3000,
                 responsive: [
                     {

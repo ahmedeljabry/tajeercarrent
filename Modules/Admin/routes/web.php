@@ -51,7 +51,7 @@ Route::group(["prefix" => "admin", "middleware"=>['guest']], function() {
 Route::get('/admin/lang/switch', [HomeController::class, 'switchLang']);
 
 
-Route::group(["prefix" => "admin", "middleware" => ['AdminAuth']], function () {
+Route::group(["prefix" => "admin", "middleware" => ['AdminAuth', 'AdminLang']], function () {
 
 
     Route::get('/', [HomeController::class, 'index']);

@@ -259,6 +259,9 @@
                 speed: 1000,
                 dots: false,
                 arrows: true,
+                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 nextArrow: $(".choose-fav-car-type-next"),
                 prevArrow: $(".choose-fav-car-type-prev"),
                 autoplay: true,
@@ -292,6 +295,9 @@
                 speed: 1000,
                 dots: false,
                 arrows: true,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 nextArrow: $(".choose-fav-car-brand-next"),
                 prevArrow: $(".choose-fav-car-brand-prev"),
                 autoplay: true,
@@ -337,6 +343,9 @@
                     prevArrow: $prevArrow,
                     autoplay: true,
                     autoplaySpeed: 3000,
+                                    @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                     responsive: [
                         {
                             breakpoint: 991.89,
@@ -370,6 +379,9 @@
                 arrows: true,
                 nextArrow: $(".banner-next-desktop"),
                 prevArrow: $(".banner-prev-desktop"),
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 autoplay: true,
                 autoplaySpeed: 3000,
                 responsive: [
@@ -395,6 +407,9 @@
                 arrows: true,
                 nextArrow: $(".banner-next-mobile"),
                 prevArrow: $(".banner-prev-mobile"),
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 autoplay: true,
                 autoplaySpeed: 3000,
                 responsive: [
@@ -421,6 +436,9 @@
                 arrows: true,
                 nextArrow: $(".testimonials-next"),
                 prevArrow: $(".testimonials-prev"),
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 autoplay: true,
                 autoplaySpeed: 3000,
                 responsive: [

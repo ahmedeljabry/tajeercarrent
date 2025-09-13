@@ -214,6 +214,9 @@
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
+                                @if (app()->getLocale() == "ar")
+                    rtl: true,
+                @endif
                 responsive: [
                     {
                         breakpoint: 991.89,
