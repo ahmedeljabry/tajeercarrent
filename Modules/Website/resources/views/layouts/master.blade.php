@@ -170,9 +170,9 @@
 
 
 
-{{--<div class="scroll-up">--}}
-{{--    <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}"/>--}}
-{{--</div>--}}
+<div class="scroll-up">
+    <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}"/>
+</div>
 
 
 <header>
@@ -843,6 +843,12 @@
             }
         });
     });
+
+    $(function(){
+        $(".scroll-up").on('click', function (){
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        })
+    })
 </script>
 
 @section("js")
