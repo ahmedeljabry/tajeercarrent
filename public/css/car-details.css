@@ -64,7 +64,7 @@ ul li::marker {
 
 .car-details-pricing .car-details-pricing-card,
 .car-details-pricing-deposit {
-    padding-inline-start: 1rem;
+    padding-inline: 1rem;
 }
 
 .car-details-pricing-group {
