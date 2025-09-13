@@ -48,6 +48,14 @@
                                 @endif
                             </div>
                         @endif
+                        @if (request()->get('section'))
+                            <select class="form-select select-section" name="section">
+                                <option value="">{{__('lang.Section')}}</option>
+                                @foreach(\App\Models\Section::all() as $section)
+                                    <option @selected(request()->get('section') == $section->id) value="{{$section->id}}">{{$section->title}}</option>
+                                @endforeach
+                            </select>
+                        @endif
                         <select class="form-select" name="year">
                             <option value="">{{__('lang.Year')}}</option>
                             @foreach(Year::all() as $year)

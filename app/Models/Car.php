@@ -197,6 +197,10 @@ class Car extends Model implements Sitemapable
         return $this->belongsToMany(Type::class, 'car_types');
     }
 
+    public function sections(){
+        return $this->belongsToMany(Section::class, 'section_cars');
+    }
+
     public function toSitemapTag(): Url | string | array
     {
         $url = LaravelLocalization::localizeUrl("/{$this->id}/{$this->slug}");

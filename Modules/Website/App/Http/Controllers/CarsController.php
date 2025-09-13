@@ -84,6 +84,11 @@ class CarsController extends Controller
                     $query->where('slug', $color);
                 });
             })
+            ->when(request('section'), function ($query, $section) {
+                $query->whereHas('sections', function ($query) use ($section) {
+                    $query->where('sections.id', $section);
+                });
+            })
             ->orderBy('refreshed_at', 'desc')
             ->where('type', 'default');
 

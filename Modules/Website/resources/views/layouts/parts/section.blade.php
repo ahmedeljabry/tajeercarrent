@@ -7,7 +7,7 @@
                     <div class="section-header-title">
                         <h3>{{$section->title}}</h3>
                         <div class="black-line"></div>
-                        <a href="./rent.html" class="view-all-btn">{{__('lang.View All')}}</a>
+                        <a href="{{route('website.cars.filter', ['section' => $section->id])}}" class="view-all-btn">{{__('lang.View All')}}</a>
                     </div>
                     <div class="description-container">
                         <p class="description-text">
