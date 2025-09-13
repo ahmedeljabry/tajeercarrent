@@ -925,3 +925,13 @@ footer ul li a {
   padding: 20px;
   background-color: #eff8fda1;
 }
+
+
+footer .col-lg-3{
+    border-left: 1px solid white;
+}
+
+.arabic-version footer .col-lg-3{
+    border-left: unset;
+    border-right: 1px solid white;
+}
