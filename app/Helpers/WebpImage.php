@@ -2,9 +2,12 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Str;
+
 class WebpImage
 {
     public static function generateUrl($url){
+        $url = Str::replace([url(''), '/storage/'], '', $url);
         $data = explode(".", $url);
         if (count($data) == 1){
             $url = $data[0];

@@ -39,12 +39,12 @@
                         <div class="car-details-slider">
                             <div class="slider-for-car-details">
                                 @foreach($car->images as $image)
-                                    <img class="mw-100 " src="/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}" alt="{{$car->name}}">
+                                    <img class="mw-100 " src="/storage/{{\App\Helpers\WebpImage::generateUrl($image->image_url)}}" alt="{{$car->name}}">
                                 @endforeach
                             </div>
                             <div class="slider-nav-car-details my-5 ">
                                 @foreach($car->images as $image)
-                                    <img class="mw-100 " src="/storage/{{\App\Helpers\WebpImage::generateUrl($car->image)}}" alt="{{$car->name}}">
+                                    <img class="mw-100 " src="/storage/{{\App\Helpers\WebpImage::generateUrl($image->image_url)}}" alt="{{$car->name}}">
                                 @endforeach
                             </div>
                         </div>
