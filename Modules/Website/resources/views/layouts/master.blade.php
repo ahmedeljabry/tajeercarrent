@@ -861,14 +861,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 links-footer">
-                <ul>
-                    @foreach(Type::get() as $t)
-                        <li>
-                            <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$t->title}}"
-                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $t])) }}">{{__('lang.Rent')}} {{$t->title}}</a>
-                        </li>
-                    @endforeach
-                </ul>
+                @for ($i = 0; $i < 2; $i++)
+                    <ul>
+                        @foreach (Type::all()->skip(ceil($i * Type::all()->count() / 2 )) as $item)
+                            <li>
+                                <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
+                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endfor
+
                 <ul>
                     <li>
                         <a data-toggle="tooltip" data-placement="left" title="{{__('lang.FAQ')}}"
@@ -882,13 +885,14 @@
                         <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Contact Us')}}"
                            href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
                     </li>
-                    @foreach(app('settings')->getFooterPages() as $key => $item)
+                    @foreach(app('settings')->getFooterPages() as $item)
                         <li>
                             <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
                                href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
                         </li>
                     @endforeach
                 </ul>
+
                 <ul class="justify-content-center">
                     <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
                     <li>
