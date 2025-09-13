@@ -42,7 +42,7 @@ class CarsController extends Controller
 
     public function filter($country, $city){
         $types = request('types');
-        $monthly = in_array('monthly', $types);
+        $monthly = in_array('monthly', $types ?? []);
         $types = array_filter($types, function ($value) {
             return $value != 'monthly';
         });
