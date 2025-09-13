@@ -31,7 +31,7 @@
                     {{__('lang.Color')}}/ {{$car->color->title}}
                 </li>
                 <li>
-                    {{__('lang.Type')}}: {{$car->types->map(function($type){return $type->title;})->implode(', ')}}
+                    {{__('lang.Type')}}/ {{$car->types->map(function($type){return $type->title;})->implode(', ')}}
                 </li>
                 <li>
                     {{__('lang.Doors')}} / {{$car->doors}}
