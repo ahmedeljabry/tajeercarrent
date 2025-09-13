@@ -1,4 +1,4 @@
-<div class="account-settings-card mb-3">
+<a class="account-settings-card mb-3" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
     <picture class="account-settings-card-main-picture">
         <img alt="{{$car->name}}" src="{{ asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($car->image) }}"/>
         <div class="rent-car-labels">
@@ -14,7 +14,7 @@
     </picture>
     <div class="d-flex flex-column justify-content-between h-100 p-3">
         <div>
-            <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])) }}">
+            <a href="#">
                 <h4>{{$car->name}}</h4>
             </a>
             <ul>
@@ -95,4 +95,4 @@
         @endif
     </div>
 
-</div>
+</a>
