@@ -69,7 +69,7 @@
             </ul>
         </div>
         <div class="rent-car-slide-footer ">
-            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatsapp'))}}">
+            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}?text={{urlencode("Hello I Am Interested On This Car, " . LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])))}}" target="_blank" rel="noopener">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px"
                          viewBox="0 0 24 24">

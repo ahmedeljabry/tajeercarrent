@@ -28,11 +28,6 @@ class CarsController extends Controller
         })
         ->limit(10)->get();
 
-//        $car->company->views()->create([
-//            'car_id' => $car->id,
-//            'user_id' => \Auth::user()?->id ?? null
-//        ]);
-
         if($car->model) {
             $description = \App\Models\Content::where('type','model')->where('resource_id', $car->model->id)->first();
         } else {
