@@ -14,8 +14,7 @@
         <section class="car-details-section">
             @include('website::cars.parts.breadcrumb', [
                 'breadcrumbs' => [
-                    app('settings')->get('page_car_brands_title') ?: __('lang.Car Brands') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
-                    $yacht->brand->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $yacht->brand])),
+                    app('settings')->get('yacht_title') ?: __('lang.Rent yacht') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')),
                     $yacht->name => null
             ]])
 
