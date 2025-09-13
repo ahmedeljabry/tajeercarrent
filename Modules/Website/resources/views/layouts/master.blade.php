@@ -48,7 +48,7 @@
         gtag('config', 'AW-11558027423');
     </script>
 </head>
-<body class="@if(app()->getLocale()) arabic-version @endif">
+<body class="@if(app()->getLocale() == 'ar') arabic-version @endif">
 
 {!!app('settings')->get('scripts_body')!!}
 
