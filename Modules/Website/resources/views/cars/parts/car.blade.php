@@ -93,10 +93,6 @@
                 <span>{{app('currencies')->convert($car->price_per_month)}} {{app('currencies')->getCurrency()->code}}</span>
             </div>
         @endif
-        <picture class="rent-car-slide-icon">
-            <img src="{{asset("/assets/images/tajeer-app-icon.png")}}" alt="" class="mw-100">
-        </picture>
-
     </div>
 
 </div>
