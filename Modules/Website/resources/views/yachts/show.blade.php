@@ -79,7 +79,7 @@
                             <h3>
                                 {{$yacht->name}}
                             </h3>
-                            <div class="car-details-feat d-flex flex-column flex-md-row flex-wrap  gap-5">
+                            <div class="car-details-feat d-flex px-3 flex-wrap  gap-5">
                                 <ul>
                                     @if ($yacht->types->count())
                                         <li>
