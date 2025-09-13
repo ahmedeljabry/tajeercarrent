@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "homepage_banner" => "Banner",
     "Car Types" => "Car Types",
     "Car Brands" => "Car Brands",
     "About Us" => "About Us",

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "homepage_banner" =>  "بانر",
     "Car Types" => "انواع السيارات",
     "Car Brands" => "برندات السيارات",
     "Contact Us" => "تواصل معنا",
