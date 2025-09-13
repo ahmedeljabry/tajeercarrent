@@ -239,7 +239,7 @@
                     </li>
                     <li class="header__actions_list_item">
                         <p>
-                            <i class="fa fa-money"></i>
+                            <i class="far fa-money-bill-alt"></i>
                             <span>{{__('lang.Currency')}}</span>
                         </p>
                         <div class="dropdown ">
