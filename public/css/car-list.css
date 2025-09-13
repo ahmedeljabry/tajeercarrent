@@ -136,6 +136,7 @@ input[type="range"]::-webkit-slider-thumb {
 
     .filter-btn-mobile,
     .close-btn {
+        z-index: 999999;
         display: none !important;
     }
 }
@@ -172,5 +173,6 @@ input[type="range"]::-webkit-slider-thumb {
         left: 50%;
         transform: translate(-50%, -50%);
         color: var(--primary-color);
+        z-index: 9999999999;
     }
 }
