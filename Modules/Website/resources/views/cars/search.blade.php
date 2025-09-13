@@ -27,6 +27,21 @@
 @section("content")
     <main id="car-list">
         <div class="container">
+            @if ($section = \App\Models\Section::whereId(request('section'))->first())
+                <div class="section-header container mb-5">
+                    <div class="section-header-title">
+                        <h3>{{$section->title}}</h3>
+                        <div class="black-line"></div>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-text">
+                            {{$section->description}}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
+                    </div>
+                </div>
+            @endif
+
             <form action="{{route('website.cars.filter')}}" method="get">
                 <div class="row mt-50">
 
@@ -60,6 +75,21 @@
             <div class="col-12">
                 {{$cars->appends(request()->input())->links()}}
             </div>
+
+                @if ($content = \App\Models\Content::where('type', 'section')->where('resource_id', request('section'))->first())
+                    <section class="car-description py-5">
+                        <div class="container">
+                            <div class="head-title-with-line">
+                                <h1>
+                                    {{$content->title}}
+                                </h1>
+                            </div>
+                            <div class="car-content-desc mt-3">
+                                {!! $content->description !!}
+                            </div>
+                        </div>
+                    </section>
+                @endif
         </div>
     </main>
 
