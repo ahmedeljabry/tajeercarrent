@@ -1129,7 +1129,7 @@ footer ul li a:hover {
 }
 
 .type__filter ul li {
-  background: #e6f6ff;
+  background-color: var(--third-color);
   padding: 8px 20px;
   font-weight: 600;
   text-align: center;
