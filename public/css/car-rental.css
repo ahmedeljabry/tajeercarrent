@@ -11,7 +11,7 @@
 }
 
 .account-settings-card-main-picture {
-    height: 360px !important;
+    height: 100% !important;
 }
 
 .account-settings-card-wrapper {
