@@ -25,10 +25,10 @@
 
                     @if($blog)
                     <div class="home__about_content blog-item">
-                        <h2>{{$blog->getTranslation("title", \App::getLocale())}}</h2>
+                        <h1>{{$blog->getTranslation("title", \App::getLocale())}}</h1>
 
                         @if($blog->image)
-                        <img alt="{{$blog->getTranslation("title", \App::getLocale())}}" src="/storage/{{\App\Helpers\WebpImage::generateUrl($blog->image)}}" />
+                            <img alt="{{$blog->getTranslation("title", \App::getLocale())}}" src="/storage/{{\App\Helpers\WebpImage::generateUrl($blog->image)}}" />
                         @endif
                         {!!$blog->content!!}
                     </div>

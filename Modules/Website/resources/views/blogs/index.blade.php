@@ -18,7 +18,7 @@
             <picture>
                 <img src="{{asset('/assets/images/FerariF8TributoRedK2930InteriorFront.png')}}" alt="{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}">
             </picture>
-            <h2>{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}</h2>
+            <h1>{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}</h1>
         </section>
 
         @include('website::cars.parts.breadcrumb', [
