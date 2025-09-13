@@ -1,7 +1,7 @@
     @if(count($faq) > 0)
         <section>
             <div class="container mt-5">
-                <h2>{{__('lang.FAQ')}}</h2>
+                <h1>{{__('lang.FAQ')}}</h1>
             </div>
             <div class="conatiner">
                 <div class="container accordion accordion-flush custom-accordion" id="faqsFlushExample">
