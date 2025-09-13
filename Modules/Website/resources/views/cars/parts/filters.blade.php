@@ -122,6 +122,10 @@
     </div>
 </section>
 
+<div class="filter-btn-mobile d-flex align-items-center gap-2">
+    <i class="fa-solid fa-filter"></i>
+    {{__('lang.Filter')}}
+</div>
 
 @section('schemes')
     @if(count($cars) > 0)
@@ -300,6 +304,17 @@
         $(function (){
             $('.order-by').on('change', function(){
                 $(this).closest('form').submit();
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('.filter-btn-mobile').on('click', function () {
+                $('.filter-container').addClass('show');
+            });
+
+            $('.close-btn').on('click', function () {
+                $('.filter-container').removeClass('show');
             });
         });
     </script>
