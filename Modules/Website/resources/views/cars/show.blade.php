@@ -311,13 +311,6 @@
         @endif
     </main>
 
-    @include('website::layouts.parts.suggested-cars', ['suggested_cars' => $suggested_cars])
-
-    @include('website::layouts.parts.faq', [
-        "faq" => \App\Models\Faq::where('type','car')->where('resource_id', $car->id)->get()
-    ])
-
-
 @endsection
 @section('js')
     <script>
