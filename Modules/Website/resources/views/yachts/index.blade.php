@@ -28,12 +28,12 @@
             <div class="container">
                 <div class="section-header">
                     <div class="section-header-title">
-                        <h3>{{app('settings')->get('yacht_title')}}</h3>
+                        <h1>{{app('settings')->get('yacht_title')}}</h1>
                         <div class="black-line"></div>
                     </div>
                     <div class="description-container">
                         <p class="description-text">
-                            {!! app('settings')->get('driver_description') !!}
+                            {!! app('settings')->get('yacht_description') !!}
                         </p>
                         <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
                     </div>

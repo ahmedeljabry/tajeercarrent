@@ -21,7 +21,7 @@
             @if ($yacht->description)
                 <div class="section-header container mb-5">
                     <div class="section-header-title">
-                        <h3>{{$yacht->name}}</h3>
+                        <h1>{{$yacht->name}}</h1>
                         <div class="black-line"></div>
                     </div>
                     <div class="description-container">
