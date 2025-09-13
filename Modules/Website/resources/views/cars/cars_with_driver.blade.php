@@ -28,7 +28,7 @@
             <div class="container">
                 <div class="section-header">
                     <div class="section-header-title">
-                        <h3>{{app('settings')->get('driver_title')}}</h3>
+                        <h1>{{app('settings')->get('driver_title')}}</h1>
                         <div class="black-line"></div>
                     </div>
                     <div class="description-container">
