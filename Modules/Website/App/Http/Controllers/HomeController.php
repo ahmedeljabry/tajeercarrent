@@ -66,6 +66,14 @@ class HomeController extends Controller
             'add_prefix' => false
         ];
 
+        $urls[] = [
+            'loc' => '/types/',
+            'lastmod' => Carbon::today()->toAtomString(),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+            'add_prefix' => true
+        ];
+
         foreach (Type::all() as $type) {
             $urls[] = [
                 'loc' => '/types/' . $type->slug,
@@ -76,6 +84,14 @@ class HomeController extends Controller
             ];
         }
 
+        $urls[] = [
+            'loc' => '/brands/',
+            'lastmod' => Carbon::today()->toAtomString(),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+            'add_prefix' => true
+        ];
+
         foreach (Brand::all() as $brand) {
             $urls[] = [
                 'loc' => '/brands/' . $brand->slug,
@@ -85,6 +101,14 @@ class HomeController extends Controller
                 'add_prefix' => true
             ];
         }
+
+        $urls[] = [
+            'loc' => '/with-driver/',
+            'lastmod' => Carbon::today()->toAtomString(),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+            'add_prefix' => true
+        ];
 
         foreach (Car::where(function ($query){
             $query->where('type', 'driver');
@@ -99,6 +123,14 @@ class HomeController extends Controller
             ];
         }
 
+        $urls[] = [
+            'loc' => '/yachts/',
+            'lastmod' => Carbon::today()->toAtomString(),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+            'add_prefix' => true
+        ];
+
         foreach (Car::where(function ($query){
             $query->where('type', 'yacht');
         }) as $yacht) {
@@ -111,6 +143,13 @@ class HomeController extends Controller
             ];
         }
 
+        $urls[] = [
+            'loc' => '/blogs/' . $blog->slug,
+            'lastmod' => Carbon::today()->toAtomString(),
+            'changefreq' => 'weekly',
+            'priority' => '0.9',
+            'add_prefix' => true
+        ];
 
         foreach (Blog::all() as $blog){
             $urls[] = [
