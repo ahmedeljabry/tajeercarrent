@@ -32,7 +32,7 @@
                     <div class="section-header">
                         @if ($content->title)
                             <div class="section-header-title">
-                                <h3>{{$content->title}}</h3>
+                                <h1>{{$content->title}}</h1>
                                 <div class="black-line"></div>
                             </div>
                         @endif
