@@ -16,7 +16,7 @@
     <main id="blogs">
         <section class="new-pages-banner">
             <picture>
-                <img src="{{asset('/assets/images/car-subscription-new-image.png')}}" alt="{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}">
+                <img src="{{asset('/assets/images/FerariF8TributoRedK2930InteriorFront.png')}}" alt="{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}">
             </picture>
             <h2>{{app('settings')->get('blog_title') ?? __('lang.Blogs')}}</h2>
         </section>

@@ -1,6 +1,6 @@
 <section class="home-1st-section">
     <picture>
-        <img alt="search" src="{{ asset("/website/images/search_bg.webp") }}">
+        <img alt="search" src="{{ asset("/assets/images/FerariF8TributoRedK2930InteriorFront.png") }}">
     </picture>
     <form action="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.filter'))}}" method="get">
         <h1 class="text-white text-center">

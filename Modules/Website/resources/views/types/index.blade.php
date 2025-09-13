@@ -15,7 +15,7 @@
     <main id="car-types">
         <section class="new-pages-banner">
             <picture>
-                <img src="{{asset('/assets/images/car-subscription-new-image.png')}}" alt="{{app('settings')->get('page_car_types_title') ?? __('lang.Car Types')}}">
+                <img src="{{asset('/assets/images/FerariF8TributoRedK2930InteriorFront.png')}}" alt="{{app('settings')->get('page_car_types_title') ?? __('lang.Car Types')}}">
             </picture>
             <h2>{{app('settings')->get('page_car_types_title') ?? __('lang.Car Types')}}</h2>
         </section>
