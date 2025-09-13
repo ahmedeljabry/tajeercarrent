@@ -443,41 +443,6 @@
 
                 ]
             });
-            document.querySelectorAll('.home-content-section').forEach(function (section) {
-                const contentWrapper = section.querySelector('.home-desc');
-                const btn = section.querySelector('.main-btn');
-                const image = section.querySelector('picture img');
-
-                function checkHeight() {
-                    const imageHeight = image.offsetHeight;
-                    const contentHeight = contentWrapper.scrollHeight;
-
-                    if (contentHeight <= imageHeight) {
-                        btn.style.display = 'none';
-                    } else {
-                        btn.style.display = 'block';
-                        contentWrapper.style.maxHeight = imageHeight + 'px';
-                    }
-                }
-
-                if (image.complete) {
-                    checkHeight();
-                } else {
-                    image.onload = checkHeight;
-                }
-
-                btn.addEventListener('click', function () {
-                    if (contentWrapper.classList.contains('show-more')) {
-                        contentWrapper.classList.remove('show-more');
-                        btn.textContent = '{{__('lang.Read More')}}';
-                        contentWrapper.style.maxHeight = image.offsetHeight + 'px';
-                    } else {
-                        contentWrapper.classList.add('show-more');
-                        btn.textContent = '{{__('lang.Read Less')}}';
-                        contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
-                    }
-                });
-            });
         });
     </script>
 @endsection
