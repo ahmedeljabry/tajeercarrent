@@ -41,6 +41,12 @@ class CarsController extends Controller
     }
 
     public function filter($country, $city){
+        $types = request('types');
+        $monthly = in_array('monthly', $types);
+        $types = array_filter($types, function ($value) {
+            return $value != 'monthly';
+        });
+
         $query = Car::with(['images','brand','model','color','types','company','year'])
             ->when(request('search'), function ($query, $search) {
                 $query->where(function ($query) use ($search) {
@@ -50,7 +56,10 @@ class CarsController extends Controller
             ->when(request('order_by'), function ($query, $order) {
                 $query->orderBy('price_per_day', $order == "price_low" ? "asc" : "desc");
             })
-            ->when(request('types'), function ($query, $types) {
+            ->when($monthly, function ($query, $types) {
+                $query->where('price_per_month', '>', 0);
+            })
+            ->when($types, function ($query, $types) {
                 $query->whereHas('types', function ($query) use ($types) {
                     $query->whereIn('slug', $types);
                 });
