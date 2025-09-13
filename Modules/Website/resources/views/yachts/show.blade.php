@@ -54,56 +54,11 @@
                             <div class="car-details-pricing-group d-flex justify-content-between ">
                                 @if($yacht->price_per_day)
                                     <div class="car-details-pricing-card">
-                                        <h4 class="text-center">{{__('lang.Day')}}</h4>
+                                        <h4 class="text-center">{{__('lang.Hours')}}</h4>
                                         <ul>
                                             <li>
                                                 {{app('currencies')->convert($yacht->price_per_day)}} {{app('currencies')->getCurrency()->code}}
                                             </li>
-                                            <li>
-                                                {{__('lang.KM Limit Day')}} / {{$yacht->km_per_day ?: 250}} {{__('lang.KM')}}
-                                            </li>
-                                            @if ($yacht->extra_price)
-                                                <li>
-                                                    {{__('lang.Extra KM Price')}} = {{app('currencies')->convert($yacht->extra_pric)}} {{app('currencies')->getCurrency()->code}}
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                @endif
-                                @if($yacht->price_per_week)
-                                    <div class="car-details-pricing-card">
-                                        <h4 class="text-center">{{__('lang.Week')}}</h4>
-                                        <ul>
-                                            <li>
-                                                {{app('currencies')->convert($yacht->price_per_week)}} {{app('currencies')->getCurrency()->code}}
-                                            </li>
-                                            <li>
-                                                {{__('lang.KM Limit Week')}} / {{$yacht->km_per_week ?: 250}} {{__('lang.KM')}}
-                                            </li>
-                                            @if ($yacht->extra_price)
-                                                <li>
-                                                    {{__('lang.Extra KM Price')}} = {{app('currencies')->convert($yacht->extra_pric)}} {{app('currencies')->getCurrency()->code}}
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                @endif
-
-                                @if($yacht->price_per_month)
-                                    <div class="car-details-pricing-card">
-                                        <h4 class="text-center">{{__('lang.Month')}}</h4>
-                                        <ul>
-                                            <li>
-                                                {{app('currencies')->convert($yacht->price_per_month)}} {{app('currencies')->getCurrency()->code}}
-                                            </li>
-                                            <li>
-                                                {{__('lang.KM Limit Month')}} / {{$yacht->km_per_month ?: 250}} {{__('lang.KM')}}
-                                            </li>
-                                            @if ($yacht->extra_price)
-                                                <li>
-                                                    {{__('lang.Extra KM Price')}} = {{app('currencies')->convert($yacht->extra_pric)}} {{app('currencies')->getCurrency()->code}}
-                                                </li>
-                                            @endif
                                         </ul>
                                     </div>
                                 @endif
@@ -127,44 +82,18 @@
                             </h3>
                             <div class="car-details-feat d-flex flex-column flex-md-row flex-wrap  gap-5">
                                 <ul>
-                                    <li>
-                                        {{__('lang.Brand')}} / {{$yacht->brand->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Model')}} / {{$yacht->model->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Year')}} / {{$yacht->year->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Color')}} / {{$yacht->color->title}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Type')}} / {{$yacht->types->map(function($type){return $type->title;})->implode(', ')}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.Doors')}} / {{$yacht->doors}}
-                                    </li>
+                                    @if ($yacht->types->count())
+                                        <li>
+                                            {{__('lang.Type')}} / {{$yacht->types->map(function($type){return $type->title;})->implode(', ')}}
+                                        </li>
+                                    @endif
                                     <li>
                                         {{__('lang.Passengers')}} / {{$yacht->passengers}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.No. Of Luggage')}} / {{$yacht->bags}}
                                     </li>
                                     <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
                                 </ul>
                                 <ul>
-                                    <li>{{__("lang.Minimum of Days")}} /  {{$yacht->minimum_day_booking}}</li>
-                                    <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($yacht->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                                    <li>
-                                        {{__('lang.KM Limit Day')}} / {{$yacht->km_per_day ?: 250}} {{__('lang.KM')}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.KM Limit Week')}} / {{$yacht->km_per_week ?: 250}} {{__('lang.KM')}}
-                                    </li>
-                                    <li>
-                                        {{__('lang.KM Limit Day')}} / {{$yacht->km_per_month ?: 250}} {{__('lang.KM')}}
-                                    </li>
+                                    <li>{{__("lang.Minimum of Hours")}} /  {{$yacht->minimum_day_booking}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -223,24 +152,11 @@
                                     </li>
                                 @endif
                                 <li>
-                                    <div class="times-group-container d-flex gap-2">
-                                        <p>{{__('lang.Delivery Locations')}} / </p> <div class="days">{!! $yacht->company->cities->chunk(5)->map(function ($item){return '<p>' . $item->map(function ($item){return $item->title;})->implode(' - ') . '</p>';})->implode('') !!}</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    {{__('lang.Salik Charges')}} / {{app('currencies')->convert($yacht->salik_fees)}} {{app('currencies')->getCurrency()->code}}
-                                </li>
-                                <li>
                                     {{$yacht->company->vat_percentage}}% {{__('lang.VAT')}} / {{__('lang.Not Included')}}
                                 </li>
                                 <li>
                                     {{__('lang.Age Required')}} / {{$yacht->company->min_age}}+
                                 </li>
-                                @if($yacht->company->type == "default")
-                                    <li>
-                                        {{__('admin.Deposit Refund')}} / {{$yacht->company->deposit_refund}} ({{__('lang.Days')}})
-                                    </li>
-                                @endif
                                 @if ($yacht->company->hours()->where('type', '!=', 'holiday')->count())
                                     <li>
                                         <div class="times-group-container d-flex gap-2">
