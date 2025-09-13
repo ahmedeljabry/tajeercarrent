@@ -1322,10 +1322,13 @@ footer .bg {
 
 footer ul {
   padding-left: 30px;
-  border-right: 1px solid white;
   height: auto;
   display: flex;
   flex-wrap: wrap;
+}
+
+footer ul .col-lg-3{
+    border-left: 1px solid white;
 }
 
 footer ul li {
