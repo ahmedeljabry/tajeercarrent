@@ -791,7 +791,7 @@
             const lineHeight = parseFloat(getComputedStyle(descriptionText).lineHeight);
             const lines = descriptionText.scrollHeight / lineHeight;
 
-            if (lines <= 3) {
+            if (lines <= 2.5) {
                 btn.style.display = 'none';
             }
 
