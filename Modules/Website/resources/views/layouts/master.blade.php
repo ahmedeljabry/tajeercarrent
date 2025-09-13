@@ -201,7 +201,7 @@
                 <ul class="header__actions desktop__header_actions desktop-view-btns">
                     <li class="header__actions_list_item">
                         <p>
-                            <i class="fa-solid fa-location-dot"></i>
+                            <i class="fa fa-map-marker"></i>
                             <span>{{__('lang.Location')}}</span>
                         </p>
                         <div class="dropdown ">
@@ -239,7 +239,7 @@
                     </li>
                     <li class="header__actions_list_item">
                         <p>
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa fa-money"></i>
                             <span>{{__('lang.Currency')}}</span>
                         </p>
                         <div class="dropdown ">
@@ -259,9 +259,6 @@
                     <li class="header__actions_list_item">
                         <p>
                             <i class="fa fa-language"></i>
-                            <picture>
-                                <img src="{{asset('assets/icons/lang_' . app()->getLocale() . '.png')}}" alt="" class="mw-100">
-                            </picture>
                             <span>{{ __('lang.Language') }}</span>
                         </p>
                         <div class="dropdown ">
