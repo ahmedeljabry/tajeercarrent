@@ -80,7 +80,7 @@ ul li::marker {
 
 @media (min-width: 992px) and (max-width: 1200px) {
     .car-details-pricing-group {
-        flex-direction: column;
+        flex-direction: row;
         gap: 20px !important;
     }
 
@@ -95,7 +95,7 @@ ul li::marker {
 
 @media (max-width: 768px) {
     .car-details-pricing-group {
-        flex-direction: column;
+        flex-direction: row;
         gap: 20px !important;
     }
 
