@@ -77,18 +77,9 @@
             </div>
 
                 @if ($content = \App\Models\Content::where('type', 'section')->where('resource_id', request('section'))->first())
-                    <section class="car-description py-5">
-                        <div class="container">
-                            <div class="head-title-with-line">
-                                <h1>
-                                    {{$content->title}}
-                                </h1>
-                            </div>
-                            <div class="car-content-desc mt-3">
-                                {!! $content->description !!}
-                            </div>
-                        </div>
-                    </section>
+                    @include('website::layouts.parts.content', [
+                         "content" => $content
+                     ])
                 @endif
         </div>
     </main>
