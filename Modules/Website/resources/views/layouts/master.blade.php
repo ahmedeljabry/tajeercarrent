@@ -665,7 +665,14 @@
             <div class="col-lg-9 links-footer">
                 @for ($i = 0; $i < 2; $i++)
                     <ul>
-                        @foreach (Type::all()->skip(ceil($i * Type::all()->count() / 2 )) as $item)
+                        @foreach (Type::all()->skip(ceil($i * Type::all()->count() / 2 )) as $item)]
+                            @if ($item->slug == 'yachts')
+                                <li>
+                                    <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
+                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
+                                </li>
+                                @continue
+                            @endif
                             <li>
                                 <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
                                    href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
