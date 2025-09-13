@@ -354,6 +354,7 @@ form div .main-btn {
   top: 50%;
   transform: translateY(-50%);
   padding: 0.2rem 1rem;
+  margin: auto;
 }
 
 form div .main-btn svg {

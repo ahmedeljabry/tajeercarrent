@@ -311,10 +311,12 @@
         $(document).ready(function () {
             $('.filter-btn-mobile').on('click', function () {
                 $('.filter-container').addClass('show');
+                $("body").addClass('overflow-hidden').css('height', '100vh');
             });
 
             $('.close-btn').on('click', function () {
                 $('.filter-container').removeClass('show');
+                $("body").removeClass('overflow-hidden');
             });
         });
     </script>
