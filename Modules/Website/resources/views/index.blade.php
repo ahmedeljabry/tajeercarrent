@@ -34,6 +34,17 @@
                 </span>
                 <div class="container choose-fav-car-type-slider">
                     @foreach($types as $item)
+                        @if ($item->slug == 'yachts')
+                            <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">
+                                <picture>
+                                    <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                                </picture>
+                                <div class="car-type-brand-slide-footer">
+                                    <p>{{$item->title}}</p>
+                                </div>
+                            </a>
+                            @continue
+                        @endif
                         <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
                             <picture>
                                 <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
