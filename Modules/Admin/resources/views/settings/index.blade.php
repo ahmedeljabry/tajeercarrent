@@ -36,7 +36,14 @@
                                                 </div>
                                             @endforeach
         
-
+                                            @foreach (Config::get('app.languages') as $key => $value)
+                                                <div class="form-group row mb-4">
+                                                    <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.homepage_banner')}} {{$value}}</label>
+                                                    <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                        <input value='{{$settings->getTranslation("homepage_banner",$key)}}' type="text" required class="form-control" name="homepage_banner_{{$key}}" >
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                             <div class="form-group row mb-4">
                                                 <label for="hPassword" class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.image')}} {{__('admin.header')}}</label>
                                                 <div class="col-xl-9 col-lg-9 col-sm-10">

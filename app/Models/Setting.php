@@ -123,7 +123,8 @@ class Setting extends Model
         "find_your_car_description",
         "default_notes",
         "driver_notes",
-        "yacht_notes"
+        "yacht_notes",
+        "homepage_banner"
     ];
 
     protected $fillable = [
@@ -168,6 +169,7 @@ class Setting extends Model
         "page_car_brands_title",
         "page_contact_us_title",
         "page_contact_us_description",
+        "homepage_banner"
     ];
 
     protected $hidden = ['created_at', 'updated_at','header_logo','footer_logo'];

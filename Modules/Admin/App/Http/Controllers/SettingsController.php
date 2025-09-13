@@ -102,6 +102,7 @@ class SettingsController extends Controller
             $data['page_car_brands_title'] = $request->get("page_car_brands_title_" . $key);
             $data['page_contact_us_title'] = $request->get("page_contact_us_title_" . $key);
             $data['page_contact_us_description'] = $request->get("page_contact_us_description_" . $key);
+            $data['homepage_banner'] = $request->get('homepage_banner_' . $key);
         }
         if($request->hasFile('header_logo')){
             $data['header_logo'] = $request->file('header_logo')->store('settings', 'public');

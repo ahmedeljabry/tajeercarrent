@@ -7,10 +7,7 @@
             {{__('lang.Rent a Car in')}} {{app('country')->getCity()->title}}
         </h1>
         <p class="text-white text-center ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus, dolore id atque ipsa sequi
-            dicta eum
-            temporibus suscipit repudiandae aliquid sunt corrupti et, quasi ad facilis? Tempore, reprehenderit
-            eum!
+            {!! app('settings')->get('homepage_banner') !!}
         </p>
         <div class="view-all-cars-input">
             <button>
