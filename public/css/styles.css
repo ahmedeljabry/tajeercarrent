@@ -119,12 +119,12 @@ ul {
 
 @font-face {
   font-family: 'Segoe UI';
-  src: url('../assets/fonts/segoe-ui/SegoeUI-Bold.eot');
-  src: url('../assets/fonts/segoe-ui/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Bold.woff2') format('woff2'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Bold.woff') format('woff'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Bold.ttf') format('truetype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Bold.svg#SegoeUI-Bold') format('svg');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-Bold.eot');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Bold.woff2') format('woff2'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Bold.woff') format('woff'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Bold.ttf') format('truetype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Bold.svg#SegoeUI-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -132,12 +132,12 @@ ul {
 
 @font-face {
   font-family: 'Segoe UI';
-  src: url('../assets/fonts/segoe-ui/SegoeUI.eot');
-  src: url('../assets/fonts/segoe-ui/SegoeUI.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/segoe-ui/SegoeUI.woff2') format('woff2'),
-    url('../assets/fonts/segoe-ui/SegoeUI.woff') format('woff'),
-    url('../assets/fonts/segoe-ui/SegoeUI.ttf') format('truetype'),
-    url('../assets/fonts/segoe-ui/SegoeUI.svg#SegoeUI') format('svg');
+  src: url('/assets/fonts/segoe-ui/SegoeUI.eot');
+  src: url('/assets/fonts/segoe-ui/SegoeUI.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/segoe-ui/SegoeUI.woff2') format('woff2'),
+    url('/assets/fonts/segoe-ui/SegoeUI.woff') format('woff'),
+    url('/assets/fonts/segoe-ui/SegoeUI.ttf') format('truetype'),
+    url('/assets/fonts/segoe-ui/SegoeUI.svg#SegoeUI') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -145,12 +145,12 @@ ul {
 
 @font-face {
   font-family: 'Segoe UI';
-  src: url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.eot');
-  src: url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.woff2') format('woff2'),
-    url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.woff') format('woff'),
-    url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.ttf') format('truetype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-BoldItalic.svg#SegoeUI-BoldItalic') format('svg');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.eot');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.woff2') format('woff2'),
+    url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.woff') format('woff'),
+    url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.ttf') format('truetype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-BoldItalic.svg#SegoeUI-BoldItalic') format('svg');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -158,12 +158,12 @@ ul {
 
 @font-face {
   font-family: 'Segoe UI';
-  src: url('../assets/fonts/segoe-ui/SegoeUI-Italic.eot');
-  src: url('../assets/fonts/segoe-ui/SegoeUI-Italic.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Italic.woff2') format('woff2'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Italic.woff') format('woff'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Italic.ttf') format('truetype'),
-    url('../assets/fonts/segoe-ui/SegoeUI-Italic.svg#SegoeUI-Italic') format('svg');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-Italic.eot');
+  src: url('/assets/fonts/segoe-ui/SegoeUI-Italic.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Italic.woff2') format('woff2'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Italic.woff') format('woff'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Italic.ttf') format('truetype'),
+    url('/assets/fonts/segoe-ui/SegoeUI-Italic.svg#SegoeUI-Italic') format('svg');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -172,12 +172,12 @@ ul {
 /* Arabic Font */
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-ExtraLight.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-ExtraLight.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraLight.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraLight.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraLight.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraLight.svg#Tajawal-ExtraLight') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-ExtraLight.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-ExtraLight.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraLight.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraLight.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraLight.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraLight.svg#Tajawal-ExtraLight') format('svg');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -185,12 +185,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-Bold.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-Bold.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-Bold.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-Bold.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-Bold.svg#Tajawal-Bold') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-Bold.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-Bold.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-Bold.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-Bold.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-Bold.svg#Tajawal-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -198,12 +198,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-ExtraBold.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-ExtraBold.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraBold.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraBold.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraBold.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-ExtraBold.svg#Tajawal-ExtraBold') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-ExtraBold.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraBold.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraBold.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraBold.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-ExtraBold.svg#Tajawal-ExtraBold') format('svg');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -211,12 +211,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-Black.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-Black.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-Black.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-Black.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-Black.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-Black.svg#Tajawal-Black') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-Black.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-Black.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-Black.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-Black.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-Black.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-Black.svg#Tajawal-Black') format('svg');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -224,12 +224,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-Medium.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-Medium.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-Medium.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-Medium.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-Medium.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-Medium.svg#Tajawal-Medium') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-Medium.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-Medium.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-Medium.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-Medium.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-Medium.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-Medium.svg#Tajawal-Medium') format('svg');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -237,12 +237,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-Light.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-Light.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-Light.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-Light.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-Light.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-Light.svg#Tajawal-Light') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-Light.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-Light.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-Light.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-Light.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-Light.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-Light.svg#Tajawal-Light') format('svg');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -250,12 +250,12 @@ ul {
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('../assets/fonts/tajawal/Tajawal-Regular.eot');
-  src: url('../assets/fonts/tajawal/Tajawal-Regular.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/tajawal/Tajawal-Regular.woff2') format('woff2'),
-    url('../assets/fonts/tajawal/Tajawal-Regular.woff') format('woff'),
-    url('../assets/fonts/tajawal/Tajawal-Regular.ttf') format('truetype'),
-    url('../assets/fonts/tajawal/Tajawal-Regular.svg#Tajawal-Regular') format('svg');
+  src: url('/assets/fonts/tajawal/Tajawal-Regular.eot');
+  src: url('/assets/fonts/tajawal/Tajawal-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/tajawal/Tajawal-Regular.woff2') format('woff2'),
+    url('/assets/fonts/tajawal/Tajawal-Regular.woff') format('woff'),
+    url('/assets/fonts/tajawal/Tajawal-Regular.ttf') format('truetype'),
+    url('/assets/fonts/tajawal/Tajawal-Regular.svg#Tajawal-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -602,7 +602,7 @@ select {
   height: 45px;
   background-color: transparent;
   appearance: none;
-  background-image: url(../assets/Icons/CaretDown.png);
+  background-image: url(/assets/Icons/CaretDown.png);
   background-repeat: no-repeat;
   background-position: center right 15px;
   padding-inline-end: 2rem;
