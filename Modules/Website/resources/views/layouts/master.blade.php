@@ -892,8 +892,8 @@
                 <ul class="justify-content-center">
                     <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
                     <li>
-                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
-                            <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
+                        <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
+                            <i class="fa fa-phone"></i> {{app('settings')->get('contact_whatsapp')}}
                         </a>
                     </li>
                     <li>
