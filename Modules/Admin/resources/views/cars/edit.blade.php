@@ -185,12 +185,12 @@
                                       
 
                                         @foreach(\Config::get("app.languages") as $key => $value)
-                                        <!-- <div class="form-group row mb-4">
-                                            <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">ال{{__('admin.description')}} والمميزات {{$value}}</label>
-                                            <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <textarea class="form-control" name="description_{{$key}}">{{$car->getTranslation('description', $key)}}</textarea>
+                                            <div class="form-group row mb-4">
+                                                <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">ال{{__('admin.description')}} والمميزات {{$value}}</label>
+                                                <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                    <textarea class="form-control" name="description_{{$key}}">{{$car->getTranslation('description', $key)}}</textarea>
+                                                </div>
                                             </div>
-                                        </div> -->
                                         @endforeach
 
                                         @foreach(\Config::get("app.languages") as $key => $value)
@@ -404,21 +404,14 @@
                             
                         </div>
 
-                        @if($car->type != "default" )
-
                         <div class="col-lg-12">
                             @include("admin::layouts.parts.content", [
                                 "content" => \App\Models\Content::where([["type", "car"],["resource_id", $car->id]])->first(),
                                 "seo" => \App\Models\SEO::where([["type", "car"],["resource_id", $car->id]])->first(),
-                                "faq" => \App\Models\Faq::where([["type", "car"],["resource_id", $car->id]])->get()
-                            ])  
-                        </div> 
-
-                        @endif
-
-
-              
-              
+                                "faq" => null,
+                                "content_count" => 1
+                            ])
+                        </div>
                     </div>
 
                 </form>

@@ -206,12 +206,12 @@
                                         
 
                                         @foreach(\Config::get("app.languages") as $key => $value)
-                                        <!-- <div class="form-group row mb-4">
-                                            <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">ال{{__('admin.description')}} والمميزات {{$value}}</label>
-                                            <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <textarea class="form-control" name="description_{{$key}}"></textarea>
+                                            <div class="form-group row mb-4">
+                                                <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">ال{{__('admin.description')}} والمميزات {{$value}}</label>
+                                                <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                    <textarea class="form-control" name="description_{{$key}}"></textarea>
+                                                </div>
                                             </div>
-                                        </div> -->
                                         @endforeach
 
                                         @foreach(\Config::get("app.languages") as $key => $value)
@@ -390,18 +390,16 @@
                             
                         </div>
 
-                        @if(request()->type != 'default')
+                        <div class="col-lg-12">
+                            @include("admin::layouts.parts.content", [
+                                "content" => \App\Models\Content::where([["type", "type"],["resource_id", $item->id]])->first(),
+                                "seo" => \App\Models\SEO::where([["type", "type"],["resource_id", $item->id]])->first(),
+                                "faq" => null,
+                                "content_count" => 1
+                            ])
+                        </div>
 
-                        @include("admin::layouts.parts.content", [
-                            "content" => null,
-                            "seo"     => null,
-                            "faq"     => null
-                        ])
-                        
-                        @endif
-        
-              
-              
+
                     </div>
 
                 </form>

@@ -1,10 +1,14 @@
 <div class="mt-20 fb">
-    <div class="statbox widget box box-shadow mt-20">
+    @php
+        $content_count ??= 3;
+    @endphp
+    @for($i = 1; $i <= $content_count; $i++)
+        <div class="statbox widget box box-shadow mt-20">
             <div class="widget-header mb-20">
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <div class="page__header_title">
-                            <h4>{{__('admin.content')}} 1</h4>
+                            <h4>{{__('admin.content')}} {{$i}}</h4>
                         </div>
 
                     </div>
@@ -20,7 +24,7 @@
                                     <div class="form-group row mb-4">
                                         <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.title')}}  {{$value}}</label>
                                         <div class="col-xl-12 col-lg-12 col-sm-12">
-                                            <input type="text" value="{{$content ? $content->getTranslation('title', $key) : ''}}"  class="form-control" name="content_title_{{$key}}" >
+                                            <input type="text" value="{{$content ? $content->getTranslation('title'.($i > 1 ? "_{$i}" : ""), $key) : ''}}"  class="form-control" name="content_title{{$i > 1 ? "_$i":''}}_{{$key}}" >
                                         </div>
                                     </div>
                                 </div>
@@ -32,147 +36,33 @@
                             <label for="hPassword" class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.image')}} {{__('admin.content')}}</label>
                             <div class="col-xl-12 col-lg-12 col-sm-12">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" accept="image/*" name="content_image" id="customFileContent">
-                                    <label class="custom-file-label" for="customFileContent">{{__('admin.choose_file')}}</label>
+                                    <input type="file" class="custom-file-input" accept="image/*" name="content_image{{$i > 1 ? "_$i":''}}" id="customFileContent{{$i}}">
+                                    <label class="custom-file-label" for="customFileContent{{$i}}">{{__('admin.choose_file')}}</label>
                                 </div>
-                                @if($content && $content->image)
-                                    <img src="{{asset('storage/'.\App\Helpers\WebpImage::generateUrl($content->image))}}" class="img-fluid mt-2" style="max-width: 200px;">
+                                @if($content && $content->{"image" . ($i > 1 ? "_{$i}" : "")})
+                                    <img src="{{asset('storage/'.\App\Helpers\WebpImage::generateUrl($content->{"image" . ($i > 1 ? "_{$i}" : "")}))}}" class="img-fluid mt-2" style="max-width: 200px;">
                                     <br/>
-                                    <a href="{{url('/')}}/admin/content/delete-image/{{$content->id}}/1" class="btn btn-danger btn-rounded mt-2">{{__('admin.delete')}} {{__('admin.image')}}</a>
-                                    @endif
-                            </div>
-                        </div>
-
-
-                        @foreach(\Config::get("app.languages") as $key => $value)
-                        <div class="form-group row mb-4">
-                            <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.content')}} {{$value}}</label>
-                            <div class="col-xl-12 col-lg-12 col-sm-12">
-                                <textarea  class="form-control body" name="content_description_{{$key}}" >{!!$content ? $content->getTranslation('description', $key) : '' !!}</textarea>
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-    </div>
-    <div class="statbox widget box box-shadow mt-20">
-            <div class="widget-header mb-20">
-                <div class="row">
-                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <div class="page__header_title">
-                            <h4>{{__('admin.content')}} 2</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="widget-content widget-content-area">
-                <div class="row">
-                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <div class="row">
-                            @foreach(\Config::get("app.languages") as $key => $value)
-                                <div class="col-lg-6">
-                                    <div class="form-group row mb-4">
-                                        <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.title')}} {{$value}}</label>
-                                        <div class="col-xl-12 col-lg-12 col-sm-12">
-                                            <input type="text" value="{{$content ? $content->getTranslation('title_2', $key) : ''}}"  class="form-control" name="content_title_2_{{$key}}" >
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-
-                        <div class="form-group row mb-4">
-                            <label for="hPassword" class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.image')}} {{__('admin.content')}}</label>
-                            <div class="col-xl-12 col-lg-12 col-sm-12">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" accept="image/*" name="content_image_2" id="customFileContent2">
-                                    <label class="custom-file-label" for="customFileContent2">{{__('admin.choose_file')}}</label>
-                                </div>
-                                @if($content && $content->image_2)
-                                    <img src="{{asset('storage/'.\App\Helpers\WebpImage::generateUrl($content->image_2))}}" class="img-fluid mt-2" style="max-width: 200px;">
-                                    <br/>
-                                    <a href="{{url('/')}}/admin/content/delete-image/{{$content->id}}/2" class="btn btn-danger btn-rounded mt-2">{{__('admin.delete')}} {{__('admin.image')}}</a>
+                                    <a href="{{url('/')}}/admin/content/delete-image/{{$content->id}}/{{$i}}" class="btn btn-danger btn-rounded mt-2">{{__('admin.delete')}} {{__('admin.image')}}</a>
                                 @endif
                             </div>
                         </div>
 
 
                         @foreach(\Config::get("app.languages") as $key => $value)
-                        <div class="form-group row mb-4">
-                            <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.content')}} {{$value}}</label>
-                            <div class="col-xl-12 col-lg-12 col-sm-12">
-                                <textarea  class="form-control body" name="content_description_2_{{$key}}" >{!!$content ? $content->getTranslation('description_2', $key) : '' !!}</textarea>
+                            <div class="form-group row mb-4">
+                                <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.content')}} {{$value}}</label>
+                                <div class="col-xl-12 col-lg-12 col-sm-12">
+                                    <textarea  class="form-control body" name="content_description{{$i > 1 ? "_$i":''}}_{{$key}}" >{!!$content ? $content->getTranslation('description' . ($i > 1 ? "_{$i}" : ""), $key) : '' !!}</textarea>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
 
                     </div>
                 </div>
             </div>
-    </div>
-    <div class="statbox widget box box-shadow mt-20">
-            <div class="widget-header mb-20">
-                <div class="row">
-                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <div class="page__header_title">
-                            <h4>{{__('admin.content')}} 3</h4>
-                        </div>
+        </div>
+    @endfor
 
-                    </div>
-                </div>
-            </div>
-
-            <div class="widget-content widget-content-area">
-                <div class="row">
-                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <div class="row">
-                            @foreach(\Config::get("app.languages") as $key => $value)
-                                <div class="col-lg-6">
-                                    <div class="form-group row mb-4">
-                                        <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.title')}} {{$value}}</label>
-                                        <div class="col-xl-12 col-lg-12 col-sm-12">
-                                            <input type="text" value="{{$content ? $content->getTranslation('title_3', $key) : ''}}"  class="form-control" name="content_title_3_{{$key}}" >
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-
-                        <div class="form-group row mb-4">
-                            <label for="hPassword" class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.image')}} {{__('admin.content')}}</label>
-                            <div class="col-xl-12 col-lg-12 col-sm-12">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" accept="image/*" name="content_image_3" id="customFileContent3">
-                                    <label class="custom-file-label" for="customFileContent3">{{__('admin.choose_file')}}</label>
-                                </div>
-                                @if($content && $content->image_3)
-                                    <img src="{{asset('storage/'.\App\Helpers\WebpImage::generateUrl($content->image_3))}}" class="img-fluid mt-2" style="max-width: 200px;">
-                                    <br/>
-                                    <a href="{{url('/')}}/admin/content/delete-image/{{$content->id}}/3" class="btn btn-danger btn-rounded mt-2">{{__('admin.delete')}} {{__('admin.image')}}</a>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        @foreach(\Config::get("app.languages") as $key => $value)
-                        <div class="form-group row mb-4">
-                            <label class="col-xl-12 col-sm-12 col-sm-12 col-form-label">{{__('admin.content')}} {{$value}}</label>
-                            <div class="col-xl-12 col-lg-12 col-sm-12">
-                                <textarea  class="form-control body" name="content_description_3_{{$key}}" >{!!$content ? $content->getTranslation('description_3', $key) : '' !!}</textarea>
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-    </div>
     <div class="statbox widget box box-shadow mt-20">
         <div class="widget-content widget-content-area">
             <div class="row">
@@ -214,6 +104,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="statbox widget box box-shadow mt-20">
         <div class="widget-header mb-20">
             <div class="row">

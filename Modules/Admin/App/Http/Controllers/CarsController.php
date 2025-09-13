@@ -106,12 +106,10 @@ class CarsController extends Controller
             }
         }
 
-        if($car->type != "default") {
-            $resource = "car";
-            $content = new \Modules\Admin\App\Services\ContentService();
-            $content->create($request, $resource, $car->id);
-            $content->updateFaq($request, $resource, $car->id);
-        }
+        $resource = "car";
+        $content = new \Modules\Admin\App\Services\ContentService();
+        $content->create($request, $resource, $car->id);
+        $content->updateFaq($request, $resource, $car->id);
 
         return response()->json(['status' => 'success']);
     }
@@ -167,15 +165,11 @@ class CarsController extends Controller
                 $car->images()->create(['image' => $file->store('cars', 'public')]);
             }
         }
-        if($car->type != "default") {
+
         $resource = "car";
         $content = new \Modules\Admin\App\Services\ContentService();
-        $content->update($request,
-        \App\Models\Content::where('type',$resource)->where('resource_id',$id)->first(),
-        \App\Models\SEO::where('type',$resource)->where('resource_id',$id)->first()
-        );
-        $content->updateFaq($request, $resource, $id);
-    }
+        $content->create($request, $resource, $car->id);
+        $content->updateFaq($request, $resource, $car->id);
 
         return response()->json(['status' => 'success']);
     }
@@ -193,9 +187,6 @@ class CarsController extends Controller
             $car->is_refresh = 1;
             $car->refreshed_at = now();
             $car->save();
-            $car->company->refreshes()->create([
-                'car_id' => $car->id
-            ]);
         }
         return redirect()->back()->withSuccess("تم تحديث السيارات بنجاح");
 
@@ -212,15 +203,6 @@ class CarsController extends Controller
         $car->is_refresh = 1;
         $car->refreshed_at = now();
         $car->save();
-
-        $car->company->refreshes()->create([
-            'car_id' => $car->id
-        ]);
-        // if($car->refreshed_at == null) {
-        //     $car->is_refresh = 1;
-        //     $car->refreshed_at = now();
-        //     $car->save();
-        // }
         return redirect()->back()->withSuccess("تم تحديث السيارة بنجاح");
     }
 

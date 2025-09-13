@@ -4,8 +4,8 @@
 @endsection
 @section('seo')
     @include('website::layouts.parts.seo', [
-        'seo' => $car->model ? \App\Models\SEO::where('type','model')->where('resource_id', $car->model->id)->first() : null,
-        "title" => $car->name . "-" .  ( $car->company?->name ??  ''  ) . " #" .   $car->id ,
+        'seo' => \App\Models\SEO::where('type', 'car')->where('resource_id', $car->id)->first(),
+        "title" => $car->name,
         "image" => secure_url('/') . '/storage/'. \App\Helpers\WebpImage::generateUrl($car->image)
     ])
 @endsection
@@ -18,18 +18,21 @@
                     $car->brand->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $car->brand])),
                     $car->name => null
             ]])
-            <div class="section-header container mb-5">
-                <div class="section-header-title">
-                    <h3>{{$car->name}}</h3>
-                    <div class="black-line"></div>
+
+            @if ($car->description)
+                <div class="section-header container mb-5">
+                    <div class="section-header-title">
+                        <h3>{{$car->name}}</h3>
+                        <div class="black-line"></div>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-text">
+                            {{$car->description}}
+                        </p>
+                        <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
+                    </div>
                 </div>
-                <div class="description-container">
-                    <p class="description-text">
-{{--                        {!! $car->getDescription() !!}--}}
-                    </p>
-                    <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
-                </div>
-            </div>
+            @endif
             <div class="container m-auto ">
                 <div class="row">
                     <div class="col-lg-6">
@@ -292,16 +295,16 @@
                 </div>
             </section>
         @endif
-        @if ($features = $car?->model->page_features)
+        @if ($content = \App\Models\Content::where('type', 'car')->where('resource_id', $car->id)->first())
             <section class="car-description py-5">
                 <div class="container">
                     <div class="head-title-with-line">
                         <h1>
-                            {{$car->name}}
+                            {{$content->title}}
                         </h1>
                     </div>
                     <div class="car-content-desc mt-3">
-                        {!! $features !!}
+                        {!! $content->description !!}
                     </div>
                 </div>
             </section>
@@ -309,10 +312,6 @@
     </main>
 
     @include('website::layouts.parts.suggested-cars', ['suggested_cars' => $suggested_cars])
-
-    @include('website::layouts.parts.content', [
-        "content" => \App\Models\Content::where('type','car')->where('resource_id', $car->id)->first()
-    ])
 
     @include('website::layouts.parts.faq', [
         "faq" => \App\Models\Faq::where('type','car')->where('resource_id', $car->id)->get()
@@ -420,7 +419,7 @@
                         "name": "Tajeer"
                     },
                     "datePublished": "{{date('Y-m-d')}}",
-                    "reviewBody": "{{$car->getDescription()}}",
+                    "reviewBody": "{{$car->description}}",
                     "name": "{{$car->name}}",
                     "reviewRating": {
                         "@type": "Rating",

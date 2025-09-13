@@ -205,17 +205,4 @@ class Car extends Model implements Sitemapable
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
     }
-
-    public function getDescription() {
-        $model = $this->model;
-        $basicDescription = $model ? $model->page_description : '';
-        $carDescription   = __('lang.Rent')
-        . " " . $this->name
-        . " " .   ($this->year ? $this->year->title : '')
-        . " " .  ($this->color ? $this->color->title : '')
-        . " " . __('lang.Color')
-        . " " . __('lang.Contact')
-        . " " . __('lang.For Booking');
-        return $carDescription . " <br/> " . $basicDescription;
-    }
 }

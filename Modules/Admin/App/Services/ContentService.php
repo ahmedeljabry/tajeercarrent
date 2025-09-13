@@ -60,7 +60,10 @@ class ContentService
         if($request->has('content_image_3')){
             $data['image_3'] = $request->file('content_image_3')->store('contents', 'public');
         }
-        \App\Models\Content::create($data);
+        \App\Models\Content::updateOrCreate([
+            'type' => $type,
+            'resource_id' => $resource_id
+        ], $data);
 
         $data_seo = [];
         $data_seo['description'] = [];
@@ -77,7 +80,10 @@ class ContentService
         }
         $data_seo['type'] = $type;
         $data_seo['resource_id'] = $resource_id;
-        \App\Models\SEO::create($data_seo);
+        \App\Models\SEO::updateOrCreate([
+            'type' => $type,
+            'resource_id' => $resource_id
+        ], $data_seo);
 
 
         return true;

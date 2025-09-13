@@ -105,7 +105,7 @@
                         "name": "Tajeer"
                     },
                     "datePublished": "{{date('Y-m-d')}}",
-                    "reviewBody": "{{$yacht->getDescription()}}",
+                    "reviewBody": "{{$yacht->description}}",
                     "name": "{{$yacht->name}}",
                     "reviewRating": {
                         "@type": "Rating",

@@ -99,7 +99,7 @@
                         "name": "Tajeer"
                     },
                     "datePublished": "{{date('Y-m-d')}}",
-                    "reviewBody": "{{$car->getDescription()}}",
+                    "reviewBody": "{{$car->description}}",
                     "name": "{{$car->name}}",
                     "reviewRating": {
                         "@type": "Rating",

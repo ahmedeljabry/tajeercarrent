@@ -37,7 +37,7 @@
                 @include('website::cars.parts.breadcrumb')
                 @include('website::layouts.parts.page-title',[
                     "title"       => $yacht->name,
-                    "description" => $yacht->getDescription(),
+                    "description" => $yacht->description,
                 ])
             </div>
 
@@ -391,7 +391,7 @@
                         "name": "Tajeer"
                     },
                     "datePublished": "{{date('Y-m-d')}}",
-                    "reviewBody": "{{$yacht->getDescription()}}",
+                    "reviewBody": "{{$yacht->description}}",
                     "name": "{{$yacht->name}}",
                     "reviewRating": {
                         "@type": "Rating",
