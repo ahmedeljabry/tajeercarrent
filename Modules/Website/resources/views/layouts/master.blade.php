@@ -186,16 +186,16 @@
                 </a>
             </div>
             <div class="col-lg-6 col-xl-3 col-md-7 col-12 mt-4 mt-md-0 justify-content-end  ">
-                <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.pages.list-your-car'))}}"
-                   class="d-flex h-100 justify-content-lg-end justify-content-center  ">
-                    <div class="header__list_your_car">
-                        <img width="30" height="30" alt="listcar" class="car"
-                             src="{{asset('/website/images/header_car.png')}}">
-                        <p>{{__('lang.List your cars in TAJEER platform')}}</p>
-                        <img alt="upload" class="icon" width="26" height="25"
-                             src="{{asset('/website/images/icons/upload.png')}}">
-                    </div>
-                </a>
+{{--                <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.pages.list-your-car'))}}"--}}
+{{--                   class="d-flex h-100 justify-content-lg-end justify-content-center  ">--}}
+{{--                    <div class="header__list_your_car">--}}
+{{--                        <img width="30" height="30" alt="listcar" class="car"--}}
+{{--                             src="{{asset('/website/images/header_car.png')}}">--}}
+{{--                        <p>{{__('lang.List your cars in TAJEER platform')}}</p>--}}
+{{--                        <img alt="upload" class="icon" width="26" height="25"--}}
+{{--                             src="{{asset('/website/images/icons/upload.png')}}">--}}
+{{--                    </div>--}}
+{{--                </a>--}}
             </div>
             <div class="col-lg-7">
                 <ul class="header__actions desktop__header_actions desktop-view-btns">
