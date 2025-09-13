@@ -23,20 +23,14 @@
         </div>
         <div class="rent-car-slide-description">
             <ul>
-                @if ($car->security_deposit)
-                    <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                @endif
-                @if($car->minimum_day_booking)
-                    <li>
-                        {{__('lang.Minimum of Days')}} / {{$car->minimum_day_booking}}
-                    </li>
-                @endif
+                <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
+                <li>
+                    {{__('lang.Minimum of Days')}} / {{$car->minimum_day_booking}}
+                </li>
                 <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
-                @if ($car->km_per_day)
-                    <li>
-                        {{__('lang.KM Limit Day')}} / {{$car->km_per_day}}
-                    </li>
-                @endif
+                <li>
+                    {{__('lang.KM Limit Day')}} / {{$car->km_per_day}}
+                </li>
             </ul>
             <div class="rent-car-slide-description-blue-boxes">
                 @if ($car->price_per_day)

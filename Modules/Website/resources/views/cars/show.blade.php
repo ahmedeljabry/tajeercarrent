@@ -117,9 +117,9 @@
                                 <div class="head-title-with-line">
                                     <h3>{{__('lang.Please Note')}}</h3>
                                 </div>
-                                <ul class="mt-3">
+                                <div class="ms-1">
                                     {!! app('settings')->get($car->type . "_notes") !!}
-                                </ul>
+                                </div>
                             </div>
                         @endif
                     </div>
@@ -130,31 +130,21 @@
                             </h1>
                             <div class="car-details-feat d-flex flex-column flex-md-row flex-wrap  gap-5">
                                 <ul>
-                                    @if ($car->brand)
-                                        <li>
-                                            {{__('lang.Brand')}} / {{$car->brand->title}}
-                                        </li>
-                                    @endif
-                                    @if ($car->model)
-                                        <li>
-                                            {{__('lang.Model')}} / {{$car->model->title}}
-                                        </li>
-                                    @endif
-                                    @if($car->year)
-                                        <li>
-                                            {{__('lang.Year')}} / {{$car->year->title}}
-                                        </li>
-                                    @endif
-                                    @if($car->color)
-                                        <li>
-                                            {{__('lang.Color')}}/ {{$car->color->title}}
-                                        </li>
-                                    @endif
-                                    @if($car->types)
-                                        <li>
-                                            {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
-                                        </li>
-                                    @endif
+                                    <li>
+                                        {{__('lang.Brand')}} / {{$car->brand->title}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.Model')}} / {{$car->model->title}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.Year')}} / {{$car->year->title}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.Color')}}/ {{$car->color->title}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
+                                    </li>
                                     <li>
                                         {{__('lang.Doors')}} / {{$car->doors}}
                                     </li>
@@ -164,8 +154,19 @@
                                     <li>
                                         {{__('lang.No. Of Luggage')}} / {{$car->bags}}
                                     </li>
+                                    <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
+                                </ul>
+                                <ul>
+                                    <li>{{__("lang.Minimum of Days")}} /  {{$car->minimum_day_booking}}</li>
+                                    <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
                                     <li>
-                                        {{__('lang.Insurance Type')}} / {{__('lang.Full')}}
+                                        {{__('lang.KM Limit Day')}} / {{$car->km_per_day ?: 250}} {{__('lang.KM')}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.KM Limit Week')}} / {{$car->km_per_week ?: 250}} {{__('lang.KM')}}
+                                    </li>
+                                    <li>
+                                        {{__('lang.KM Limit Day')}} / {{$car->km_per_month ?: 250}} {{__('lang.KM')}}
                                     </li>
                                 </ul>
                             </div>
@@ -285,7 +286,7 @@
                     </div>
                     <div class="row">
                         @foreach ($car->features?->split(4) as $chunk)
-                            <div class="col-md-6 co-lg-4 col-xl-3 mb-4">
+                            <div class="col-md-6 co-lg-4 col-xl-3 mb-4 car-details-notes">
                                 <ul class="mt-2">
                                     @foreach ($chunk as $feature)
                                         <li>{{$feature->name}}</li>

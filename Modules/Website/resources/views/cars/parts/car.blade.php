@@ -18,31 +18,21 @@
                 <h4>{{$car->name}}</h4>
             </a>
             <ul>
-                @if ($car->brand)
-                    <li>
-                        {{__('lang.Brand')}} / {{$car->brand->title}}
-                    </li>
-                @endif
-                @if ($car->model)
-                    <li>
-                        {{__('lang.Model')}} / {{$car->model->title}}
-                    </li>
-                @endif
-                @if($car->year)
-                    <li>
-                        {{__('lang.Year')}} / {{$car->year->title}}
-                    </li>
-                @endif
-                @if($car->color)
-                    <li>
-                        {{__('lang.Color')}}/ {{$car->color->title}}
-                    </li>
-                @endif
-                @if($car->types)
-                    <li>
-                        {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
-                    </li>
-                @endif
+                <li>
+                    {{__('lang.Brand')}} / {{$car->brand->title}}
+                </li>
+                <li>
+                    {{__('lang.Model')}} / {{$car->model->title}}
+                </li>
+                <li>
+                    {{__('lang.Year')}} / {{$car->year->title}}
+                </li>
+                <li>
+                    {{__('lang.Color')}}/ {{$car->color->title}}
+                </li>
+                <li>
+                    {{__('lang.Type')}}: {{$car->types->map(function($type){return $type;})->implode(', ')}}
+                </li>
                 <li>
                     {{__('lang.Doors')}} / {{$car->doors}}
                 </li>
@@ -52,11 +42,11 @@
                 <li>
                     {{__('lang.No. Of Luggage')}} / {{$car->bags}}
                 </li>
-                <li>Car deposit: 3000 AED</li>
-                <li>{{__("lang.Minimum of Days")}}: {{$car->minimum_day_booking}}</li>
-                <li>
-                    {{__('lang.Insurance Type')}} / {{__('lang.Full')}}
-                </li>
+                <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
+            </ul>
+            <ul>
+                <li>{{__("lang.Minimum of Days")}} / {{$car->minimum_day_booking}}</li>
+                <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
                 <li>
                     {{__('lang.KM Limit Day')}} / {{$car->km_per_day ?: 250}} {{__('lang.KM')}}
                 </li>
