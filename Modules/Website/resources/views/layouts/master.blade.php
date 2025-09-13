@@ -663,44 +663,49 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 links-footer">
-                @for ($i = 0; $i < 2; $i++)
+                @php
+                    $types = Type::all();
+                    $pages = app('settings')->getFooterPages();
+                    $statics = collect([
+                        (object)['name' => __('lang.FAQ'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.faq'))],
+                        (object)['name' => __('lang.Blogs'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index'))],
+                        (object)['name' => __('lang.Contact Us'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us'))]
+                    ]);
+
+                    $items = collect();
+                    $items = $items->merge($types);
+                    $items = $items->merge($pages);
+                    $items = $items->merge($statics)
+                @endphp
+                @foreach ($items->chunk(10) as $chunk)
                     <ul>
-                        @foreach (Type::all()->skip(ceil($i * Type::all()->count() / 2 )) as $item)
-                            @if ($item->slug == 'yachts')
+                        @foreach ($chunk as $item)
+                            @if ($item instanceof Type)
+                                @if ($item->slug == 'yachts')
+                                    <li>
+                                        <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
+                                           href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
+                                    </li>
+                                    @continue
+                                @endif
                                 <li>
                                     <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
-                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
+                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
                                 </li>
-                                @continue
+                            @elseif($item instanceof \App\Models\Page)
+                                <li>
+                                    <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
+                                       href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
+                                       href="{{ $item->link }}">{{$item->name}}</a>
+                                </li>
                             @endif
-                            <li>
-                                <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
-                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
-                            </li>
                         @endforeach
                     </ul>
-                @endfor
-
-                <ul>
-                    <li>
-                        <a data-toggle="tooltip" data-placement="left" title="{{__('lang.FAQ')}}"
-                           href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.faq')) }}">{{__('lang.FAQ')}}</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Blog')}}"
-                           href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Contact Us')}}"
-                           href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
-                    </li>
-                    @foreach(app('settings')->getFooterPages() as $item)
-                        <li>
-                            <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
-                               href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
-                        </li>
-                    @endforeach
-                </ul>
+                @endforeach
 
                 <ul class="justify-content-center">
                     <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
