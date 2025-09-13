@@ -22,11 +22,10 @@
                 <div class="section-header-title">
                     <h3>{{$car->name}}</h3>
                     <div class="black-line"></div>
-                    <a href="{{\Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $car->brand]))}}" class="view-all-btn">{{__('lang.View All')}}</a>
                 </div>
                 <div class="description-container">
                     <p class="description-text">
-                        {!! $car->getDescription() !!}
+{{--                        {!! $car->getDescription() !!}--}}
                     </p>
                     <button type="button" class="read-more-btn">{{__('lang.Read More')}}</button>
                 </div>
@@ -106,11 +105,6 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="car-details-pricing-deposit">
-                                <p>
-                                    Deposit / Not required
-                                </p>
-                            </div>
                         </div>
                         @if (app('settings')->get($car->type . "_notes"))
                             <div class="car-details-notes my-5">
@@ -125,9 +119,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="car-details-features py-5 py-lg-0 ">
-                            <h1>
+                            <h3>
                                 {{$car->name}}
-                            </h1>
+                            </h3>
                             <div class="car-details-feat d-flex flex-column flex-md-row flex-wrap  gap-5">
                                 <ul>
                                     <li>
@@ -302,9 +296,9 @@
             <section class="car-description py-5">
                 <div class="container">
                     <div class="head-title-with-line">
-                        <h3>
+                        <h1>
                             {{$car->name}}
-                        </h3>
+                        </h1>
                     </div>
                     <div class="car-content-desc mt-3">
                         {!! $features !!}

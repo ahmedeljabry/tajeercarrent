@@ -526,7 +526,7 @@
              aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <div class="logo">
-                    <img width="197" height="60" src="./assets/images/logo.png" alt="logo">
+                    <img width="197" height="60" src="{{asset('/storage/' .  app("settings")->get("header_logo")) }}" alt="logo">
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
@@ -535,228 +535,62 @@
             <div class="offcanvas-body d-flex align-items-center">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="https://tajeercarrent.com/en/uae/bur-dubai">Home</a>
+                        <a class="nav-link" href="{{url(app()->getLocale())}}">{{__('lang.Home')}}</a>
                     </li>
                     <li class="nav-item ">
                         <div class="dropdown">
                             <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                Car brands
+                                {{__('lang.Car Brands')}}
                                 <i class="fa-solid fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu brands-logo">
                                 <ul class="row">
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/mercedes.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Mercedes
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/lamb.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Lamborghini
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/Rang-rover.webp" alt=""
-                                                     class="mw-100">
-                                            </picture>
-                                            Rang Rover
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/nissan.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Nissan
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/mercedes.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Mercedes
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/lamb.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Lamborghini
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/Rang-rover.webp" alt=""
-                                                     class="mw-100">
-                                            </picture>
-                                            Rang Rover
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/nissan.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Nissan
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/mercedes.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Mercedes
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/lamb.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Lamborghini
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/Rang-rover.webp" alt=""
-                                                     class="mw-100">
-                                            </picture>
-                                            Rang Rover
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/nissan.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Nissan
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/mercedes.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Mercedes
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/lamb.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Lamborghini
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/Rang-rover.webp" alt=""
-                                                     class="mw-100">
-                                            </picture>
-                                            Rang Rover
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/nissan.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Nissan
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/mercedes.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Mercedes
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/lamb.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Lamborghini
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/Rang-rover.webp" alt=""
-                                                     class="mw-100">
-                                            </picture>
-                                            Rang Rover
-                                        </a>
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="#">
-                                            <picture>
-                                                <img src="./assets/images/nissan.webp" alt="" class="mw-100">
-                                            </picture>
-                                            Nissan
-                                        </a>
-                                    </li>
+                                    @foreach(app('cars')->brands as $item)
+                                        <li class="col-lg-3">
+                                            <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
+                                                <picture>
+                                                    <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="" class="mw-100">
+                                                </picture>
+                                                {{$item->title}}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </ul>
                         </div>
                     </li>
+                    @if ($type = Type::whereSlug('with-driver')->first())
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers')) }}">{{__('lang.Rent a car with driver')}}</a>
+                        </li>
+                    @endif
+
+                    @if ($type = Type::whereSlug('yachts')->first())
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent yacht')}}</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item active">
-                        <a class="nav-link" href="./rent.html">Rent
-                            a
-                            car with
-                            driver
-                        </a>
+                        <a class="nav-link" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./car-rental.html">Rent
-                            yacht</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./blogs.html">Blog</a>
-                    </li>
+
                     <li class="nav-item ">
                         <div class="dropdown ">
                             <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                Quick Links
-                                <i class="fa-solid fa-chevron-down"></i>
+                                {{__('lang.Quick Links')}}
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="./contact-us.html">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="./about-us.html">
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="./web-privacy-terms-and-condition.html">
-                                        Our Service
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="./web-privacy-terms-and-condition.html">
-                                        Terms & Conditions
-                                    </a>
-                                </li>
+                                <a class="dropdown-item"
+                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
+                                @foreach(app('settings')->getHeaderPages() as $item)
+                                    <a class="dropdown-item"
+                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
+                                @endforeach
                             </ul>
                         </div>
                     </li>
@@ -764,15 +598,15 @@
                 <div class="account-info d-flex flex-column gap-3 w-100 ">
                     <a href="#" class="my-account d-flex align-items-center gap-2">
                         <i class="fa-regular fa-circle-user"></i>
-                        <p class="mb-0">My Account</p>
+                        <p class="mb-0">{{__('lang.My Account')}}</p>
                     </a>
                     <div class="auth-btns d-flex align-items-center justify-content-around "
                          data-bs-toggle="modal" data-bs-target="#login-modal">
                         <a href=" #" class="main-btn">
-                            Login
+                            {{__('lang.Sign in')}}
                         </a>
                         <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
-                            Sign Up
+                            {{__('lang.Sign up')}}
                         </a>
                     </div>
                 </div>
@@ -780,42 +614,41 @@
                                     align-items-center ">
                     <ul class=" mb-4 mb-xlg-0 ">
                         <li>
-                            <a href=" tel:+971 56 442 4448">
+                            <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
                                 <img width="36" height="36" alt="call"
                                      src="https://tajeercarrent.com/website/images/icons/call.png">
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com/Tajeercarrental">
+                            <a href="{{app('settings')->get('contact_facebook')}}">
                                 <img width="36" height="36" alt="fb"
-                                     src="https://tajeercarrent.com/website/images/icons/facebook.png">
+                                     src="{{asset('/website/images/icons/facebook.png')}}">
                             </a>
                         </li>
                         <li>
-                            <a href="https://x.com/tajeercarrental">
+                            <a href="{{app('settings')->get('contact_twitter')}}">
                                 <img width="36" height="36" alt="twitter"
-                                     src="https://tajeercarrent.com/website/images/icons/twitter.png">
+                                     src="{{asset('/website/images/icons/twitter.png')}}">
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/tajeercarrental/">
+                            <a href="{{app('settings')->get('contact_instagram')}}">
                                 <img width="36" height="36" alt="instagrm"
-                                     src="https://tajeercarrent.com/website/images/icons/instagram.png">
+                                     src="{{asset('/website/images/icons/instagram.png')}}">
                             </a>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <a
-                                    href="https://play.google.com/store/apps/details?id=com.tajeer&amp;hl=en&amp;gl=US&amp;pli=1">
+                            <a href="{{app('settings')->get('app_google_play')}}">
                                 <img width="125" height="37" alt="app" class="apps-image"
-                                     src="https://tajeercarrent.com/website/images/icons/googleplay.webp">
+                                     src="{{asset('/website/images/icons/googleplay.webp')}}">
                             </a>
                         </li>
                         <li>
-                            <a href="https://apps.apple.com/ae/app/tajeer-rent-a-car-in-dubai/id1458290275">
+                            <a href="{{app('settings')->get('app_apple_store')}}">
                                 <img alt="app" width="115" height="41" class="apps-image"
-                                     src="https://tajeercarrent.com/website/images/icons/appstore.webp">
+                                     src="{{asset('/website/images/icons/appstore.webp')}}">
                             </a>
                         </li>
                     </ul>
@@ -896,8 +729,8 @@
                 <ul class="justify-content-center">
                     <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
                     <li>
-                        <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
-                            <i class="fa fa-phone"></i> {{app('settings')->get('contact_whatsapp')}}
+                        <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
+                            <i class="fa fa-phone"></i> {{app('settings')->get('contact_phone')}}
                         </a>
                     </li>
                     <li>

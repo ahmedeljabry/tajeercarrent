@@ -4062,3 +4062,13 @@ hr {
     border-bottom: 1px solid #fff;
   }
 }
+
+.mobile-view .dropdown-menu{
+    width: 100%;
+}
+
+.mobile-view .dropdown-menu ul{
+    width: 100%;
+    overflow: scroll;
+    max-height: 300px;
+}
