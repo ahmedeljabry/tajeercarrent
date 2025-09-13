@@ -469,34 +469,6 @@
             <li class="header__actions_list_item">
                 <p>
                     <i class="fa fa-language"></i>
-                    <picture>
-                        <img src="{{asset('/assets/icons/lang_' . app()->getLocale(). '.png')}}" alt="" class="mw-100">
-                    </picture>
-                    <span>{{ __('lang.Language') }}</span>
-                </p>
-                <div class="dropdown ">
-                    <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Arabic
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        @foreach (LaravelLocalization::getSupportedLocales() as $langCode => $langDetails)
-                            <li>
-                                <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
-                                    <picture>
-                                        <img src="{{asset('/assets/icons/lang_' . $langCode. '.png')}}" alt="" class="mw-100">
-                                    </picture>
-                                    {{$langDetails['name']}}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </li>
-            <li class="header__actions_list_item">
-                <p>
-                    <i class="fa fa-language"></i>
                 </p>
                 <div class="dropdown ">
                     <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
