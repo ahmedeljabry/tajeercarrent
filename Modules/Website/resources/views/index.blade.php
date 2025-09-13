@@ -256,29 +256,20 @@
                     {
                         breakpoint: 991.89,
                         settings: {
-                            slidesToShow: 2.5,
-                            centerMode: false,
-                            centerPadding: '150px',
-                            focusOnSelect: true
+                            slidesToShow: 2.5
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
-                            slidesToShow: 2.5,
-                            centerMode: false,
-                            centerPadding: '100px',
-                            focusOnSelect: true
+                            slidesToShow: 2.5
                         },
 
                     },
                     {
                         breakpoint: 576.89,
                         settings: {
-                            slidesToShow: 2.5,
-                            centerMode: false,
-                            centerPadding: '50px',
-                            focusOnSelect: true
+                            slidesToShow: 2.5
                         },
                     },
                 ]
@@ -341,8 +332,6 @@
                             settings: {
                                 slidesToShow: 1,
                                 arrows: false,
-                                centerMode: true,
-                                centerPadding: '60px',
                             },
                         },
                         {
@@ -350,8 +339,6 @@
                             settings: {
                                 slidesToShow: 1,
                                 arrows: false,
-                                centerMode: true,
-                                centerPadding: '40px',
                             }
                         },
                         {
@@ -359,8 +346,6 @@
                             settings: {
                                 slidesToShow: 1,
                                 arrows: false,
-                                centerMode: true,
-                                centerPadding: '20px',
                             }
                         }
                     ]
@@ -411,10 +396,7 @@
                     {
                         breakpoint: 991.89,
                         settings: {
-                            dots: true,
                             slidesToShow: 1,
-                            centerMode: true,
-                            centerPadding: "20px",
                         },
                     },
                 ]
@@ -455,8 +437,6 @@
                         breakpoint: 424.89,
                         settings: {
                             slidesToShow: 1,
-                            centerMode: true,
-                            centerPadding: '20px',
                             dots: true,
                         },
                     },

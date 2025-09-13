@@ -44,19 +44,6 @@
                 </li>
                 <li>{{__('lang.Insurance Type')}} / {{__('lang.Full')}} </li>
             </ul>
-            <ul>
-                <li>{{__("lang.Minimum of Days")}} / {{$car->minimum_day_booking}}</li>
-                <li>{{__('lang.Deposit')}} / {{app('currencies')->convert($car->security_deposit)}} {{app('currencies')->getCurrency()->code}}</li>
-                <li>
-                    {{__('lang.KM Limit Day')}} / {{$car->km_per_day ?: 250}} {{__('lang.KM')}}
-                </li>
-                <li>
-                    {{__('lang.KM Limit Week')}} / {{$car->km_per_week ?: 250}} {{__('lang.KM')}}
-                </li>
-                <li>
-                    {{__('lang.KM Limit Day')}} / {{$car->km_per_month ?: 250}} {{__('lang.KM')}}
-                </li>
-            </ul>
         </div>
         <div class="rent-car-slide-footer ">
             <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}?text={{urlencode("Hello I Am Interested On This Car, " . LaravelLocalization::getLocalizedUrl(null, route('website.cars.show', ['car' => $car])))}}" target="_blank" rel="noopener">

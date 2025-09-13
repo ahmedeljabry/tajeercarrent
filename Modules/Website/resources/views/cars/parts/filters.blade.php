@@ -211,30 +211,21 @@
                         breakpoint: 991.89,
                         settings: {
                             slidesToShow: 1,
-                            arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '60px',
+                            arrows: false
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
                             slidesToShow: 1,
-                            arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '40px',
+                            arrows: false
                         }
                     },
                     {
                         breakpoint: 424.89,
                         settings: {
                             slidesToShow: 1,
-                            arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '20px',
+                            arrows: false
                         }
                     }
                 ]

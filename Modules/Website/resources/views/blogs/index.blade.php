@@ -83,9 +83,6 @@
                         settings: {
                             slidesToShow: 1,
                             arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '60px',
                         },
                     },
                     {
@@ -93,9 +90,6 @@
                         settings: {
                             slidesToShow: 1,
                             arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '40px',
                         }
                     },
                     {
@@ -103,9 +97,6 @@
                         settings: {
                             slidesToShow: 1,
                             arrows: false,
-                            dots: true,
-                            centerMode: true,
-                            centerPadding: '20px',
                         }
                     }
                 ]
