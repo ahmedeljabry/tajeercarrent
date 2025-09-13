@@ -167,3 +167,13 @@ ul li::marker {
         z-index: 99999999999999999;
     }
 }
+
+.slider-nav-car-details .slick-track .slick-slide{
+    height: 300px;
+    object-fit: cover;
+}
+
+.slider-for-car-details .slick-track .slick-slide{
+    height: 500px;
+    object-fit: cover;
+}
