@@ -58,7 +58,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign in')}}</h1>
+                <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign in')}}</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -115,7 +115,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign up')}}</h1>
+                <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign up')}}</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
