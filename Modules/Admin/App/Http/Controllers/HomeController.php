@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function switchLang(Request $request): RedirectResponse
     {
-        \Cookie::queue(\Cookie::make('admin_lang', app()->getLocale(), 60*24*30));
+        \Cookie::queue('admin_lang', app()->getLocale() == "ar" ? "en" : "ar", 60*24*30);
         return redirect()->back();
     }
 
