@@ -3322,6 +3322,8 @@ section {
 
 .rent-car-slide picture {
   position: relative;
+  height: 250px;
+  display: block;
 }
 
 .rent-car-labels {
@@ -3898,7 +3900,7 @@ section {
 .rent-car-slide img {
   height: 250px;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .banner-slider .slick-track picture {
