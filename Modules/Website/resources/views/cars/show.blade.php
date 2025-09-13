@@ -273,6 +273,7 @@
                 </div>
             </div>
         </section>
+
         @if ($car->features->count() > 0)
             <section class="car-features">
                 <div class="container">
@@ -295,6 +296,7 @@
                 </div>
             </section>
         @endif
+
         @if ($content = \App\Models\Content::where('type', 'car')->where('resource_id', $car->id)->first())
             <section class="car-description py-5">
                 <div class="container">
