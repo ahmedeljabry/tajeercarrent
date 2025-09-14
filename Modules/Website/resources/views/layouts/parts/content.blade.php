@@ -20,6 +20,9 @@
         @if($content->title_2 || $content->description_2 || $content->image_2)
             <section class="home-content-section">
                 <div class="container">
+                    <picture>
+                        <img loading="lazy" alt="{{$content->title_2}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_2)}}" />
+                    </picture>
                     <div class="home-content-container">
                         <div class="home-desc">
                             <h2>{{$content->title_2}}</h2>
@@ -27,9 +30,6 @@
                         </div>
                         <div class="main-btn">{{__('lang.Read More')}}</div>
                     </div>
-                    <picture>
-                        <img loading="lazy" alt="{{$content->title_2}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_2)}}" />
-                    </picture>
                 </div>
             </section>
             <hr>
