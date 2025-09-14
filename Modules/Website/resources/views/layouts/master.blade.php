@@ -450,7 +450,7 @@
             </li>
             <li class="header__actions_list_item">
                 <p>
-                    <i class="fa-solid fa-dollar-sign"></i>
+                    <i class="far fa-money-bill-alt"></i>
                 </p>
                 <div class="dropdown ">
                     <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
