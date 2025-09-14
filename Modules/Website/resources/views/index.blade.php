@@ -144,25 +144,6 @@
         </section>
         <hr class="mt-5">
 
-        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title && $content->image && $content->description)
-            <section class="home-content-section">
-                <div class="container">
-                    <picture>
-                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image)}}" alt="">
-                    </picture>
-                    <div class="home-content-container">
-                        <div class="home-desc">
-                            @if ($content->title)
-                                <h2>{{$content->title}}</h2>
-                            @endif
-                            {!! $content->description !!}
-                        </div>
-                        <div class="main-btn">{{__('lang.Read More')}}</div>
-                    </div>
-                </div>
-            </section>
-        @endif
-
         @if ($left = app('settings')->get('book_your_next_trip_left') && $right = app('settings')->get('book_your_next_trip_right'))
             <section class="booking-stpes-section">
                 <picture>
@@ -179,41 +160,9 @@
             </section>
         @endif
 
-        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title_2 && $content->image_2 && $content->description_2)
-            <section class="home-content-section">
-                <div class="container">
-                    <picture>
-                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_2)}}" alt="">
-                    </picture>
-                    <div class="home-content-container">
-                        <div class="home-desc">
-                            <h2>{{$content->title_2}}</h2>
-                           {!! $content->description_2 !!}
-                        </div>
-                        <div class="main-btn">{{__('lang.Read More')}}</div>
-                    </div>
-                </div>
-            </section>
-            <hr>
-        @endif
-
-        @if (($content = \App\Models\Content::where('type', 'home')->first()) && $content->title_3 && $content->image_3 && $content->description_3)
-            <section class="home-content-section">
-                <div class="container">
-                    <div class="home-content-container">
-                        <div class="home-desc">
-                            <h2>{{$content->title_3}}</h2>
-                            {!! $content->description_3 !!}
-                        </div>
-                        <div class="main-btn">{{__('lang.Read More')}}</div>
-                    </div>
-                    <picture>
-                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($content->image_3)}}" alt="">
-                    </picture>
-                </div>
-            </section>
-            <hr>
-        @endif
+        @include('website::layouts.parts.content', [
+            "content" => \App\Models\Content::where('type','home')->first()
+        ])
 
 
         @if(app('settings')->get('google_reviews_widget'))
