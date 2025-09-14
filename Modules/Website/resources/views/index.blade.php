@@ -144,7 +144,7 @@
         </section>
         <hr class="mt-5">
 
-        @if ($left = app('settings')->get('book_your_next_trip_left') && $right = app('settings')->get('book_your_next_trip_right'))
+        @if (($left = app('settings')->get('book_your_next_trip_left')) && ($right = app('settings')->get('book_your_next_trip_right')))
             <section class="booking-stpes-section">
                 <picture>
                     <img src="{{asset('/assets/images/FerariF8TributoRedK2930FrontDet.png')}}" alt="">
