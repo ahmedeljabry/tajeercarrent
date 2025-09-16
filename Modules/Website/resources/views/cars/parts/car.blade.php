@@ -18,6 +18,7 @@
                 <h4>{{$car->name}}</h4>
             </a>
             <ul>
+                @dd($car->id)
                 <li>
                     {{__('lang.Brand')}} / {{$car->brand->title}}
                 </li>
