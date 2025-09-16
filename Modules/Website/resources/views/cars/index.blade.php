@@ -71,6 +71,7 @@
                         <div class="rental-details-container">
                             <div class="account-settings-card-wrapper">
                                 @foreach($cars as $car)
+                                    @continue(!$car->brand || !$car->model || !$car->year || !$car->color || !$car->types)
                                     @include('website::cars.parts.car', ['car' => $car])
                                 @endforeach
                             </div>
