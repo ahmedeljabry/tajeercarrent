@@ -248,8 +248,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function switchCity($city) {
-        dd(City::where('slug', $city)->first(), City::all()->select('slug')->toArray());
+    public function switchCity(?City $city) {
         $previousUrl = url()->previous();
         $previousRequest = request()->create($previousUrl);
         $previousRoute = \Illuminate\Support\Facades\Route::getRoutes()->match($previousRequest);
