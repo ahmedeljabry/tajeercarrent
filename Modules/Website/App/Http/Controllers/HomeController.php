@@ -144,7 +144,7 @@ class HomeController extends Controller
         }
 
         $urls[] = [
-            'loc' => '/blogs/' . $blog->slug,
+            'loc' => '/blogs/',
             'lastmod' => Carbon::today()->toAtomString(),
             'changefreq' => 'weekly',
             'priority' => '0.9',
