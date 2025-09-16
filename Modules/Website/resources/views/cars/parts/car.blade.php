@@ -19,16 +19,16 @@
             </a>
             <ul>
                 <li>
-                    {{__('lang.Brand')}} / {{$car->brand->title}}
+                    {{__('lang.Brand')}} / {{$car->brand?->title}}
                 </li>
                 <li>
-                    {{__('lang.Model')}} / {{$car->model->title}}
+                    {{__('lang.Model')}} / {{$car->model?->title}}
                 </li>
                 <li>
-                    {{__('lang.Year')}} / {{$car->year->title}}
+                    {{__('lang.Year')}} / {{$car->year?->title}}
                 </li>
                 <li>
-                    {{__('lang.Color')}} / {{$car->color->title}}
+                    {{__('lang.Color')}} / {{$car->color?->title}}
                 </li>
                 <li>
                     {{__('lang.Type')}} / {{$car->types->map(function($type){return $type->title;})->implode(', ')}}

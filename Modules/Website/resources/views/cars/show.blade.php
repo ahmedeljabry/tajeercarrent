@@ -15,7 +15,7 @@
             @include('website::cars.parts.breadcrumb', [
                 'breadcrumbs' => [
                     app('settings')->get('page_car_brands_title') ?: __('lang.Car Brands') => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
-                    $car->brand->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $car->brand])),
+                    $car->brand?->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $car->brand])),
                     $car->name => null
             ]])
 
@@ -128,16 +128,16 @@
                             <div class="car-details-feat d-flex px-3 flex-wrap  gap-5">
                                 <ul>
                                     <li>
-                                        {{__('lang.Brand')}} / {{$car->brand->title}}
+                                        {{__('lang.Brand')}} / {{$car->brand?->title}}
                                     </li>
                                     <li>
-                                        {{__('lang.Model')}} / {{$car->model->title}}
+                                        {{__('lang.Model')}} / {{$car->model?->title}}
                                     </li>
                                     <li>
-                                        {{__('lang.Year')}} / {{$car->year->title}}
+                                        {{__('lang.Year')}} / {{$car->year?->title}}
                                     </li>
                                     <li>
-                                        {{__('lang.Color')}} / {{$car->color->title}}
+                                        {{__('lang.Color')}} / {{$car->color?->title}}
                                     </li>
                                     <li>
                                         {{__('lang.Type')}} / {{$car->types->map(function($type){return $type->title;})->implode(', ')}}
