@@ -235,7 +235,7 @@ class HomeController extends Controller
     }
 
     public function switchCountry(Country $country) {
-        $city = $country->cities()->whereDefault(true)->first()->id ?? $country->cities()->first()->id;
+        $city = $country->cities()->whereDefault(true)->first() ?? $country->cities()->first();
         $previousUrl = url()->previous();
         $previousRequest = request()->create($previousUrl);
         $previousRoute = \Illuminate\Support\Facades\Route::getRoutes()->match($previousRequest);
