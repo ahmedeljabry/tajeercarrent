@@ -18,9 +18,11 @@
                 <h4>{{$car->name}}</h4>
             </a>
             <ul>
-                <li>
-                    {{__('lang.Brand')}} / {{$car->brand->title}}
-                </li>
+                @if ($car->brand)
+                    <li>
+                        {{__('lang.Brand')}} / {{$car->brand->title}}
+                    </li>
+                @endif
                 <li>
                     {{__('lang.Model')}} / {{$car->model->title}}
                 </li>
