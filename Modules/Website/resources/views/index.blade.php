@@ -234,20 +234,20 @@
                     {
                         breakpoint: 991.89,
                         settings: {
-                            slidesToShow: 2
+                            slidesToShow: 3
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
-                            slidesToShow: 2
+                            slidesToShow: 3
                         },
 
                     },
                     {
                         breakpoint: 576.89,
                         settings: {
-                            slidesToShow: 2
+                            slidesToShow: 3
                         },
                     },
                 ]
@@ -274,14 +274,14 @@
                     {
                         breakpoint: 991.89,
                         settings: {
-                            slidesToShow: 2,
+                            slidesToShow: 3,
 
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
-                            slidesToShow: 2,
+                            slidesToShow: 3,
 
                         },
 
@@ -289,7 +289,7 @@
                     {
                         breakpoint: 576.89,
                         settings: {
-                            slidesToShow: 2,
+                            slidesToShow: 3,
 
                         },
                     },
