@@ -220,7 +220,6 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-                slidesToScroll: 1,
 swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
                 dots: false,
                 arrows: true,

@@ -325,7 +325,6 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-                slidesToScroll: 1,
 swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
                 dots: false,
                 arrows: true,
@@ -364,7 +363,6 @@ swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
         $(document).ready(function () {
             $('.slider-for-car-details').slick({
                 slidesToShow: 1,
-                slidesToScroll: 1,
 swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
                 arrows: false,
                 fade: true,
@@ -376,7 +374,6 @@ swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
 
             $('.slider-nav-car-details').slick({
                 slidesToShow: 3,
-                slidesToScroll: 1,
 swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
                 asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
