@@ -204,7 +204,7 @@
             $('.choose-fav-car-type-slider').slick({
                 infinite: false,
                 slidesToShow: 6,
-                  slidesToScroll: 1,
+
                   swipeToSlide: true,
                   waitForAnimate: false,
                   speed: 200,
@@ -243,7 +243,7 @@
             $('.choose-fav-car-brand-slider').slick({
                 infinite: false,
                 slidesToShow: 6,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -291,7 +291,7 @@
                 $slider.slick({
                     infinite: false,
                     slidesToShow: 3,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -332,7 +332,7 @@
             $('.banner-slider-desktop').slick({
                 infinite: false,
                 slidesToShow: 1,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -363,7 +363,7 @@
             $('.banner-slider-mobile').slick({
                 infinite: false,
                 slidesToShow: 1,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -394,7 +394,7 @@
             $('.testimonials-slider').slick({
                 infinite: false,
                 slidesToShow: 4,
-                  slidesToScroll: 1,
+
                   swipeToSlide: true,
                   waitForAnimate: false,
                   speed: 200,

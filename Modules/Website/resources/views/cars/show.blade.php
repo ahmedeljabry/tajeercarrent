@@ -325,7 +325,7 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -366,7 +366,7 @@
         $(document).ready(function () {
             $('.slider-for-car-details').slick({
                 slidesToShow: 1,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
@@ -380,7 +380,7 @@
 
             $('.slider-nav-car-details').slick({
                 slidesToShow: 3,
-  slidesToScroll: 1,
+
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
