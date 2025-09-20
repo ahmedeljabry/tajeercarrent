@@ -481,7 +481,7 @@
                             <li>
                                 <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
                                     <picture>
-                                        <img src="./assets/icons/lang_{{$langCode}}.png" alt="" class="mw-100">
+                                        <img src="/assets/icons/lang_{{$langCode}}.png" alt="" class="mw-100">
                                     </picture>
                                     {{$langDetails['name']}}
                                 </a>
