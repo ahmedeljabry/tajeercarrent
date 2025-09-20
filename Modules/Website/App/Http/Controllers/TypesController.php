@@ -61,7 +61,7 @@ class TypesController extends Controller
         $models = [];
 
         $breadcrumbs = [
-            __('lang.Categories') => route('website.cars.types.index'),
+            __('lang.Car Types') => route('website.cars.types.index'),
             $type->title => null
         ];
 
@@ -97,7 +97,7 @@ class TypesController extends Controller
         $resource_title  = __('lang.Car Brands');
         $models   = $resource->models()->limit(10)->get();
         $breadcrumbs = [
-            __('lang.Categories') => route('website.cars.types.index'),
+            __('lang.Car Types') => route('website.cars.types.index'),
             $type->title => route('website.cars.types.show', ['type' => $type]),
             $model->title => null,
         ];
