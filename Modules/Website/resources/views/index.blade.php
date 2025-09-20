@@ -220,20 +220,20 @@ swipeToSlide: true,
                     {
                         breakpoint: 991.89,
                         settings: {
-                            slidesToShow: 2.5
+                            slidesToShow: 2
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
-                            slidesToShow: 2.5
+                            slidesToShow: 2
                         },
 
                     },
                     {
                         breakpoint: 576.89,
                         settings: {
-                            slidesToShow: 2.5
+                            slidesToShow: 2
                         },
                     },
                 ]
@@ -257,14 +257,14 @@ swipeToSlide: true,
                     {
                         breakpoint: 991.89,
                         settings: {
-                            slidesToShow: 2.5,
+                            slidesToShow: 2,
                             focusOnSelect: true
                         },
                     },
                     {
                         breakpoint: 767.89,
                         settings: {
-                            slidesToShow: 2.5,
+                            slidesToShow: 2,
                             focusOnSelect: true
                         },
 
@@ -272,7 +272,7 @@ swipeToSlide: true,
                     {
                         breakpoint: 576.89,
                         settings: {
-                            slidesToShow: 2.5,
+                            slidesToShow: 2,
                             focusOnSelect: true
                         },
                     },
