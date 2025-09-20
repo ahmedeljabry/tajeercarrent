@@ -62,7 +62,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ LaravelLocalization::getLocalizedUrl(null, route('website.account.login')) }}" method="post">
+                <form id="login-form" action="{{ LaravelLocalization::getLocalizedUrl(null, route('website.account.login')) }}" method="post">
                     @csrf
                     @if($errors->login->any())
                         <div class="alert alert-danger">
@@ -75,11 +75,11 @@
                         <input name="email" type="email" class="form-control" placeholder="{{__('lang.Email')}}">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="{{__('lang.Password')}}">
+                        <input name="password" type="password" class="form-control" placeholder="{{__('lang.Password')}}">
                     </div>
                 </form>
                 <div class="auth-buttons d-flex flex-column ">
-                    <button class="main-btn rounded-0 w-100 text-center" type="submit">{{__('lang.Sign in')}}</button>
+                    <button class="main-btn rounded-0 w-100 text-center" type="submit" form="login-form">{{__('lang.Sign in')}}</button>
                 </div>
                 <div class="auth-social-media-buttons d-flex align-items-center flex-column gap-2 mt-4">
                     <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'facebook']))}}" class="facebook d-flex align-items-center justify-content-around w-100">
