@@ -10,9 +10,16 @@
             <div class="close-btn">
                 <i class="fa-solid fa-xmark"></i>
             </div>
-            <h1>
-                {{__('lang.Filter')}}
-            </h1>
+
+            @if (request()->routeIs('website.cars.filter'))
+                <h1>
+                    {{__('lang.Filter')}}
+                </h1>
+            @else
+                <h3>
+                    {{__('lang.Filter')}}
+                </h3>
+            @endif
             <h5 class="fw-normal">
                 {{__('lang.SEARCH YOUR CAR')}}
             </h5>
