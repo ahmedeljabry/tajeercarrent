@@ -204,7 +204,8 @@
             $('.choose-fav-car-type-slider').slick({
                 infinite: false,
                 slidesToShow: 6,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 speed: 1000,
                 dots: false,
                 arrows: true,
@@ -240,7 +241,8 @@
             $('.choose-fav-car-brand-slider').slick({
                 infinite: false,
                 slidesToShow: 6,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 speed: 1000,
                 dots: false,
                 arrows: true,
@@ -285,7 +287,8 @@
                 $slider.slick({
                     infinite: false,
                     slidesToShow: 3,
-                    slidesToScroll: 5,
+                    slidesToScroll: 1,
+swipeToSlide: true,
                     dots: false,
                     arrows: true,
                     nextArrow: $nextArrow,
@@ -323,7 +326,8 @@
             $('.banner-slider-desktop').slick({
                 infinite: false,
                 slidesToShow: 1,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-desktop"),
@@ -351,7 +355,8 @@
             $('.banner-slider-mobile').slick({
                 infinite: false,
                 slidesToShow: 1,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-mobile"),
@@ -379,7 +384,8 @@
             $('.testimonials-slider').slick({
                 infinite: false,
                 slidesToShow: 4,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 speed: 1000,
                 dots: false,
                 arrows: true,

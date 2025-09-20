@@ -70,7 +70,7 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-                slidesToScroll: 5,
+                slidesToScroll: 1,,
                 dots: false,
                 arrows: true,
                 nextArrow: $nextArrow,

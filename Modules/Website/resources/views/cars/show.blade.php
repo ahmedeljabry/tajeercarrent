@@ -325,7 +325,8 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 dots: false,
                 arrows: true,
                 nextArrow: $nextArrow,
@@ -363,7 +364,8 @@
         $(document).ready(function () {
             $('.slider-for-car-details').slick({
                 slidesToShow: 1,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 arrows: false,
                 fade: true,
                                 @if (app()->getLocale() == "ar")
@@ -374,7 +376,8 @@
 
             $('.slider-nav-car-details').slick({
                 slidesToShow: 3,
-                slidesToScroll: 5,
+                slidesToScroll: 1,
+swipeToSlide: true,
                 asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
                                 @if (app()->getLocale() == "ar")
