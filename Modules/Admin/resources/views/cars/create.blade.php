@@ -392,8 +392,8 @@
 
                         <div class="col-lg-12">
                             @include("admin::layouts.parts.content", [
-                                "content" => \App\Models\Content::where([["type", "type"],["resource_id", $item->id]])->first(),
-                                "seo" => \App\Models\SEO::where([["type", "type"],["resource_id", $item->id]])->first(),
+                                "content" => null,
+                                "seo" => null,
                                 "faq" => null,
                                 "content_count" => 1
                             ])
