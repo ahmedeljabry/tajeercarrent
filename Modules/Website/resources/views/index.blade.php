@@ -220,7 +220,7 @@
                 waitForAnimate: false,
                 speed: 100,
                 touchThreshold: 5,
-                cssEase: 'linear',
+
                 dots: false,
                 arrows: true,
                 @if (app()->getLocale() == "ar")
@@ -260,7 +260,7 @@
                 waitForAnimate: false,
                 speed: 100,
                 touchThreshold: 5,
-                cssEase: 'linear',
+
                 dots: false,
                 arrows: true,
                 @if (app()->getLocale() == "ar")
@@ -309,7 +309,7 @@
                     waitForAnimate: false,
                     speed: 100,
                     touchThreshold: 5,
-                    cssEase: 'linear',
+
                     dots: false,
                     arrows: true,
                     nextArrow: $nextArrow,
@@ -350,7 +350,7 @@
                 waitForAnimate: false,
                 speed: 100,
                 touchThreshold: 5,
-                cssEase: 'linear',
+
                 dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-desktop"),
@@ -383,7 +383,7 @@
                 waitForAnimate: false,
                 speed: 100,
                 touchThreshold: 5,
-                cssEase: 'linear',
+
                 dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-mobile"),
@@ -414,9 +414,9 @@
 
                 swipeToSlide: true,
                 waitForAnimate: false,
-                speed: 100,
+                speed: 200,
                 touchThreshold: 5,
-                cssEase: 'linear',
+
                 dots: false,
                 arrows: true,
                 nextArrow: $(".testimonials-next"),
