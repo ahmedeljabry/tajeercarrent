@@ -295,7 +295,7 @@
   waitForAnimate: false,
   speed: 200,
   touchThreshold: 8,                asNavFor: '.slider-for-car-details',
-                focusOnSelect: true,
+
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
