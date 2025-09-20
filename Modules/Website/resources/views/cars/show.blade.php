@@ -329,7 +329,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8,                dots: false,
+  touchThreshold: 50,                dots: false,
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
@@ -370,7 +370,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8,                arrows: false,
+  touchThreshold: 50,                arrows: false,
                 fade: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
@@ -384,7 +384,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8,                asNavFor: '.slider-for-car-details',
+  touchThreshold: 50,                asNavFor: '.slider-for-car-details',
 
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
