@@ -69,7 +69,7 @@ class BrandsController extends Controller
             'seo'          => $seo,
             'content'      => $content,
             'faq'          => $faq,
-            'canonical'   =>  $brand->slug,
+            'canonical'   =>  '/brands/' . $brand->slug,
             'breadcrumbs' => $breadcrumbs,
         ]);
     }
@@ -105,7 +105,7 @@ class BrandsController extends Controller
             'seo'          => $seo,
             'content'      => $content,
             'faq'          => $faq,
-            'canonical'   =>  $brand->slug,
+            'canonical'   =>  '/brands/' . $brand->slug . '/models/' . $model->slug,
             'breadcrumbs' => $breadcrumbs
         ]);
     }
