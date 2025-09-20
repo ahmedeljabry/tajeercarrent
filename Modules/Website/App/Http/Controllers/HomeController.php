@@ -100,6 +100,16 @@ class HomeController extends Controller
                 'priority' => '0.9',
                 'add_prefix' => true
             ];
+
+            foreach ($brand->models as $model) {
+                $urls[] = [
+                    'loc' => '/brands/' . $brand->slug . '/models/' . $model->slug,
+                    'lastmod' => $model->updated_at->toAtomString(),
+                    'changefreq' => 'daily',
+                    'priority' => '0.9',
+                    'add_prefix' => true
+                ];
+            }
         }
 
         $urls[] = [
