@@ -76,7 +76,7 @@
                 slide: '',
                 slidesPerRow: 1,
                 slidesToShow: 1,
-                slidesToScroll: 1,
+                slidesToScroll: 5,
                 speed: 500,
                 swipe: true,
                 swipeToSlide: false,
