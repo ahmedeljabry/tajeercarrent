@@ -1,7 +1,11 @@
     @if(count($faq) > 0)
         <section>
             <div class="container mt-5">
-                <h1>{{__('lang.FAQ')}}</h1>
+                @if (request()->routeIs('website.pages.faq'))
+                    <h1>{{__('lang.FAQ')}}</h1>
+                @else
+                    <h3>{{__('lang.FAQ')}}</h3>
+                @endif
             </div>
             <div class="conatiner">
                 <div class="container accordion accordion-flush custom-accordion" id="faqsFlushExample">
