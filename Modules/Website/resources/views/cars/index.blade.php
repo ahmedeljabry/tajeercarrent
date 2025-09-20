@@ -13,6 +13,7 @@
        ->when(request('max_price'), function ($query, $max_price) {
            $query->where('price_per_day', '<=' , app('currencies')->getAedAmount($max_price));
        })->paginate(10);
+    dd($cars->ddRawSql());
    $max_price = app('currencies')->convert((clone $query)->max('price_per_day'))
 @endphp
 
