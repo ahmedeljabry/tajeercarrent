@@ -239,7 +239,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8                dots: false,
+  touchThreshold: 8,                dots: false,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
@@ -280,7 +280,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8                arrows: false,
+  touchThreshold: 8,                arrows: false,
                 fade: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
@@ -294,7 +294,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8                asNavFor: '.slider-for-car-details',
+  touchThreshold: 8,                asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,

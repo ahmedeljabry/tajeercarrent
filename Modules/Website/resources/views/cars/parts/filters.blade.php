@@ -224,7 +224,7 @@
   swipeToSlide: true,
   waitForAnimate: false,
   speed: 200,
-  touchThreshold: 8                dots: false,
+  touchThreshold: 8,                dots: false,
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
