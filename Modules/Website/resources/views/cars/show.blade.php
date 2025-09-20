@@ -325,8 +325,11 @@
             $slider.slick({
                 infinite: false,
                 slidesToShow: 3,
-swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
-                dots: false,
+  slidesToScroll: 1,
+  swipeToSlide: true,
+  waitForAnimate: false,
+  speed: 200,
+  touchThreshold: 8                dots: false,
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
@@ -363,8 +366,11 @@ swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
         $(document).ready(function () {
             $('.slider-for-car-details').slick({
                 slidesToShow: 1,
-swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
-                arrows: false,
+  slidesToScroll: 1,
+  swipeToSlide: true,
+  waitForAnimate: false,
+  speed: 200,
+  touchThreshold: 8                arrows: false,
                 fade: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
@@ -374,8 +380,11 @@ swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
 
             $('.slider-nav-car-details').slick({
                 slidesToShow: 3,
-swipeToSlide: true, waitForAnimate: false, touchThreshold: 5,
-                asNavFor: '.slider-for-car-details',
+  slidesToScroll: 1,
+  swipeToSlide: true,
+  waitForAnimate: false,
+  speed: 200,
+  touchThreshold: 8                asNavFor: '.slider-for-car-details',
                 focusOnSelect: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
