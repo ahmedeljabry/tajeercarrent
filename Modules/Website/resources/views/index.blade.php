@@ -1,9 +1,12 @@
-
+@php use App\Models\SEO; @endphp
+@php use App\Helpers\WebpImage; @endphp
+@php use App\Models\Content; @endphp
+@php use App\Models\Faq; @endphp
 @extends('website::layouts.master')
 
 @section('seo')
     @include('website::layouts.parts.seo', [
-        'seo' => \App\Models\SEO::where('type','home')->first(),
+        'seo' => SEO::where('type','home')->first(),
         "title" => app('settings')->get('title'),
         "image" => secure_url('/') . '/website/images/fav.jpg'
     ])
@@ -18,7 +21,8 @@
                     <div class="section-header-title">
                         <h3>{{app('settings')->get('car_types_title')}}</h3>
                         <div class="black-line"></div>
-                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.index')) }}" class="view-all-btn">{{__('lang.View All')}}</a>
+                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.index')) }}"
+                           class="view-all-btn">{{__('lang.View All')}}</a>
                     </div>
                     <div class="description-container">
                         <p class="description-text">
@@ -35,9 +39,11 @@
                 <div class="container choose-fav-car-type-slider">
                     @foreach($types as $item)
                         @if ($item->slug == 'yachts')
-                            <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">
+                            <a class="car-type-brand-slide"
+                               href="{{LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">
                                 <picture>
-                                    <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                                    <img alt="{{$item->slug}}"
+                                         src="{{asset("/storage/") . "/" . WebpImage::generateUrl($item->image)}}">
                                 </picture>
                                 <div class="car-type-brand-slide-footer">
                                     <p>{{$item->title}}</p>
@@ -45,9 +51,11 @@
                             </a>
                             @continue
                         @endif
-                        <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
+                        <a class="car-type-brand-slide"
+                           href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">
                             <picture>
-                                <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                                <img alt="{{$item->slug}}"
+                                     src="{{asset("/storage/") . "/" . WebpImage::generateUrl($item->image)}}">
                             </picture>
                             <div class="car-type-brand-slide-footer">
                                 <p>{{$item->title}}</p>
@@ -67,7 +75,8 @@
                     <div class="section-header-title">
                         <h3>{{app('settings')->get('car_brands_title')}}</h3>
                         <div class="black-line"></div>
-                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')) }}" class="view-all-btn">{{__('lang.View All')}}</a>
+                        <a href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')) }}"
+                           class="view-all-btn">{{__('lang.View All')}}</a>
                     </div>
                     <div class="description-container">
                         <p class="description-text">
@@ -83,9 +92,11 @@
                 </span>
                 <div class="container choose-fav-car-brand-slider">
                     @foreach(app('cars')->brands as $item)
-                        <a class="car-type-brand-slide" href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
+                        <a class="car-type-brand-slide"
+                           href="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $item])) }}">
                             <picture>
-                                <img alt="{{$item->slug}}" src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($item->image)}}">
+                                <img alt="{{$item->slug}}"
+                                     src="{{asset("/storage/") . "/" . WebpImage::generateUrl($item->image)}}">
                             </picture>
                             <div class="car-type-brand-slide-footer">
                                 <p>{{$item->title}}</p>
@@ -161,7 +172,7 @@
         @endif
 
         @include('website::layouts.parts.content', [
-            "content" => \App\Models\Content::where('type','home')->first()
+            "content" => Content::where('type','home')->first()
         ])
 
 
@@ -175,24 +186,24 @@
                         </div>
                     </div>
                 </div>
-        </section>
+            </section>
         @endif
 
         @if(app('settings')->get('facebook_reviews_widget'))
-        <section class="home__google_reviews">
-            <div class="container testimonials-container">
-                <h4>{{__('lang.Testimonials')}}</h4>
-                <h2>{{__('lang.Facebook Reviews')}}</h2>
-                <div class="row">
-                    <div class="col-lg-12 fb" data-item="{{app('settings')->get('facebook_reviews_widget')}}">
+            <section class="home__google_reviews">
+                <div class="container testimonials-container">
+                    <h4>{{__('lang.Testimonials')}}</h4>
+                    <h2>{{__('lang.Facebook Reviews')}}</h2>
+                    <div class="row">
+                        <div class="col-lg-12 fb" data-item="{{app('settings')->get('facebook_reviews_widget')}}">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         @endif
 
         @include('website::layouts.parts.faq', [
-            "faq" => \App\Models\Faq::where('type','home')->get()
+            "faq" => Faq::where('type','home')->get()
         ])
     </main>
 @endsection
@@ -200,19 +211,20 @@
 
 @section("js")
     <script>
-        $(function (){
+        $(function () {
             $('.choose-fav-car-type-slider').slick({
                 infinite: false,
                 slidesToShow: 6,
 
-                  swipeToSlide: true,
-                  waitForAnimate: false,
-                  speed: 200,
-                  touchThreshold: 50,
+                swipeToSlide: true,
+                waitForAnimate: false,
+                speed: 100,
+                touchThreshold: 1,
+                cssEase: 'linear',
                 dots: false,
                 arrows: true,
                 @if (app()->getLocale() == "ar")
-                    rtl: true,
+                rtl: true,
                 @endif
                 nextArrow: $(".choose-fav-car-type-next"),
                 prevArrow: $(".choose-fav-car-type-prev"),
@@ -244,14 +256,15 @@
                 infinite: false,
                 slidesToShow: 6,
 
-  swipeToSlide: true,
-  waitForAnimate: false,
-  speed: 200,
-  touchThreshold: 50,
+                swipeToSlide: true,
+                waitForAnimate: false,
+                speed: 100,
+                touchThreshold: 1,
+                cssEase: 'linear',
                 dots: false,
                 arrows: true,
-                                @if (app()->getLocale() == "ar")
-                    rtl: true,
+                @if (app()->getLocale() == "ar")
+                rtl: true,
                 @endif
                 nextArrow: $(".choose-fav-car-brand-next"),
                 prevArrow: $(".choose-fav-car-brand-prev"),
@@ -292,18 +305,18 @@
                     infinite: false,
                     slidesToShow: 3,
 
-  swipeToSlide: true,
-  waitForAnimate: false,
-  speed: 200,
-  touchThreshold: 50,                    dots: false,
+                    swipeToSlide: true,
+                    waitForAnimate: false,
+                    speed: 100,
+                    touchThreshold: 1,
+                    cssEase: 'linear',
+                    dots: false,
                     arrows: true,
                     nextArrow: $nextArrow,
                     prevArrow: $prevArrow,
-                    autoplay: false,
-                    autoplaySpeed: 3000,
-                                    @if (app()->getLocale() == "ar")
+                    @if (app()->getLocale() == "ar")
                     rtl: true,
-                @endif
+                    @endif
                     responsive: [
                         {
                             breakpoint: 991.89,
@@ -333,15 +346,17 @@
                 infinite: false,
                 slidesToShow: 1,
 
-  swipeToSlide: true,
-  waitForAnimate: false,
-  speed: 200,
-  touchThreshold: 50,                dots: false,
+                swipeToSlide: true,
+                waitForAnimate: false,
+                speed: 100,
+                touchThreshold: 1,
+                cssEase: 'linear',
+                dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-desktop"),
                 prevArrow: $(".banner-prev-desktop"),
-                                @if (app()->getLocale() == "ar")
-                    rtl: true,
+                @if (app()->getLocale() == "ar")
+                rtl: true,
                 @endif
                 autoplay: false,
                 autoplaySpeed: 3000,
@@ -364,15 +379,17 @@
                 infinite: false,
                 slidesToShow: 1,
 
-  swipeToSlide: true,
-  waitForAnimate: false,
-  speed: 200,
-  touchThreshold: 50,                dots: false,
+                swipeToSlide: true,
+                waitForAnimate: false,
+                speed: 100,
+                touchThreshold: 1,
+                cssEase: 'linear',
+                dots: false,
                 arrows: true,
                 nextArrow: $(".banner-next-mobile"),
                 prevArrow: $(".banner-prev-mobile"),
-                                @if (app()->getLocale() == "ar")
-                    rtl: true,
+                @if (app()->getLocale() == "ar")
+                rtl: true,
                 @endif
                 autoplay: false,
                 autoplaySpeed: 3000,
@@ -395,16 +412,17 @@
                 infinite: false,
                 slidesToShow: 4,
 
-                  swipeToSlide: true,
-                  waitForAnimate: false,
-                  speed: 200,
-                  touchThreshold: 50,
+                swipeToSlide: true,
+                waitForAnimate: false,
+                speed: 100,
+                touchThreshold: 1,
+                cssEase: 'linear',
                 dots: false,
                 arrows: true,
                 nextArrow: $(".testimonials-next"),
                 prevArrow: $(".testimonials-prev"),
-                                @if (app()->getLocale() == "ar")
-                    rtl: true,
+                @if (app()->getLocale() == "ar")
+                rtl: true,
                 @endif
                 autoplay: false,
                 autoplaySpeed: 3000,
@@ -449,7 +467,7 @@
             $data = [
                 "@context" => "https://schema.org",
                 "@type" => "FAQPage",
-                "mainEntity" => \App\Models\Faq::whereType('home')->get()->map(function ($faq){
+                "mainEntity" => Faq::whereType('home')->get()->map(function ($faq){
                     return [
                         "@type" => "Question",
                         "name" => $faq->question,
