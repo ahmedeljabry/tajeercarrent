@@ -27,12 +27,18 @@
 
 @section("content")
     <main id="car-list">
-        @include('website::cars.parts.breadcrumb', [
-                    'breadcrumbs' => [
-                        __("lang.Car Brands") => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
-                        $resource->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $resource]))
-                    ]
-                ])
+        @if (isset($breadcrumbs))
+            @include('website::cars.parts.breadcrumb', [
+                'breadcrumbs' => $breadcrumbs
+            ])
+        @else
+            @include('website::cars.parts.breadcrumb', [
+                'breadcrumbs' => [
+                    __("lang.Car Brands") => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.index')),
+                    $resource->title => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL(null, route('website.cars.brands.show', ['brand' => $resource]))
+                ]
+            ])
+        @endif
         <div class="section-header container">
             <div class="section-header-title">
                 <h1 class="fw-normal ">{{__('lang.Rent') . " " . ($resource_model?->title ?? $resource->title) . " " . __("lang.In") . " " . app('country')->getCity()->title}}</h1>
