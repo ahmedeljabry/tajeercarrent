@@ -676,10 +676,6 @@ hr {
   .home-content-section .container {
     flex-direction: column !important;
   }
-
-  .arabic-version .home-content-section .container {
-    flex-direction: column-reverse !important;
-  }
 }
 
 .home-content-section h2 {
