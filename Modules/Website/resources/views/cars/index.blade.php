@@ -7,6 +7,7 @@
 
 @php
     $cars = (clone $query)
+       ->orderBy('refreshed_at', 'desc')
        ->when(request('min_price'), function ($query, $min_price) {
            $query->where('price_per_day', '>=' , app('currencies')->getAedAmount($min_price));
        })
