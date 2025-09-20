@@ -214,7 +214,7 @@ swipeToSlide: true,
                 @endif
                 nextArrow: $(".choose-fav-car-type-next"),
                 prevArrow: $(".choose-fav-car-type-prev"),
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 3000,
                 responsive: [
                     {
@@ -251,7 +251,7 @@ swipeToSlide: true,
                 @endif
                 nextArrow: $(".choose-fav-car-brand-next"),
                 prevArrow: $(".choose-fav-car-brand-prev"),
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 3000,
                 responsive: [
                     {
@@ -293,7 +293,7 @@ swipeToSlide: true,
                     arrows: true,
                     nextArrow: $nextArrow,
                     prevArrow: $prevArrow,
-                    autoplay: true,
+                    autoplay: false,
                     autoplaySpeed: 3000,
                                     @if (app()->getLocale() == "ar")
                     rtl: true,
@@ -335,7 +335,7 @@ swipeToSlide: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 3000,
                 responsive: [
                     {
@@ -364,7 +364,7 @@ swipeToSlide: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 3000,
                 responsive: [
                     {
@@ -394,7 +394,7 @@ swipeToSlide: true,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
-                autoplay: true,
+                autoplay: false,
                 autoplaySpeed: 3000,
                 responsive: [
                     {

@@ -75,7 +75,7 @@
                 arrows: true,
                 nextArrow: $nextArrow,
                 prevArrow: $prevArrow,
-                autoplay: true,
+                autoplay: false,
                                 @if (app()->getLocale() == "ar")
                     rtl: true,
                 @endif
