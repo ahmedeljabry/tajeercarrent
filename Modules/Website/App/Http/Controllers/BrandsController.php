@@ -39,10 +39,10 @@ class BrandsController extends Controller
     }
 
     public function show($country, $city, Brand $brand){
-        $query = $brand->cars()->hasCompany()->where(function ($query){
+        $query = $brand->cars()->where(function ($query){
             $query->where('type', 'default');
             $query->orderBy('refreshed_at', 'desc');
-        });
+        })->hasCompany();
         $resource = $brand;
         $selected_types = [];
         $seo      = \App\Models\SEO::where('type','brand')->where('resource_id',$resource->id)->first();
