@@ -42,7 +42,7 @@ class BrandsController extends Controller
         $query = $brand->cars()->where(function ($query){
             $query->where('type', 'default');
             $query->orderBy('refreshed_at', 'desc');
-        })->hasCompany();
+        });
         $resource = $brand;
         $selected_types = [];
         $seo      = \App\Models\SEO::where('type','brand')->where('resource_id',$resource->id)->first();
