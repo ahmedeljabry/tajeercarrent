@@ -16,6 +16,7 @@ use \Modules\Website\App\Http\Middleware\Country;
 use \Modules\Website\App\Http\Middleware\Currencies;
 use \Modules\Website\App\Http\Middleware\CheckUrlClean;
 use \Modules\Website\App\Services\CurrencyService;
+use Illuminate\Support\Facades\Schema;
 
 class WebsiteServiceProvider extends ServiceProvider
 {
@@ -49,8 +50,18 @@ class WebsiteServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->singleton("settings", function ($app) {
-            $settings  = \App\Models\Setting::first();
-            $countries = \App\Models\Country::all(); 
+            $settings = null;
+            $countries = collect();
+            try {
+                if (Schema::hasTable('settings')) {
+                    $settings  = \App\Models\Setting::first();
+                }
+                if (Schema::hasTable('countries')) {
+                    $countries = \App\Models\Country::get();
+                }
+            } catch (\Throwable $e) {
+                // During early boot or migrations, tables may not exist.
+            }
             return new SettingsService($settings, $countries);
         });
         $this->app->singleton("cars", function ($app) {
@@ -144,3 +155,4 @@ class WebsiteServiceProvider extends ServiceProvider
         return $paths;
     }
 }
+

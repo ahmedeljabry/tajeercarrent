@@ -51,3 +51,91 @@
             </div>
 
 @endsection
+
+@section('js')
+    @parent
+    <script>
+        (function(){
+            const csrf = '{{ csrf_token() }}';
+            const route = '{{ route('admin.ai.generate') }}';
+            const contentType = '{{ $content->type ?? '' }}';
+
+            function createButton(el, kind, section, lang) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-outline-primary btn-sm mt-2';
+                btn.textContent = 'Generate with AI';
+                btn.addEventListener('click', async function(){
+                    const basePrompt = kind === 'title' ? 'Write a concise, compelling page title' : 'Write a clear, helpful paragraph';
+                    const context = ` for the ${contentType} page, section ${section}.`;
+                    const userPrompt = window.prompt('Describe what to generate (optional):', '');
+                    const prompt = basePrompt + context + (userPrompt ? `\nAdditional instructions: ${userPrompt}` : '');
+
+                    btn.disabled = true;
+                    const original = btn.textContent;
+                    btn.textContent = 'Generating...';
+                    try {
+                        const res = await fetch(route, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': csrf,
+                            },
+                            body: JSON.stringify({ prompt, lang })
+                        });
+                        const data = await res.json();
+                        if (!res.ok || data.error) throw new Error(data.error || 'Generation failed');
+
+                        if (el.tagName.toLowerCase() === 'textarea') {
+                            if (window.tinymce && Array.isArray(tinymce.editors)) {
+                                const ed = tinymce.editors.find(e => e && e.targetElm === el);
+                                if (ed) {
+                                    ed.setContent(data.text || '');
+                                } else {
+                                    el.value = data.text || '';
+                                }
+                            } else {
+                                el.value = data.text || '';
+                            }
+                        } else {
+                            el.value = data.text || '';
+                        }
+                    } catch (err) {
+                        alert('AI generation error: ' + (err.message || err));
+                    } finally {
+                        btn.disabled = false;
+                        btn.textContent = original;
+                    }
+                });
+                return btn;
+            }
+
+            function addButtons() {
+                const titleInputs = document.querySelectorAll('input[name^="content_title"]');
+                titleInputs.forEach(function(input){
+                    const m = input.name.match(/^content_title(?:_(\d+))?_(\w+)$/);
+                    const section = m && m[1] ? m[1] : '1';
+                    const lang = m && m[2] ? m[2] : '';
+                    const btn = createButton(input, 'title', section, lang);
+                    input.insertAdjacentElement('afterend', btn);
+                });
+
+                const descAreas = document.querySelectorAll('textarea[name^="content_description"]');
+                descAreas.forEach(function(area){
+                    const m = area.name.match(/^content_description(?:_(\d+))?_(\w+)$/);
+                    const section = m && m[1] ? m[1] : '1';
+                    const lang = m && m[2] ? m[2] : '';
+                    const btn = createButton(area, 'description', section, lang);
+                    area.insertAdjacentElement('afterend', btn);
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', addButtons);
+            } else {
+                addButtons();
+            }
+        })();
+    </script>
+@endsection

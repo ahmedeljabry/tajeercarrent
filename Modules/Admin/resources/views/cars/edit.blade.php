@@ -1,4 +1,4 @@
-@extends('admin::layouts.master')
+﻿@extends('admin::layouts.master')
 
 @section('content')
 
@@ -308,7 +308,7 @@
                                         <div class="form-group row mb-4">
                                             <label for="hPassword" class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.other_images')}}</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <div id="cars-uploader" class="dropzone"> 
+                                                <div id="cars-uploader"> 
                                                     <div class="dz-message" data-dz-message><span>{{__('admin.choose_file')}}</span></div>
                                                     
                                                 </div>
@@ -421,3 +421,4 @@
             </div>
 
 @endsection
+

@@ -1,4 +1,4 @@
-<div class="mt-20 fb">
+﻿<div class="mt-20 fb">
     @php
         $content_count ??= 3;
     @endphp
@@ -167,7 +167,8 @@
 
 @section('js')
     <script>
-    tinymce.init({
+    tinymce.init({   
+        license_key: 'gpl',
         selector: 'textarea.body',
         directionality: "rtl",
         plugins: 'autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
@@ -175,3 +176,5 @@
     });
     </script>
 @endsection
+
+

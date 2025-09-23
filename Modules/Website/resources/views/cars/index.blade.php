@@ -42,7 +42,7 @@
         @endif
         <div class="section-header container">
             <div class="section-header-title">
-                <h1 class="fw-normal ">{{__('lang.Rent') . " " . ($resource_model?->title ?? $resource->title) . " " . __("lang.In") . " " . app('country')->getCity()->title}}</h1>
+                <h1 class="fw-normal ">{{__('lang.Rent') . " " . ($resource_model?->title ?? $resource->title) . " " . __("lang.In") . " " . optional(app('country')->getCity())->title}}</h1>
             </div>
             @if ($description = $resource_model?->page_description ?? $resource?->page_description ?? "")
                 <div class="description-container">

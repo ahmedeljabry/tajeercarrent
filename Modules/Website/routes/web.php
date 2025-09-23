@@ -59,7 +59,8 @@ Route::group([
         Route::group([
             'prefix' => '{country?}/{city?}',
             'middleware' => \Modules\Website\App\Http\Middleware\CountryMiddleware::class,
-            'where' => ['country' => Country::implode('slug', '|'), 'city' => \App\Models\City::implode('slug', '|')],
+            // Avoid DB queries during boot; validate slugs in middleware
+            'where' => ['country' => '[A-Za-z0-9\-]+', 'city' => '[A-Za-z0-9\-]+'],
         ], function () {
             Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -98,5 +99,4 @@ Route::group([
             Route::get('/{page}', [PagesController::class, 'show'])->name('website.pages.show');
         });
  });
-
 

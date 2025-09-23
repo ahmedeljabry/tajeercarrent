@@ -1,4 +1,4 @@
-@extends('admin::layouts.master')
+﻿@extends('admin::layouts.master')
 
 @section('content')
 
@@ -63,6 +63,14 @@
                                             </div>
                                         </div>
                                         @endforeach
+
+                                        <div class="form-group row mb-2">
+                                            <div class="col-xl-3"></div>
+                                            <div class="col-xl-9 col-lg-9 col-sm-10">
+                                                <button type="button" id="ai-generate-car" class="btn btn-outline-primary btn-sm">{{ __('admin.generate') ?? 'Generate with AI' }}</button>
+                                                <small class="text-muted d-block mt-1">Enter car name (EN), then click Generate.</small>
+                                            </div>
+                                        </div>
 
                                         @if(request('type') != 'yacht')
                                         <div class="form-group row mb-4">
@@ -134,7 +142,7 @@
 
 
 
-                             
+                    
 
                                         <!-- <div class="form-group row mb-4">
                                             <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.price')}} بعد الخصم لل{{__('admin.day')}}</label>
@@ -319,7 +327,7 @@
                                         <div class="form-group row mb-4">
                                             <label for="hPassword" class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.other_images')}}</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <div id="cars-uploader" class="dropzone"> 
+                                                <div id="cars-uploader"> 
                                                     <div class="dz-message" data-dz-message><span>{{__('admin.choose_file')}}</span></div>
                                                     
                                                 </div>
@@ -407,5 +415,78 @@
 
 
             </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btn  = document.getElementById('ai-generate-car');
+        if (!btn) return;
+
+        const form = document.getElementById('cars-form');
+        const csrf = '{{ csrf_token() }}';
+        const route = '{{ route('admin.ai.generate') }}';
+        const type  = form?.dataset?.type || 'default';
+        const langs = @json(array_keys(config('app.languages', [])));
+
+        async function onGenerate(){
+            let nameEn = form.querySelector('[name="name_en"]')?.value?.trim();
+            if (!nameEn){
+                for (const el of form.querySelectorAll("[name^='name_']")){
+                    if (el.value && el.value.trim()){ nameEn = el.value.trim(); break; }
+                }
+            }
+            if (!nameEn){ alert('Please enter the car name, then click Generate.'); return; }
+
+            const schema = {
+                engine_capacity: 'string like 3.0L twin-turbo',
+                doors: 'integer', bags: 'integer', passengers: 'integer',
+                price_per_day: 'number AED', price_per_week: 'number AED', price_per_month: 'number AED',
+                km_per_day: 'integer', km_per_week: 'integer', km_per_month: 'integer',
+                extra_price: 'number AED', security_deposit: 'number AED', minimum_day_booking: 'integer',
+                is_day_offer: 'boolean', day_offer_price: 'number AED',
+                brand: 'brand title', model: 'model title',
+                description_en: 'short HTML', description_ar: 'short HTML (Arabic)', description_ru: 'short HTML (Russian)'
+            };
+            const prompt =
+    `You are assisting an admin filling a car form for type: ${type}.
+    Car name (EN or provided): ${nameEn}.
+    Return ONLY JSON matching: ${JSON.stringify(schema)} with realistic values.`;
+
+            const original = btn.textContent;
+            btn.disabled = true; btn.textContent = 'Generating…';
+            try {
+                const res = await fetch(route, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
+                    body: JSON.stringify({ prompt, lang: 'en' })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
+
+                let json = null, text = data.text || '';
+                try { json = JSON.parse(text); }
+                catch { const m = text.match(/\{[\s\S]*\}/); if (m) { try { json = JSON.parse(m[0]); } catch {} } }
+                if (!json) throw new Error('AI did not return valid JSON');
+
+                for (const key in json) {
+                    if (json[key] !== undefined) {
+                        const input = form.querySelector(`[name="${key}"]`);
+                        if (input) input.value = json[key];
+                    }
+                }
+
+                alert('AI filled fields. Please review before saving.');
+            } catch (err) {
+                alert('AI error: ' + (err?.message || err));
+            } finally {
+                btn.disabled = false; btn.textContent = original;
+            }
+        }
+
+        btn.addEventListener('click', onGenerate);
+    });
+    </script>
 
 @endsection
+
+
+

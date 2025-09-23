@@ -137,6 +137,12 @@
     <script src="{{url('/')}}/assets/js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js" integrity="sha512-U2WE1ktpMTuRBPoCFDzomoIorbOyUv0sP8B+INA3EzNAhehbzED1rOJg6bCqPf/Tuposxb5ja/MAUnC8THSbLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        if (window.Dropzone) {
+            // Prevent auto-attachment to elements with class="dropzone"
+            window.Dropzone.autoDiscover = false;
+        }
+    </script>
+    <script>
         $(document).ready(function() {
             App.init();
         });
@@ -159,7 +165,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     @section('js')
     @show
-
+    @yield('js')
 
 
 </body>

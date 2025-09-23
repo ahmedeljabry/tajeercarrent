@@ -25,6 +25,7 @@ use Modules\Admin\App\Http\Controllers\BlogController;
 use Modules\Admin\App\Http\Controllers\NotificationsController;
 use Modules\Admin\App\Http\Controllers\MessagesController;
 use Modules\Admin\App\Http\Controllers\CurrenciesController;
+use Modules\Admin\App\Http\Controllers\AIController;
 
 
 /*
@@ -98,7 +99,8 @@ Route::group(["prefix" => "admin", "middleware" => ['AdminAuth', 'AdminLang']], 
     Route::resource('messages', MessagesController::class);
     Route::resource('currencies', CurrenciesController::class);
 
-
+    // AI helpers
+    Route::post('ai/generate', [AIController::class, 'generate'])->name('admin.ai.generate');
 
 });
 

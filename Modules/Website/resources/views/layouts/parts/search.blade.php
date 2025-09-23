@@ -4,7 +4,7 @@
     </picture>
     <form action="{{LaravelLocalization::getLocalizedURL(null, route('website.cars.filter'))}}" method="get">
         <h1 class="text-white text-center">
-            {{__('lang.Rent a Car in')}} {{app('country')->getCity()->title}}
+            {{__('lang.Rent a Car in')}} {{ optional(app('country')->getCity())->title }}
         </h1>
         <p class="text-white text-center ">
             {!! app('settings')->get('homepage_banner') !!}
