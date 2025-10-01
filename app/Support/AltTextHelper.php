@@ -21,7 +21,7 @@ final class AltTextHelper
             mb_strrpos($cut, ' ') ?: 0
         );
 
-        if ($boundary > 40) { /
+        if ($boundary > 40) { 
             $t = mb_substr($t, 0, $boundary);
         } else {
             $t = rtrim(mb_substr($t, 0, $max));

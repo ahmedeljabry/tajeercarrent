@@ -43,7 +43,7 @@ class ImageSizeResolver
                         }
                     }
                 } catch (\Throwable $e) {
-                    // تجاهُل أي أخطاء شبكة
+                    
                 }
             }
 
