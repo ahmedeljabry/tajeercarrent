@@ -39,6 +39,11 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CanonicalUrl::class,
+            \App\Http\Middleware\NoIndexForUtilityRoutes::class,
+            \App\Http\Middleware\SecurityHeaders::class,
+            \App\Http\Middleware\HtmlImageSizer::class,
+            \App\Http\Middleware\HtmlAltShortener::class,
         ],
 
         'api' => [

@@ -1,3 +1,16 @@
 User-agent: *
 Allow: /
+
+Disallow: /*/login
+Disallow: /*/login/
+Disallow: /*/login/*
+Disallow: /*/language/*/switch
+Disallow: /*/country/*/switch
+Disallow: /*/city/*/switch
+Disallow: /*/currency/*/switch
+
 Sitemap: https://tajeercarrent.com/sitemap.xml
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>

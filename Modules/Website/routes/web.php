@@ -56,12 +56,15 @@ Route::group([
             Route::get("/account/logout", [UsersController::class, 'logout'])->name('website.account.logout');
         });
 
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+
         Route::group([
             'prefix' => '{country?}/{city?}',
             'middleware' => \Modules\Website\App\Http\Middleware\CountryMiddleware::class,
             // Avoid DB queries during boot; validate slugs in middleware
             'where' => ['country' => '[A-Za-z0-9\-]+', 'city' => '[A-Za-z0-9\-]+'],
         ], function () {
+
             Route::get('/', [HomeController::class, 'index'])->name('home');
 
             Route::prefix('types')->controller(TypesController::class)->group(function () {
@@ -73,7 +76,7 @@ Route::group([
             Route::prefix('brands')->controller(BrandsController::class)->group(function () {
                 Route::get('/', 'index')->name('website.cars.brands.index');
                 Route::get('/{brand}', 'show')->name('website.cars.brands.show');
-                Route::get('/{brand}/models/{model}', 'model')->name('website.cars.brands.models');
+                Route::get('/{brand}/models/{model}', 'model')->name('website.cars.brands.mob//Hummerdels');
             });
 
             Route::prefix('cars')->controller(CarsController::class)->group(function () {
@@ -99,4 +102,3 @@ Route::group([
             Route::get('/{page}', [PagesController::class, 'show'])->name('website.pages.show');
         });
  });
-

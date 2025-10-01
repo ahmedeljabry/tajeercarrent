@@ -134,7 +134,7 @@
                     <p>{{__('lang.Select a car using search or catalog.')}}</p>
                 </div>
                 <picture>
-                    <img src="{{asset('/assets/images/chveron dashed top.png')}}" alt="">
+                    <img src="{{asset('/assets/images/chveron dashed top.png')}}" alt="chveron dashed top">
                 </picture>
                 <div class="home-main-box">
                     <div>
@@ -143,7 +143,7 @@
                     <h4>{{__('lang.Contact Your Dealer')}}</h4>
                 </div>
                 <picture>
-                    <img src="{{asset('/assets/images/chevron dashed bottom.png')}}" alt="">
+                    <img src="{{asset('/assets/images/chevron dashed bottom.png')}}" alt="chevron dashed bottom">
                 </picture>
                 <div class="home-main-box">
                     <div>
@@ -158,7 +158,7 @@
         @if (($left = app('settings')->get('book_your_next_trip_left')) && ($right = app('settings')->get('book_your_next_trip_right')))
             <section class="booking-stpes-section">
                 <picture>
-                    <img src="{{asset('/assets/images/FerariF8TributoRedK2930FrontDet.png')}}" alt="">
+                    <img src="{{asset('/assets/images/FerariF8TributoRedK2930FrontDet.png')}}" alt="book_your_next_trip_left and right image">
                 </picture>
                 <div class="container booking-steps-content">
                     <div>

@@ -38,7 +38,7 @@
                             <div class="blog-card">
                                 <div class="blog-card-content">
                                     <picture>
-                                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($blog->image)}}" alt=""
+                                        <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($blog->image)}}" alt="{{$blog->title}}"
                                              class="mw-100 w-100">
                                     </picture>
                                     <h3>{{$blog->title}}</h3>

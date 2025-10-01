@@ -51,7 +51,7 @@
                     </svg>
                     <h2>{{__("lang.Whatsapp")}}</h2>
                     <h5>
-                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatsapp'))}}">
+                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatsapp'))}}" rel="nofollow noopener">
                             {{app('settings')->get('contact_whatsapp')}}
                         </a>
                     </h5>

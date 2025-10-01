@@ -5,34 +5,24 @@ namespace Modules\Admin\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Modules\Admin\App\Services\GeminiService;
 
 class AIController extends Controller
 {
     public function generate(Request $request): JsonResponse
     {
         $request->validate([
-            'prompt' => 'required|string|max:5000',
-            'lang' => 'nullable|string',
+            'prompt' => 'required|string|max:12000',
         ]);
 
-        $prompt = (string) $request->input('prompt');
-        $lang = $request->input('lang');
-
-        $system = 'You are a helpful assistant for an admin CMS. Respond with plain text only.';
-
-        if ($lang) {
-            $locales = (array) config('app.locales', []);
-            $languageName = $locales[$lang] ?? $lang;
-            $system .= ' Respond strictly in ' . $languageName . '.';
-        }
+        $system = 'You are a helpful assistant for an admin CMS. Respond with STRICT JSON that matches the responseSchema. No code fences, no comments.';
 
         try {
-            $service = new \Modules\Admin\App\Services\GeminiService();
-            $text = $service->generateText($prompt, $system);
-            return response()->json(['text' => $text]);
+            $svc  = new GeminiService();
+            $json = $svc->generateJsonForCar([ (string) $request->input('prompt') ], $system);
+            return response()->json(['json' => $json]);
         } catch (\Throwable $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
 }
-

@@ -159,7 +159,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.security_deposit')}}</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">
-                                                <input required  type="number" class="form-control" name="security_deposit" >
+                                                <input required  type="number" class="form-control" name="security_deposit" value="0">
                                             </div>
                                         </div>
 
@@ -415,78 +415,241 @@
 
 
             </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const btn  = document.getElementById('ai-generate-car');
-        if (!btn) return;
+<script>
+(function(){
+  const btn = document.getElementById('ai-generate-car');
+  if (!btn) return;
 
-        const form = document.getElementById('cars-form');
-        const csrf = '{{ csrf_token() }}';
-        const route = '{{ route('admin.ai.generate') }}';
-        const type  = form?.dataset?.type || 'default';
-        const langs = @json(array_keys(config('app.languages', [])));
+  const csrf = '{{ csrf_token() }}';
+  const route = '{{ route('admin.ai.generate') }}';
+  const form = document.getElementById('cars-form');
+  const formType = form?.getAttribute('data-type') || 'default';
+  const langKeys = @json(array_keys(Config::get('app.languages')));
 
-        async function onGenerate(){
-            let nameEn = form.querySelector('[name="name_en"]')?.value?.trim();
-            if (!nameEn){
-                for (const el of form.querySelectorAll("[name^='name_']")){
-                    if (el.value && el.value.trim()){ nameEn = el.value.trim(); break; }
-                }
-            }
-            if (!nameEn){ alert('Please enter the car name, then click Generate.'); return; }
+  function normalizeNumerals(str){
+    const map = {'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
+    return String(str).replace(/[٠-٩]/g, d => map[d]);
+  }
+  function toNumber(val){
+    if (val === null || val === undefined || val === '') return '';
+    const cleaned = normalizeNumerals(String(val)).replace(/[^0-9.\-]/g, ''); 
+    const n = Number(cleaned);
+    return isNaN(n) ? '' : n;
+  }
 
-            const schema = {
-                engine_capacity: 'string like 3.0L twin-turbo',
-                doors: 'integer', bags: 'integer', passengers: 'integer',
-                price_per_day: 'number AED', price_per_week: 'number AED', price_per_month: 'number AED',
-                km_per_day: 'integer', km_per_week: 'integer', km_per_month: 'integer',
-                extra_price: 'number AED', security_deposit: 'number AED', minimum_day_booking: 'integer',
-                is_day_offer: 'boolean', day_offer_price: 'number AED',
-                brand: 'brand title', model: 'model title',
-                description_en: 'short HTML', description_ar: 'short HTML (Arabic)', description_ru: 'short HTML (Russian)'
-            };
-            const prompt =
-    `You are assisting an admin filling a car form for type: ${type}.
-    Car name (EN or provided): ${nameEn}.
-    Return ONLY JSON matching: ${JSON.stringify(schema)} with realistic values.`;
+  function setInput(name, value){
+    const el = document.querySelector(`[name="${name}"]`);
+    if (!el) return;
+    el.value = value ?? '';
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  function setTextarea(name, value){
+    const el = document.querySelector(`textarea[name="${name}"]`);
+    if (!el) return;
+    el.value = value ?? '';
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
 
-            const original = btn.textContent;
-            btn.disabled = true; btn.textContent = 'Generating…';
-            try {
-                const res = await fetch(route, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf },
-                    body: JSON.stringify({ prompt, lang: 'en' })
-                });
-                const data = await res.json();
-                if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
-
-                let json = null, text = data.text || '';
-                try { json = JSON.parse(text); }
-                catch { const m = text.match(/\{[\s\S]*\}/); if (m) { try { json = JSON.parse(m[0]); } catch {} } }
-                if (!json) throw new Error('AI did not return valid JSON');
-
-                for (const key in json) {
-                    if (json[key] !== undefined) {
-                        const input = form.querySelector(`[name="${key}"]`);
-                        if (input) input.value = json[key];
-                    }
-                }
-
-                alert('AI filled fields. Please review before saving.');
-            } catch (err) {
-                alert('AI error: ' + (err?.message || err));
-            } finally {
-                btn.disabled = false; btn.textContent = original;
-            }
+  function setTinyOrTextarea(name, html){
+    
+    const el = document.querySelector(`[name="${name}"]`);
+    if (!el) return;
+    if (window.tinymce) {
+        const inst = window.tinymce.get(el.name) || window.tinymce.get(el.id);
+        if (inst) {
+            inst.setContent(html || 'Ahmed');
+            inst.fire('change');
+            return;
         }
+    }
+  }
 
-        btn.addEventListener('click', onGenerate);
-    });
-    </script>
+  function setMultiSelectByTexts(selector, texts){
+    const select = document.querySelector(selector);
+    if (!select) return;
+    const wanted = Array.isArray(texts) ? texts.map(String) : [];
+    const values = [];
+    for (const opt of select.options) {
+      const t = (opt.text || '').toLowerCase().trim();
+      if (wanted.some(w => {
+        const ww = String(w).toLowerCase().trim();
+        return t === ww || t.startsWith(ww) || t.includes(ww);
+      })) values.push(opt.value);
+    }
+    // select2
+    if (window.$ && $(select).hasClass('select2-hidden-accessible')) {
+      $(select).val(values).trigger('change');
+    } else {
+      for (const opt of select.options) {
+        opt.selected = values.includes(opt.value);
+      }
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
 
+  function setSelectByText(select, text){
+    if (!select || !text) return null;
+    const target = String(text).toLowerCase().trim();
+    let chosen = null;
+    const opts = Array.from(select.options || []);
+    chosen = opts.find(o => (o.text || '').toLowerCase().trim() === target)
+         ||  opts.find(o => (o.text || '').toLowerCase().trim().startsWith(target))
+         ||  opts.find(o => (o.text || '').toLowerCase().trim().includes(target));
+    if (chosen) {
+      const value = chosen.value;
+      if (window.$ && $(select).hasClass('select2-hidden-accessible')) {
+        $(select).val(value).trigger('change');
+      } else {
+        select.value = value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      return chosen;
+    }
+    return null;
+  }
+
+  async function setModelByName(brandId, modelName){
+    if (!brandId || !modelName) return;
+    try {
+      const res = await fetch(`/admin/cars/${brandId}/models`, { headers:{'Accept':'application/json'} });
+      const data = await res.json();
+      const select = document.querySelector('select.select-model[name="model_id"]');
+      if (!select) return;
+      const wasSelect2 = window.$ && $(select).hasClass('select2-hidden-accessible');
+      if (wasSelect2) $(select).select2('destroy');
+      select.innerHTML = `<option value="">{{ __('admin.model') }}</option>`;
+      (data || []).forEach(m=>{
+        const opt = document.createElement('option');
+        opt.value = m.id;
+        opt.textContent = m.name || m.title || '';
+        select.appendChild(opt);
+      });
+      if (wasSelect2) {
+        $(select).select2({ dir: 'rtl', width: '100%', dropdownAutoWidth: true, dropdownParent: $(select).parent() });
+      }
+      setSelectByText(select, modelName);
+    } catch(_) {}
+  }
+
+  function setKeywordsCSV(name, list){
+    const val = Array.isArray(list) ? list.map(s => String(s).trim()).filter(Boolean) : [];
+    const csv = val.join(', ');
+    setTextarea(name, csv);
+  }
+
+  btn.addEventListener('click', async function(){
+    const nameEnEl = document.querySelector('[name="name_en"]');
+    const nameEn = nameEnEl ? nameEnEl.value.trim() : '';
+    if (!nameEn) { alert('Please enter the car name (EN) first.'); return; }
+
+    const prompt = [
+      `You are helping fill an admin rental form for a ${formType === 'yacht' ? 'yacht' : (formType === 'driver' ? 'car-with-driver' : 'self-drive car')} in the UAE, Act as human and give me fresh content and unique, DO NOT repeat any text, Content seo optimization`,
+      `Car name: "${nameEn}".`,
+      'Return STRICT minified JSON that matches the responseSchema. No markdown, no comments, no trailing commas.',
+      'Write short descriptions (max 100 words) for ar, en, ru. Each must mention "TAJEER RENT A CAR" and "car rental in Dubai". Map to description_ar, description_en, description_ru.',
+      'Create 3 long HTML content blocks for each language (ar, en, ru):',
+      '- Block 1: specifications & advantages',
+      '- Block 2: brand and model details',
+      '- Block 3: why rent this vehicle in Dubai',
+      'Create SEO meta title per language (ar, en, ru) → seo_meta_title_{lang}.',
+      'Create meta description per language (≤130 chars) → seo_description_{lang}.',
+      'Create up to 5 SEO keywords per language → seo_keywords_{lang} (array).',
+      'Keep numeric fields as numbers. Use AED. For driver/yacht: minimum_day_booking is hours; for self-drive: days.'
+    ].join('\n');
+
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = '{{ __('admin.generating') ?? 'Generating...' }}';
+
+    try {
+      const res = await fetch(route, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-TOKEN': csrf,
+        },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Generation failed');
+
+      // server returns parsed JSON
+      const parsed = data.json || {};
+
+      // ==== Names & short descriptions ====
+      (['ar','en','ru']).forEach(l=>{
+        if (parsed[`name_${l}`] != null) setInput(`name_${l}`, String(parsed[`name_${l}`]));
+        if (parsed[`description_${l}`] != null) setTextarea(`description_${l}`, String(parsed[`description_${l}`]));
+      });
+
+      // ==== Long HTML content (3 blocks) ====
+        (['ar','en','ru']).forEach(l=>{
+          const tKey = `content_title_${l}`;
+          const dKey = `content_description_${l}`;
+          if (parsed[tKey] != null) setInput(`content_title_${l}`, String(parsed[tKey]));
+          if (parsed[dKey] != null) setTinyOrTextarea(`content_description_${l}`, String(parsed[dKey]));
+        });
+
+      // ==== Numbers ====
+      if (formType === 'default') {
+        setInput('price_per_day',   toNumber(parsed.price_per_day));
+        setInput('price_per_week',  toNumber(parsed.price_per_week));
+        setInput('price_per_month', toNumber(parsed.price_per_month));
+        setInput('km_per_day',      toNumber(parsed.km_per_day));
+        setInput('km_per_week',     toNumber(parsed.km_per_week));
+        setInput('km_per_month',    toNumber(parsed.km_per_month));
+      } else {
+        setInput('price_per_day',   toNumber(parsed.price_per_hour));
+        setInput('price_per_week',  toNumber(parsed.price_3_hours));
+        setInput('price_per_month', toNumber(parsed.price_8_hours));
+      }
+      setInput('extra_price',           toNumber(parsed.extra_price));
+      setInput('minimum_day_booking',   toNumber(parsed.minimum_day_booking));
+
+      if (formType !== 'yacht') {
+        setInput('engine_capacity', parsed.engine_capacity || '');
+        setInput('doors',           toNumber(parsed.doors));
+        setInput('bags',            toNumber(parsed.bags));
+      }
+      setInput('passengers', toNumber(parsed.passengers));
+
+
+      // ==== SEO (your exact names) ====
+      (['ar','en','ru']).forEach(l=>{
+        if (parsed[`seo_meta_title_${l}`] != null) setInput(`seo_meta_title_${l}`, String(parsed[`seo_meta_title_${l}`]));
+        if (parsed[`seo_description_${l}`] != null) setTextarea(`seo_description_${l}`, String(parsed[`seo_description_${l}`]));
+        if (parsed[`seo_keywords_${l}`]) setKeywordsCSV(`seo_keywords_${l}`, parsed[`seo_keywords_${l}`]);
+      });
+
+      if (Array.isArray(parsed.faq) && parsed.faq.length){
+        const holder = document.querySelector('.faq__holder');
+        const addBtn = document.querySelector('.add-faq');
+        const need = parsed.faq.length - holder.querySelectorAll('.faq__item').length;
+        for (let i=0; i<need; i++){
+          try { addBtn?.dispatchEvent(new Event('click', {bubbles:true})); } catch(_) {}
+        }
+        const qSel = l => `input[name="faq_question_${l}[]"]`;
+        const aSel = l => `input[name="faq_answer_${l}[]"]`;
+        parsed.faq.forEach((item, idx)=>{
+          (['ar','en','ru']).forEach(l=>{
+            const q = document.querySelectorAll(qSel(l))[idx];
+            const a = document.querySelectorAll(aSel(l))[idx];
+            if (q && item[`question_${l}`] != null) q.value = String(item[`question_${l}`]);
+            if (a && item[`answer_${l}`]   != null) a.value = String(item[`answer_${l}`]);
+          });
+        });
+      }
+
+    } catch (err) {
+      alert('AI generation error: ' + (err.message || err));
+    } finally {
+      btn.disabled = false;
+      btn.textContent = original;
+    }
+  });
+})();
+</script>
 @endsection
-
-
-

@@ -272,7 +272,7 @@
                                     <li>
                                         <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
                                             <picture>
-                                                <img src="{{asset('assets/icons/lang_' . $langCode . '.png')}}" alt="" class="mw-100">
+                                                <img src="{{asset('assets/icons/lang_' . $langCode . '.png')}}" alt="{{ $langCode }}" class="mw-100">
                                             </picture>
                                             {{$langDetails['name']}}
                                         </a>
@@ -282,17 +282,34 @@
                         </div>
                     </li>
                     <li class="header__actions_list_item">
-                        <div class="auth-btns text-white  d-flex align-items-center gap-2">
-                            <a class="text-white text-decoration-underline " data-bs-toggle="modal"
-                               data-bs-target="#login-modal">
-                                {{__('lang.Sign in')}}
-                            </a>
-                            {{__('lang.Or')}}
-                            <a class="text-white text-decoration-underline " data-bs-toggle="modal"
-                               data-bs-target="#sign-up-modal">
-                                {{__('lang.Sign up')}}
-                            </a>
-                        </div>
+                        @auth('customers')
+                            <div class="dropdown">
+                                <a class="text-white text-decoration-underline dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                    {{ auth('customers')->user()->name ?? __('lang.My Account') }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @else
+                            <div class="auth-btns text-white  d-flex align-items-center gap-2">
+                                <a class="text-white text-decoration-underline " data-bs-toggle="modal"
+                                   data-bs-target="#login-modal">
+                                    {{__('lang.Sign in')}}
+                                </a>
+                                {{__('lang.Or')}}
+                                <a class="text-white text-decoration-underline " data-bs-toggle="modal"
+                                   data-bs-target="#sign-up-modal">
+                                    {{__('lang.Sign up')}}
+                                </a>
+                            </div>
+                        @endauth
                     </li>
                 </ul>
             </div>
@@ -320,7 +337,7 @@
                                     <li class="col-lg-3">
                                         <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
                                             <picture>
-                                                <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="" class="mw-100">
+                                                <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="{{ $item->name }}" class="mw-100">
                                             </picture>
                                             {{$item->title}}
                                         </a>
@@ -481,7 +498,7 @@
                             <li>
                                 <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
                                     <picture>
-                                        <img src="/assets/icons/lang_{{$langCode}}.png" alt="" class="mw-100">
+                                        <img src="/assets/icons/lang_{{$langCode}}.png" alt="{{ $langCode }}" class="mw-100">
                                     </picture>
                                     {{$langDetails['name']}}
                                 </a>
@@ -519,7 +536,7 @@
                                         <li class="col-lg-3">
                                             <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
                                                 <picture>
-                                                    <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="" class="mw-100">
+                                                    <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="{{ $item->name }}" class="mw-100">
                                                 </picture>
                                                 {{$item->title}}
                                             </a>
@@ -565,19 +582,36 @@
                     </li>
                 </ul>
                 <div class="account-info d-flex flex-column gap-3 w-100 ">
-                    <a href="#" class="my-account d-flex align-items-center gap-2">
-                        <i class="fa-regular fa-circle-user"></i>
-                        <p class="mb-0">{{__('lang.My Account')}}</p>
-                    </a>
-                    <div class="auth-btns d-flex align-items-center justify-content-around "
-                         data-bs-toggle="modal" data-bs-target="#login-modal">
-                        <a href=" #" class="main-btn">
-                            {{__('lang.Sign in')}}
+                    @auth('customers')
+                        <div class="dropdown">
+                            <a href="#" class="my-account d-flex align-items-center gap-2 dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <p class="mb-0">{{ auth('customers')->user()->name ?? __('lang.My Account') }}</p>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="#" class="my-account d-flex align-items-center gap-2">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <p class="mb-0">{{__('lang.My Account')}}</p>
                         </a>
-                        <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
-                            {{__('lang.Sign up')}}
-                        </a>
-                    </div>
+                        <div class="auth-btns d-flex align-items-center justify-content-around "
+                             data-bs-toggle="modal" data-bs-target="#login-modal">
+                            <a href=" #" class="main-btn">
+                                {{__('lang.Sign in')}}
+                            </a>
+                            <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
+                                {{__('lang.Sign up')}}
+                            </a>
+                        </div>
+                    @endauth
                 </div>
                 <div class=" nav-icons my-2 my-lg-0 flex-column mt-lg-0 d-flex w-100 justify-content-center
                                     align-items-center ">
@@ -715,7 +749,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}">
+                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}" rel="nofollow noopener">
                             <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
                         </a>
                     </li>

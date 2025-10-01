@@ -1019,3 +1019,8 @@ section {
   text-decoration: underline;
   display: inline-block;
 }
+
+img:not([width]):not([height]) {
+  display: block;
+  height: auto;
+}

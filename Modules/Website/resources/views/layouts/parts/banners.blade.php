@@ -9,7 +9,7 @@
                         <div>
                             <a href="{{$banner->link}}">
                                 <picture>
-                                    <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($banner->image)}}" alt="">
+                                    <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($banner->image)}}" alt="{{ $banner->image }}">
                                 </picture>
                             </a>
                         </div>
@@ -30,7 +30,7 @@
                         <div>
                             <a href="{{$banner->link}}">
                                 <picture>
-                                    <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($banner->image)}}" alt="">
+                                    <img src="{{asset("/storage/") . "/" . \App\Helpers\WebpImage::generateUrl($banner->image)}}" alt="{{ $banner->image }}">
                                 </picture>
                             </a>
                         </div>

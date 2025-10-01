@@ -14,9 +14,9 @@ class GeminiService
 
     public function __construct()
     {
-        $this->apiKey = (string) config('services.gemini.key');
-        $this->model = (string) config('services.gemini.model', 'gemini-1.5-flash');
-        $this->endpoint = rtrim((string) config('services.gemini.endpoint', 'https://generativelanguage.googleapis.com/v1beta'), '/');
+        $this->apiKey            = (string) config('services.gemini.key');
+        $this->model             = (string) config('services.gemini.model', 'gemini-2.5-flash');
+        $this->endpoint          = rtrim((string) config('services.gemini.endpoint', 'https://generativelanguage.googleapis.com/v1beta'), '/');
         $this->defaultGeneration = (array) config('services.gemini.generation', []);
 
         if (empty($this->apiKey)) {
@@ -24,42 +24,99 @@ class GeminiService
         }
     }
 
-    /**
-     * Generate plain text from a prompt using Gemini.
-     *
-     * @param string $prompt The user prompt to send.
-     * @param string|null $systemInstruction Optional system guidance.
-     * @param array $options Optional generation overrides (temperature, maxOutputTokens, etc.).
-     * @return string The generated text.
-     */
-    public function generateText(string $prompt, ?string $systemInstruction = null, array $options = []): string
+    public function generateJsonForCar(array $promptLines, ?string $systemInstruction = null): array
     {
         $payload = [
-            'contents' => [
-                [
-                    'parts' => [
-                        ['text' => $prompt],
+            'contents' => [[ 'parts' => [['text' => implode("\n", $promptLines)]] ]],
+            'generationConfig' => array_merge($this->defaultGeneration, [
+                'temperature'      => 0.2,
+                'maxOutputTokens'  => (int) env('GEMINI_MAX_TOKENS', 8192),
+
+                'responseMimeType' => 'application/json',
+                'responseSchema'   => [
+                    'type'       => 'OBJECT',
+                    'properties' => [
+
+                        'name_ar' => ['type' => 'STRING'],
+                        'name_en' => ['type' => 'STRING'],
+                        'name_ru' => ['type' => 'STRING'],
+
+                        'description_ar' => ['type' => 'STRING'],
+                        'description_en' => ['type' => 'STRING'],
+                        'description_ru' => ['type' => 'STRING'],
+
+                        'content_title_ar' => ['type' => 'STRING'],
+                        'content_title_en' => ['type' => 'STRING'],
+                        'content_title_ru' => ['type' => 'STRING'],
+                        'content_description_ar' => ['type' => 'STRING'],
+                        'content_description_en' => ['type' => 'STRING'],
+                        'content_description_ru' => ['type' => 'STRING'],
+
+                        'seo_meta_title_ar'  => ['type' => 'STRING'],
+                        'seo_meta_title_en'  => ['type' => 'STRING'],
+                        'seo_meta_title_ru'  => ['type' => 'STRING'],
+
+                        'seo_description_ar' => ['type' => 'STRING'],
+                        'seo_description_en' => ['type' => 'STRING'],
+                        'seo_description_ru' => ['type' => 'STRING'],
+
+                        'seo_keywords_ar' => ['type' => 'ARRAY', 'items' => ['type' => 'STRING']],
+                        'seo_keywords_en' => ['type' => 'ARRAY', 'items' => ['type' => 'STRING']],
+                        'seo_keywords_ru' => ['type' => 'ARRAY', 'items' => ['type' => 'STRING']],
+
+                        'engine_capacity' => ['type' => 'STRING'],
+                        'doors'           => ['type' => 'INTEGER'],
+                        'bags'            => ['type' => 'INTEGER'],
+                        'passengers'      => ['type' => 'INTEGER'],
+
+                        'price_per_day'   => ['type' => 'NUMBER'],
+                        'price_per_week'  => ['type' => 'NUMBER'],
+                        'price_per_month' => ['type' => 'NUMBER'],
+                        'km_per_day'      => ['type' => 'NUMBER'],
+                        'km_per_week'     => ['type' => 'NUMBER'],
+                        'km_per_month'    => ['type' => 'NUMBER'],
+
+                        'price_per_hour'  => ['type' => 'NUMBER'],
+                        'price_3_hours'   => ['type' => 'NUMBER'],
+                        'price_8_hours'   => ['type' => 'NUMBER'],
+
+                        'extra_price'          => ['type' => 'NUMBER'],
+                        'minimum_day_booking'  => ['type' => 'NUMBER'],
+
+                        'faq' => [
+                            'type'  => 'ARRAY',
+                            'items' => [
+                                'type'       => 'OBJECT',
+                                'properties' => [
+                                    'question_ar' => ['type' => 'STRING'],
+                                    'question_en' => ['type' => 'STRING'],
+                                    'question_ru' => ['type' => 'STRING'],
+                                    'answer_ar'   => ['type' => 'STRING'],
+                                    'answer_en'   => ['type' => 'STRING'],
+                                    'answer_ru'   => ['type' => 'STRING'],
+                                ]
+                            ]
+                        ],
+                    ],
+                    'required' => [
+                        'name_en',
+                        'passengers',
+                        'extra_price',
+                        'minimum_day_booking'
                     ],
                 ],
-            ],
-            'generationConfig' => array_merge($this->defaultGeneration, $options),
+            ]),
         ];
 
         if ($systemInstruction) {
             $payload['systemInstruction'] = [
-                'role' => 'system',
-                'parts' => [ ['text' => $systemInstruction] ],
+                'role'  => 'system',
+                'parts' => [['text' => $systemInstruction]],
             ];
         }
 
-        $url = $this->endpoint . '/models/' . urlencode($this->model) . ':generateContent?key=' . urlencode($this->apiKey);
-
-        $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ])
-            ->timeout(60)
-            ->post($url, $payload);
+        $url = $this->endpoint.'/models/'.urlencode($this->model).':generateContent?key='.urlencode($this->apiKey);
+        $response = Http::asJson()->acceptJson()->timeout(180)->post($url, $payload);
 
         if ($response->failed()) {
             $body = $response->json();
@@ -67,24 +124,29 @@ class GeminiService
             throw new RuntimeException($message);
         }
 
-        $data = $response->json();
+        $data   = $response->json();
+        $finish = data_get($data, 'candidates.0.finishReason');
 
-        // Extract first candidate text
-        $text = '';
-        if (!empty($data['candidates'][0]['content']['parts'])) {
-            foreach ($data['candidates'][0]['content']['parts'] as $part) {
-                if (isset($part['text'])) {
-                    $text .= $part['text'];
-                }
-            }
+        if ($finish === 'MAX_TOKENS') {
+            throw new RuntimeException('Gemini stopped early (MAX_TOKENS). Increase GEMINI_MAX_TOKENS or reduce requested content length.');
         }
 
-        if ($text === '') {
-            // Fallback to safety: sometimes the text may be under 'candidates[0][output_text]' or blocked
-            $text = $data['candidates'][0]['output_text'] ?? '';
+        $raw = '';
+        foreach ((array) data_get($data, 'candidates.0.content.parts', []) as $part) {
+            if (isset($part['text'])) $raw .= $part['text'];
+        }
+        if ($raw === '') {
+            $raw = (string) data_get($data, 'candidates.0.output_text', '');
+        }
+        if ($raw === '') {
+            throw new RuntimeException('Empty JSON from Gemini.');
         }
 
-        return trim((string) $text);
+        $json = json_decode($raw, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new RuntimeException('Gemini returned malformed JSON: ' . json_last_error_msg());
+        }
+
+        return $json;
     }
 }
-

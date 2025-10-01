@@ -71,15 +71,19 @@ class UsersController extends Controller
     }
 
     public function login_with_provider($provider) {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)
+        ->redirect();
     }
 
     public function handle_provider_callback($driver)
     {
         try {
-            $user = Socialite::driver($driver)->user();
+            $user = Socialite::driver($driver)
+            ->stateless()
+            ->user();
         } catch (\Exception $e) {
-            return 'error';
+            \Log::error($e->getMessage());
+            return $e;
         }
         $existingUser = User::where([['email', $user->getEmail()],["type","customer"]])->first();
         if ($existingUser) {

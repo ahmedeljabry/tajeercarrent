@@ -44,13 +44,13 @@ return [
 
     'gemini' => [
         'key' => env('GEMINI_API_KEY'),
-        'model' => env('GEMINI_MODEL', 'gemini-1.5-flash'),
+        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
         'endpoint' => env('GEMINI_ENDPOINT', 'https://generativelanguage.googleapis.com/v1beta'),
         'generation' => [
-            'temperature' => (float) env('GEMINI_TEMPERATURE', 0.7),
+            'temperature' => (float) env('GEMINI_TEMPERATURE', 0.2),
             'topK' => (int) env('GEMINI_TOP_K', 64),
             'topP' => (float) env('GEMINI_TOP_P', 0.95),
-            'maxOutputTokens' => (int) env('GEMINI_MAX_TOKENS', 1024),
+            'maxOutputTokens' => (int) env('GEMINI_MAX_TOKENS', 8192),
         ],
     ],
 

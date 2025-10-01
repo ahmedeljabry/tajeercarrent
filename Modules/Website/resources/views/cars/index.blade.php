@@ -18,7 +18,6 @@
 @endphp
 
 @section('seo')
-    <link href="{{url()->current()}}" rel="canonical" />
     @include('website::layouts.parts.seo', [
         'seo' => $seo,
         "title" => $resource ? $resource->title : "",
