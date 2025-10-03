@@ -76,7 +76,7 @@ Route::group([
             Route::prefix('brands')->controller(BrandsController::class)->group(function () {
                 Route::get('/', 'index')->name('website.cars.brands.index');
                 Route::get('/{brand}', 'show')->name('website.cars.brands.show');
-                Route::get('/{brand}/models/{model}', 'model')->name('website.cars.brands.mob//Hummerdels');
+                Route::get('/{brand}/models/{model}', 'model')->name('website.cars.brands.models');
             });
 
             Route::prefix('cars')->controller(CarsController::class)->group(function () {
