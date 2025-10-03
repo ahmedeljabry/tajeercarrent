@@ -24,8 +24,6 @@
                         </button>
                     </div>
 
-
-
                     <div class="row layout-spacing">
                         @include("admin::layouts.parts.app.alerts")
                         <div class="col-lg-7">
