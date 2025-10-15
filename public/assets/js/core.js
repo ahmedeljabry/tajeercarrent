@@ -393,18 +393,22 @@ if($("#cars-uploader").length) {
                     });
                     // formData.append('content_description_ar', $("textarea[name='content_description_ar']").val())
                     // formData.append('content_description_en', $("textarea[name='content_description_en']").val())
-                    
-                    if($('input[type=file]')[0].files[0]) {
-                        formData.append('image', $('input[type=file]')[0].files[0]);
-                    }
-                    if ($('input[type=file]')[1] && $('input[type=file]')[1].files.length > 0) {
-                        formData.append('content_image', $('input[type=file]')[1].files[0]);
-                    }
-                    if ($('input[type=file]')[2] && $('input[type=file]')[2].files.length > 0) {
-                        formData.append('content_image_2', $('input[type=file]')[2].files[0]);
-                    }
-                    if ($('input[type=file]')[3] && $('input[type=file]')[3].files.length > 0) {
-                        formData.append('content_image_3', $('input[type=file]')[3].files[0]);
+                    // IMPORTANT: Select file inputs by name (Dropzone injects hidden inputs and shifts indices)
+                    try {
+                        var mainImageEl = document.querySelector('input[name="image"]');
+                        if (mainImageEl && mainImageEl.files && mainImageEl.files[0]) {
+                            formData.append('image', mainImageEl.files[0]);
+                        }
+
+                        var contentNames = ['content_image', 'content_image_2', 'content_image_3'];
+                        contentNames.forEach(function(nm){
+                            var el = document.querySelector('input[name="' + nm + '"]');
+                            if (el && el.files && el.files[0]) {
+                                formData.append(nm, el.files[0]);
+                            }
+                        });
+                    } catch(e) {
+                        // noop: avoid breaking upload if DOM lookup fails
                     }
                 
                 });

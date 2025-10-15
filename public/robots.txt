@@ -1,16 +1,45 @@
+# robots.txt for tajeercarrent.com
+# Updated: 14 Oct 2025 (SEO-optimized for live production)
+
 User-agent: *
-Allow: /
+# --- Block login, language switchers, and filters
+Disallow: /login
+Disallow: /login/
+Disallow: /login/*
+Disallow: /language/*/switch
+Disallow: /country/*/switch
+Disallow: /city/*/switch
+Disallow: /currency/*/switch
 
-Disallow: /*/login
-Disallow: /*/login/
-Disallow: /*/login/*
-Disallow: /*/language/*/switch
-Disallow: /*/country/*/switch
-Disallow: /*/city/*/switch
-Disallow: /*/currency/*/switch
+# --- Block filtered, parameterized & paginated URLs
+Disallow: /*/cars/filter
+Disallow: /*/cars/filter?*
+Disallow: /*/brands/*?page=*
+Disallow: /*/types/*?page=*
+Disallow: /t/*?page=*
+Disallow: /*?page=*
+Disallow: /*?section=*
+Disallow: /*?filter*
+Disallow: /*?sort*
+Disallow: /*?brand*
+Disallow: /*?model*
+Disallow: /*?type*
+Disallow: /*?price*
+Disallow: /*?year*
+Disallow: /*?seats*
+Disallow: /*?fuel*
+Disallow: /*?color*
+Disallow: /*?availability*
 
+# --- Disallow staging or test environments
+Disallow: https://staging.tajeercarrent.com
+Disallow: https://stg.tajeercarrent.com
+
+# --- Allow main localized pages
+Allow: /$
+Allow: /en/
+Allow: /ar/
+Allow: /ru/
+
+# Sitemap
 Sitemap: https://tajeercarrent.com/sitemap.xml
-
-<IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-</IfModule>
