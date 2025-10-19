@@ -103,7 +103,6 @@ class ModelsController extends Controller
     {
         $model = Models::find($id);
         $data = $request->all();
-
         $data['title'] = [];
         foreach(\Config::get("app.languages") as $key => $lang) {
             $data['title'][$key] = $request->get("title_" . $key);
@@ -112,10 +111,14 @@ class ModelsController extends Controller
         foreach(\Config::get("app.languages") as $key => $lang) {
             $data['page_title'][$key] = $request->get("page_title_" . $key);
         }
-        $data['page_features'] = [];
+        $data['page_description'] = [];
         foreach(\Config::get("app.languages") as $key => $lang) {
-            $data['page_features'][$key] = $request->get("page_features_" . $key);
+            $data['page_description'][$key] = $request->get("page_description_" . $key);
         }
+        // $data['page_features'] = [];
+        // foreach(\Config::get("app.languages") as $key => $lang) {
+        //     $data['page_features'][$key] = $request->get("page_features_" . $key);
+        // }
         $model->update($data);
 
         $resource = "model";

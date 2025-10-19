@@ -55,14 +55,14 @@
                                         </div>
                                         @endforeach 
 
-                                        @foreach(\Config::get("app.languages") as $key => $value)
+                                        {{-- @foreach(\Config::get("app.languages") as $key => $value)
                                         <div class="form-group row mb-4">
                                             <label class="col-xl-3 col-sm-3 col-sm-2 col-form-label">{{__('admin.features')}} {{__('admin.car')}} {{$value}}</label>
                                             <div class="col-xl-9 col-lg-9 col-sm-10">
                                                 <textarea class="form-control" name="page_features_{{$key}}">{{$item->getTranslation("page_features",$key)}}</textarea>
                                             </div>
                                         </div>
-                                        @endforeach 
+                                        @endforeach  --}}
       
                                         
                                         @if($item->type == 'car')
