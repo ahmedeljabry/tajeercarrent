@@ -123,6 +123,7 @@ class Car extends Model implements Sitemapable
         'security_deposit',
         'customer_notes',
         'color_id',
+        'km_per_week',
         'brand_id',
         'model_id',
         'year_id',

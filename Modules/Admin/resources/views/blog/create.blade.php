@@ -90,6 +90,11 @@
     directionality: "rtl",
     plugins: 'autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    convert_urls: false,
+    relative_urls: false,
+    remove_script_host: false,
+    document_base_url: '{{ url('/') }}/',
+    link_default_protocol: 'https'
   });
 </script>
 @endsection

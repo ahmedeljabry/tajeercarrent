@@ -70,6 +70,7 @@
                                         </ul>
                                     </div>
                                 @endif
+                                
                                 @if($car->price_per_week)
                                     <div class="car-details-pricing-card">
                                         <h4 class="text-center">{{__('lang.Week')}}</h4>

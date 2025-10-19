@@ -622,25 +622,6 @@
         if (parsed[`seo_keywords_${l}`]) setKeywordsCSV(`seo_keywords_${l}`, parsed[`seo_keywords_${l}`]);
       });
 
-      if (Array.isArray(parsed.faq) && parsed.faq.length){
-        const holder = document.querySelector('.faq__holder');
-        const addBtn = document.querySelector('.add-faq');
-        const need = parsed.faq.length - holder.querySelectorAll('.faq__item').length;
-        for (let i=0; i<need; i++){
-          try { addBtn?.dispatchEvent(new Event('click', {bubbles:true})); } catch(_) {}
-        }
-        const qSel = l => `input[name="faq_question_${l}[]"]`;
-        const aSel = l => `input[name="faq_answer_${l}[]"]`;
-        parsed.faq.forEach((item, idx)=>{
-          (['ar','en','ru']).forEach(l=>{
-            const q = document.querySelectorAll(qSel(l))[idx];
-            const a = document.querySelectorAll(aSel(l))[idx];
-            if (q && item[`question_${l}`] != null) q.value = String(item[`question_${l}`]);
-            if (a && item[`answer_${l}`]   != null) a.value = String(item[`answer_${l}`]);
-          });
-        });
-      }
-
     } catch (err) {
       alert('AI generation error: ' + (err.message || err));
     } finally {

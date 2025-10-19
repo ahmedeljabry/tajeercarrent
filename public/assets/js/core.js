@@ -413,7 +413,7 @@ if($("#cars-uploader").length) {
                 
                 });
 
-                this.on("success", function(file, response) {
+                this.on("success", function() {
                    window.location.href = "/admin/cars?type=" + $("#cars-form").attr('data-type')
                 })
             },

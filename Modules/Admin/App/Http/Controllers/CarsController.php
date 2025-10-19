@@ -105,7 +105,6 @@ class CarsController extends Controller
                 $car->images()->create(['image' => $file->store('cars', 'public')]);
             }
         }
-
         $resource = "car";
         $content = new \Modules\Admin\App\Services\ContentService();
         $content->create($request, $resource, $car->id);
@@ -208,7 +207,7 @@ class CarsController extends Controller
 
     public function deleteImage($id)
     {
-        $image = \App\Models\CarImage::find($id);
+        $image = \App\Models\CarImage::whereId($id);
         $image->delete();
         return redirect()->back()->withSuccess("تم حذف الصورة بنجاح");
     }

@@ -55,8 +55,23 @@ class HtmlImageSizer
             $src = trim((string)$img->getAttribute('src'));
             if ($src === '') continue;
 
+            // Allow opting-out per image via attributes/classes
+            $cls = ' ' . strtolower((string)$img->getAttribute('class')) . ' ';
+            $optOut = $img->hasAttribute('data-nosize')
+                || $img->hasAttribute('data-no-resize')
+                || $img->hasAttribute('data-no-dimensions')
+                || str_contains($cls, ' nosize ')
+                || str_contains($cls, ' no-dimensions ')
+                || str_contains($cls, ' no-resize ');
+            if ($optOut) {
+                continue;
+            }
+
             $hasW = $img->hasAttribute('width') && (int)$img->getAttribute('width') > 0;
             $hasH = $img->hasAttribute('height') && (int)$img->getAttribute('height') > 0;
+            $style = (string) $img->getAttribute('style');
+            $styleHasW = $style && preg_match('/\bwidth\s*:\s*\d+(?:px|rem|em|%)?/i', $style);
+            $styleHasH = $style && preg_match('/\bheight\s*:\s*\d+(?:px|rem|em|%)?/i', $style);
 
             if (!$img->hasAttribute('decoding')) {
                 $img->setAttribute('decoding', 'async');
@@ -68,8 +83,13 @@ class HtmlImageSizer
                 $img->setAttribute('fetchpriority', 'auto');
             }
 
-            if ($hasW && $hasH) {
+            if (($hasW && $hasH) || ($styleHasW && $styleHasH)) {
                 continue; 
+            }
+
+            // If URL already encodes dimensions (e.g., -800x600.jpg or ?w=800&h=600), skip adding attrs
+            if (ImageSizeResolver::hasDimensionsInUrl($src)) {
+                continue;
             }
 
             [$w, $h] = ImageSizeResolver::get($src, $this->allowExternalFetch);

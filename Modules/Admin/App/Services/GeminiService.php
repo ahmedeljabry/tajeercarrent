@@ -83,20 +83,6 @@ class GeminiService
                         'extra_price'          => ['type' => 'NUMBER'],
                         'minimum_day_booking'  => ['type' => 'NUMBER'],
 
-                        'faq' => [
-                            'type'  => 'ARRAY',
-                            'items' => [
-                                'type'       => 'OBJECT',
-                                'properties' => [
-                                    'question_ar' => ['type' => 'STRING'],
-                                    'question_en' => ['type' => 'STRING'],
-                                    'question_ru' => ['type' => 'STRING'],
-                                    'answer_ar'   => ['type' => 'STRING'],
-                                    'answer_en'   => ['type' => 'STRING'],
-                                    'answer_ru'   => ['type' => 'STRING'],
-                                ]
-                            ]
-                        ],
                     ],
                     'required' => [
                         'name_en',

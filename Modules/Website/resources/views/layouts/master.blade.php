@@ -3,6 +3,7 @@
 @php use App\Models\Faq; @endphp
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +31,7 @@
     <link href="{{asset('/css/custom.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="icon" href="{{asset('/website/images/fav.jpg')}}" type="image/x-icon">
-    <link href="{{url()->current()}}" rel="canonical"/>
+    <link href="{{url()->current()}}" rel="canonical" />
 
     {!!app('settings')->get('scripts')!!}
 
@@ -48,179 +49,196 @@
         gtag('config', 'AW-11558027423');
     </script>
 </head>
+
 <body class="@if(app()->getLocale() == 'ar') arabic-version @endif">
 
-{!!app('settings')->get('scripts_body')!!}
+    {!!app('settings')->get('scripts_body')!!}
 
 
 
-<div class="modal auth-modal login-modal fade" id="login-modal" tabindex="-1" aria-labelledby="{{__('lang.Sign in')}}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign in')}}</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="login-form" action="{{ LaravelLocalization::getLocalizedUrl(null, route('website.account.login')) }}" method="post">
-                    @csrf
-                    @if($errors->login->any())
-                        <div class="alert alert-danger">
-                            @foreach($errors->login->all() as $error)
-                                {{$error}}
-                            @endforeach
+    <div class="modal auth-modal login-modal fade" id="login-modal" tabindex="-1"
+        aria-labelledby="{{__('lang.Sign in')}}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign in')}}</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form"
+                        action="{{ LaravelLocalization::getLocalizedUrl(null, route('website.account.login')) }}"
+                        method="post">
+                        @csrf
+                        @if($errors->login->any())
+                            <div class="alert alert-danger">
+                                @foreach($errors->login->all() as $error)
+                                    {{$error}}
+                                @endforeach
+                            </div>
+                        @endif
+                        <div class="mb-3">
+                            <input name="email" type="email" class="form-control" placeholder="{{__('lang.Email')}}">
                         </div>
-                    @endif
-                    <div class="mb-3">
-                        <input name="email" type="email" class="form-control" placeholder="{{__('lang.Email')}}">
+                        <div class="mb-3">
+                            <input name="password" type="password" class="form-control"
+                                placeholder="{{__('lang.Password')}}">
+                        </div>
+                    </form>
+                    <div class="auth-buttons d-flex flex-column ">
+                        <button class="main-btn rounded-0 w-100 text-center" type="submit"
+                            form="login-form">{{__('lang.Sign in')}}</button>
                     </div>
-                    <div class="mb-3">
-                        <input name="password" type="password" class="form-control" placeholder="{{__('lang.Password')}}">
-                    </div>
-                </form>
-                <div class="auth-buttons d-flex flex-column ">
-                    <button class="main-btn rounded-0 w-100 text-center" type="submit" form="login-form">{{__('lang.Sign in')}}</button>
-                </div>
-                <div class="auth-social-media-buttons d-flex align-items-center flex-column gap-2 mt-4">
-                    <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'facebook']))}}" class="facebook d-flex align-items-center justify-content-around w-100">
-                        {{__('lang.Login with facebook')}}
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'google']))}}" class="google-auth d-flex align-items-center justify-content-around w-100">
-                        {{__('lang.Login with google')}}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326667 333333"
-                             shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-                             image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
-                            <path
+                    <div class="auth-social-media-buttons d-flex align-items-center flex-column gap-2 mt-4">
+                        <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'facebook']))}}"
+                            class="facebook d-flex align-items-center justify-content-around w-100">
+                            {{__('lang.Login with facebook')}}
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'google']))}}"
+                            class="google-auth d-flex align-items-center justify-content-around w-100">
+                            {{__('lang.Login with google')}}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326667 333333"
+                                shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                                image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+                                <path
                                     d="M326667 170370c0-13704-1112-23704-3518-34074H166667v61851h91851c-1851 15371-11851 38519-34074 54074l-311 2071 49476 38329 3428 342c31481-29074 49630-71852 49630-122593m0 0z"
                                     fill="#4285f4" />
-                            <path
+                                <path
                                     d="M166667 333333c44999 0 82776-14815 110370-40370l-52593-40742c-14074 9815-32963 16667-57777 16667-44074 0-81481-29073-94816-69258l-1954 166-51447 39815-673 1870c27407 54444 83704 91852 148890 91852z"
                                     fill="#34a853" />
-                            <path
+                                <path
                                     d="M71851 199630c-3518-10370-5555-21482-5555-32963 0-11482 2036-22593 5370-32963l-93-2209-52091-40455-1704 811C6482 114444 1 139814 1 166666s6482 52221 17777 74814l54074-41851m0 0z"
                                     fill="#fbbc04" />
-                            <path
+                                <path
                                     d="M166667 64444c31296 0 52406 13519 64444 24816l47037-45926C249260 16482 211666 1 166667 1 101481 1 45185 37408 17777 91852l53889 41853c13520-40185 50927-69260 95001-69260m0 0z"
                                     fill="#ea4335" />
-                        </svg>
-                    </a>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal auth-modal sign-up-modal fade" id="sign-up-modal" tabindex="-1" aria-labelledby="{{__('lang.Sign up')}}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign up')}}</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.register'))}}" method="post">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="{{__('lang.Name')}}">
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="{{__('lang.Email')}}">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="{{__('lang.Password')}}">
-                    </div>
-                </form>
-                <div class="auth-buttons d-flex flex-column ">
-                    <a href="#" class="main-btn rounded-0 w-100 text-center ">{{__('lang.Sign up')}}</a>
+    <div class="modal auth-modal sign-up-modal fade" id="sign-up-modal" tabindex="-1"
+        aria-labelledby="{{__('lang.Sign up')}}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5 text-center " id="exampleModalLabel">{{__('lang.Sign up')}}</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <p class="tcp-content">
-                    By Continuing you agree to our <a href="#">terms & conditions</a> and <a href="#">
-                        privacy
-                    </a>
-                </p>
-                <div class="auth-social-media-buttons d-flex align-items-center flex-column gap-2 mt-3">
-                    <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'facebook']))}}" class="facebook d-flex align-items-center justify-content-around w-100">
-                        {{__('lang.Login with facebook')}}
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                    <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'google']))}}" class="google-auth d-flex align-items-center justify-content-around w-100">
-                        {{__('lang.Login with google')}}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326667 333333"
-                             shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-                             image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
-                            <path
+                <div class="modal-body">
+                    <form action="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.register'))}}"
+                        method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="{{__('lang.Name')}}">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="{{__('lang.Email')}}">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="{{__('lang.Password')}}">
+                        </div>
+                    </form>
+                    <div class="auth-buttons d-flex flex-column ">
+                        <a href="#" class="main-btn rounded-0 w-100 text-center ">{{__('lang.Sign up')}}</a>
+                    </div>
+                    <p class="tcp-content">
+                        By Continuing you agree to our <a href="#">terms & conditions</a> and <a href="#">
+                            privacy
+                        </a>
+                    </p>
+                    <div class="auth-social-media-buttons d-flex align-items-center flex-column gap-2 mt-3">
+                        <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'facebook']))}}"
+                            class="facebook d-flex align-items-center justify-content-around w-100">
+                            {{__('lang.Login with facebook')}}
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.account.login_with_provider', ['provider' => 'google']))}}"
+                            class="google-auth d-flex align-items-center justify-content-around w-100">
+                            {{__('lang.Login with google')}}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326667 333333"
+                                shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                                image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+                                <path
                                     d="M326667 170370c0-13704-1112-23704-3518-34074H166667v61851h91851c-1851 15371-11851 38519-34074 54074l-311 2071 49476 38329 3428 342c31481-29074 49630-71852 49630-122593m0 0z"
                                     fill="#4285f4" />
-                            <path
+                                <path
                                     d="M166667 333333c44999 0 82776-14815 110370-40370l-52593-40742c-14074 9815-32963 16667-57777 16667-44074 0-81481-29073-94816-69258l-1954 166-51447 39815-673 1870c27407 54444 83704 91852 148890 91852z"
                                     fill="#34a853" />
-                            <path
+                                <path
                                     d="M71851 199630c-3518-10370-5555-21482-5555-32963 0-11482 2036-22593 5370-32963l-93-2209-52091-40455-1704 811C6482 114444 1 139814 1 166666s6482 52221 17777 74814l54074-41851m0 0z"
                                     fill="#fbbc04" />
-                            <path
+                                <path
                                     d="M166667 64444c31296 0 52406 13519 64444 24816l47037-45926C249260 16482 211666 1 166667 1 101481 1 45185 37408 17777 91852l53889 41853c13520-40185 50927-69260 95001-69260m0 0z"
                                     fill="#ea4335" />
-                        </svg>
-                    </a>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
-<div class="scroll-up">
-    <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}"/>
-</div>
+    <div class="scroll-up">
+        <img width="50" height="100" alt="scroll" src="{{asset('/website/images/scroll_up.png')}}" />
+    </div>
 
 
-<header>
-    <div class="px-4">
-        <div class="row">
-            <div class=" col-lg-6 col-xl-2 col-5">
-                <a href="{{url(app()->getLocale())}}">
-                    <div class="logo">
-                        <img width="197" height="60" src="{{asset('/storage/' .  app("settings")->get("header_logo")) }}" alt="logo" class="mw-100">
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-6 col-xl-3 col-md-7 col-12 mt-4 mt-md-0 justify-content-end  ">
-{{--                <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.pages.list-your-car'))}}"--}}
-{{--                   class="d-flex h-100 justify-content-lg-end justify-content-center  ">--}}
-{{--                    <div class="header__list_your_car">--}}
-{{--                        <img width="30" height="30" alt="listcar" class="car"--}}
-{{--                             src="{{asset('/website/images/header_car.png')}}">--}}
-{{--                        <p>{{__('lang.List your cars in TAJEER platform')}}</p>--}}
-{{--                        <img alt="upload" class="icon" width="26" height="25"--}}
-{{--                             src="{{asset('/website/images/icons/upload.png')}}">--}}
-{{--                    </div>--}}
-{{--                </a>--}}
-            </div>
-            <div class="col-lg-7">
-                <ul class="header__actions desktop__header_actions desktop-view-btns">
-                    <li class="header__actions_list_item">
-                        <p>
-                            <i class="fa fa-map-marker"></i>
-                            <span>{{__('lang.Location')}}</span>
-                        </p>
-                        <div class="dropdown ">
-                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                {{app('country')->getCountry()->title}}
-                            </a>
+    <header>
+        <div class="px-4">
+            <div class="row">
+                <div class=" col-lg-6 col-xl-2 col-5">
+                    <a href="{{url(app()->getLocale())}}">
+                        <div class="logo">
+                            <img width="197" height="60"
+                                src="{{asset('/storage/' . app("settings")->get("header_logo")) }}" alt="logo"
+                                class="mw-100">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-xl-3 col-md-7 col-12 mt-4 mt-md-0 justify-content-end  ">
+                    {{-- <a href="{{LaravelLocalization::getLocalizedUrl(null, route('website.pages.list-your-car'))}}"
+                        --}} {{-- class="d-flex h-100 justify-content-lg-end justify-content-center  ">--}}
+                        {{-- <div class="header__list_your_car">--}}
+                            {{-- <img width="30" height="30" alt="listcar" class="car" --}} {{--
+                                src="{{asset('/website/images/header_car.png')}}">--}}
+                            {{-- <p>{{__('lang.List your cars in TAJEER platform')}}</p>--}}
+                            {{-- <img alt="upload" class="icon" width="26" height="25" --}} {{--
+                                src="{{asset('/website/images/icons/upload.png')}}">--}}
+                            {{-- </div>--}}
+                        {{-- </a>--}}
+                </div>
+                <div class="col-lg-7">
+                    <ul class="header__actions desktop__header_actions desktop-view-btns">
+                        <li class="header__actions_list_item">
+                            <p>
+                                <i class="fa fa-map-marker"></i>
+                                <span>{{__('lang.Location')}}</span>
+                            </p>
+                            <div class="dropdown ">
+                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{app('country')->getCountry()->title}}
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                @foreach(app('country')->getAllCountries() as $country)
-                                    @if(count($country->cities) > 0)
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.switch.country', ['country' => $country])) }}" class="title-dropdown">{{$country->title}}</a>
+                                <ul class="dropdown-menu">
+                                    @foreach(app('country')->getAllCountries() as $country)
+                                        @if(count($country->cities) > 0)
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.switch.country', ['country' => $country])) }}"
+                                                        class="title-dropdown">{{$country->title}}</a>
 
                                                     <ul>
                                                         @foreach($country->cities as $city)
-                                                            <li class="@if(app('country')->getCity() && $city->id == app('country')->getCity()->id) active @endif">
-                                                                <a href="{{ LaravelLocalization::getLocalizedURL(null, route('website.switch.city', ['city' => $city])) }}">
+                                                            <li
+                                                                class="@if(app('country')->getCity() && $city->id == app('country')->getCity()->id) active @endif">
+                                                                <a
+                                                                    href="{{ LaravelLocalization::getLocalizedURL(null, route('website.switch.city', ['city' => $city])) }}">
                                                                     {{$city->title}}
                                                                 </a>
                                                                 @if (app('country')->getCity() && $city->id == app('country')->getCity()->id)
@@ -230,313 +248,123 @@
                                                         @endforeach
                                                     </ul>
 
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="header__actions_list_item">
-                        <p>
-                            <i class="far fa-money-bill-alt"></i>
-                            <span>{{__('lang.Currency')}}</span>
-                        </p>
-                        <div class="dropdown ">
-                            <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{app('currencies')->getCurrency()->code}}
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                @foreach(app('currencies')->getAllCurrencies() as $currency)
-                                    <li>
-                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route("website.switch.currency", ['currency' => $currency])) }}">{{$currency->code}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="header__actions_list_item">
-                        <p>
-                            <i class="fa fa-language"></i>
-                            <span>{{ __('lang.Language') }}</span>
-                        </p>
-                        <div class="dropdown ">
-                            <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                {{config('app.languages')[app()->getLocale()]}}
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                @foreach (LaravelLocalization::getSupportedLocales() as $langCode => $langDetails)
-                                    <li>
-                                        <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
-                                            <picture>
-                                                <img src="{{asset('assets/icons/lang_' . $langCode . '.png')}}" alt="{{ $langCode }}" class="mw-100">
-                                            </picture>
-                                            {{$langDetails['name']}}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="header__actions_list_item">
-                        @auth('customers')
-                            <div class="dropdown">
-                                <a class="text-white text-decoration-underline dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-regular fa-circle-user"></i>
-                                    {{ auth('customers')->user()->name ?? __('lang.My Account') }}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
-                                    </li>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                 </ul>
                             </div>
-                        @else
-                            <div class="auth-btns text-white  d-flex align-items-center gap-2">
-                                <a class="text-white text-decoration-underline " data-bs-toggle="modal"
-                                   data-bs-target="#login-modal">
-                                    {{__('lang.Sign in')}}
+                        </li>
+                        <li class="header__actions_list_item">
+                            <p>
+                                <i class="far fa-money-bill-alt"></i>
+                                <span>{{__('lang.Currency')}}</span>
+                            </p>
+                            <div class="dropdown ">
+                                <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{app('currencies')->getCurrency()->code}}
                                 </a>
-                                {{__('lang.Or')}}
-                                <a class="text-white text-decoration-underline " data-bs-toggle="modal"
-                                   data-bs-target="#sign-up-modal">
-                                    {{__('lang.Sign up')}}
-                                </a>
+
+                                <ul class="dropdown-menu">
+                                    @foreach(app('currencies')->getAllCurrencies() as $currency)
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ LaravelLocalization::getLocalizedURL(null, route("website.switch.currency", ['currency' => $currency])) }}">{{$currency->code}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        @endauth
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</header>
-
-<nav class="navbar navbar-expand-lg bg-white p-0 sticky-top">
-    <div class="navbar-container d-flex justify-content-between align-items-center px-4 w-100">
-        <div class="desktop-view d-flex align-items-center justify-content-between w-100 ">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{url(app()->getLocale())}}">{{__('lang.Home')}}</a>
-                </li>
-                <li class="nav-item ">
-                    <div class="dropdown">
-                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            {{__('lang.Car Brands')}}
-                        </a>
-                        <ul class="dropdown-menu brands-logo">
-                            <ul class="row">
-                                @foreach(app('cars')->brands as $item)
-                                    <li class="col-lg-3">
-                                        <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
-                                            <picture>
-                                                <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="{{ $item->name }}" class="mw-100">
-                                            </picture>
-                                            {{$item->title}}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </ul>
-                    </div>
-                </li>
-
-                @if ($type = Type::whereSlug('with-driver')->first())
-                    <li class="nav-item active">
-                        <a class="nav-link"
-                           href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers')) }}">{{__('lang.Rent a car with driver')}}</a>
-                    </li>
-                @endif
-
-                @if ($type = Type::whereSlug('yachts')->first())
-                    <li class="nav-item active">
-                        <a class="nav-link"
-                           href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent yacht')}}</a>
-                    </li>
-                @endif
-
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
-                </li>
-
-                <li class="nav-item ">
-                    <div class="dropdown ">
-                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            {{__('lang.Quick Links')}}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <a class="dropdown-item"
-                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
-                            @foreach(app('settings')->getHeaderPages() as $item)
-                                <a class="dropdown-item"
-                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
-                            @endforeach
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-            <div class="nav-icons my-2 my-lg-0 flex-column mt-5 mt-lg-0   ">
-                <ul class="mb-4 mb-lg-0 ">
-                    <li>
-                        <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
-                            <img width="36" height="36" alt="call"
-                                 src="{{asset('/website/images/icons/call.png')}}">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{app('settings')->get('contact_facebook')}}">
-                            <img width="36" height="36" alt="fb"
-                                 src="{{asset('/website/images/icons/facebook.png')}}">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{app('settings')->get('contact_twitter')}}">
-                            <img width="36" height="36" alt="twitter"
-                                 src="{{asset('/website/images/icons/twitter.png')}}">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{app('settings')->get('contact_instagram')}}">
-                            <img width="36" height="36" alt="instagrm"
-                                 src="{{asset('/website/images/icons/instagram.png')}}">
-                        </a>
-                    </li>
-                </ul>
-                <ul class="apps">
-                    <li>
-                        <a href="{{app('settings')->get('app_google_play')}}">
-                            <img width="125" height="37" alt="app" class="apps-image"
-                                 src="{{asset('/website/images/icons/googleplay.webp')}}">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{app('settings')->get('app_apple_store')}}">
-                            <img alt="app" width="115" height="41" class="apps-image"
-                                 src="{{asset('/website/images/icons/appstore.webp')}}">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <button class="navbar-toggler bar-icon" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <ul class="header__actions desktop__header_actions mobile-view-btns">
-            <li class="header__actions_list_item">
-                <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                </p>
-                <div class="dropdown ">
-                    <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{app('country')->getCountry()->title}}
-                    </a>
-                    <ul class="dropdown-menu">
-                        @foreach(app('country')->getAllCountries() as $country)
-                            @if(count($country->cities) > 0)
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.switch.country', ['country' => $country])) }}" class="title-dropdown">{{app('country')->getCountry()->title}}</a>
-                                            <ul>
-                                                @foreach($country->cities as $city)
-                                                    <li class="@if(app('country')->getCity() && $city->id == app('country')->getCity()->id) active @endif">
-                                                        <a href="{{ LaravelLocalization::getLocalizedURL(null, route('website.switch.city', ['city' => $city])) }}">
-                                                            {{$city->title}}
-                                                        </a>
-                                                        @if (app('country')->getCity() && $city->id == app('country')->getCity()->id)
-                                                            <i class="fa-solid fa-check"></i>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                    </a>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            </li>
-            <li class="header__actions_list_item">
-                <p>
-                    <i class="far fa-money-bill-alt"></i>
-                </p>
-                <div class="dropdown ">
-                    <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        {{app('currencies')->getCurrency()->code}}
-                    </a>
-                    <ul class="dropdown-menu">
-                        @foreach(app('currencies')->getAllCurrencies() as $currency)
-                            <li>
-                                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route("website.switch.currency", ['currency' => $currency])) }}">{{$currency->code}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </li>
-            <li class="header__actions_list_item">
-                <p>
-                    <i class="fa fa-language"></i>
-                </p>
-                <div class="dropdown ">
-                    <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        {{config('app.languages')[app()->getLocale()]}}
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        @foreach (LaravelLocalization::getSupportedLocales() as $langCode => $langDetails)
-                            <li>
-                                <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}" class="dropdown-item">
-                                    <picture>
-                                        <img src="/assets/icons/lang_{{$langCode}}.png" alt="{{ $langCode }}" class="mw-100">
-                                    </picture>
-                                    {{$langDetails['name']}}
+                        </li>
+                        <li class="header__actions_list_item">
+                            <p>
+                                <i class="fa fa-language"></i>
+                                <span>{{ __('lang.Language') }}</span>
+                            </p>
+                            <div class="dropdown ">
+                                <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{config('app.languages')[app()->getLocale()]}}
                                 </a>
-                            </li>
-                        @endforeach
+
+                                <ul class="dropdown-menu">
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $langCode => $langDetails)
+                                        <li>
+                                            <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}"
+                                                class="dropdown-item">
+                                                <picture width="" height="">
+                                                    <img src="{{asset('assets/icons/lang_' . $langCode . '.png')}}"
+                                                        alt="{{ $langCode }}" class="mw-100 nosize" data-nosize="1">
+                                                </picture>
+                                                {{$langDetails['name']}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="header__actions_list_item">
+                            @auth('customers')
+                                <div class="dropdown">
+                                    <a class="text-white text-decoration-underline dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-regular fa-circle-user"></i>
+                                        {{ auth('customers')->user()->name ?? __('lang.My Account') }}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <div class="auth-btns text-white  d-flex align-items-center gap-2">
+                                    <a class="text-white text-decoration-underline " data-bs-toggle="modal"
+                                        data-bs-target="#login-modal">
+                                        {{__('lang.Sign in')}}
+                                    </a>
+                                    {{__('lang.Or')}}
+                                    <a class="text-white text-decoration-underline " data-bs-toggle="modal"
+                                        data-bs-target="#sign-up-modal">
+                                        {{__('lang.Sign up')}}
+                                    </a>
+                                </div>
+                            @endauth
+                        </li>
                     </ul>
                 </div>
-            </li>
-        </ul>
-        <div class="offcanvas offcanvas-end mobile-view" tabindex="-1" id="offcanvasNavbar"
-             aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <div class="logo">
-                    <img width="197" height="60" src="{{asset('/storage/' .  app("settings")->get("header_logo")) }}" alt="logo">
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
             </div>
-            <div class="offcanvas-body d-flex align-items-center">
+
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-white p-0 sticky-top">
+        <div class="navbar-container d-flex justify-content-between align-items-center px-4 w-100">
+            <div class="desktop-view d-flex align-items-center justify-content-between w-100 ">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="{{url(app()->getLocale())}}">{{__('lang.Home')}}</a>
                     </li>
                     <li class="nav-item ">
                         <div class="dropdown">
                             <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                                aria-expanded="false">
                                 {{__('lang.Car Brands')}}
-                                <i class="fa-solid fa-chevron-down"></i>
                             </a>
                             <ul class="dropdown-menu brands-logo">
                                 <ul class="row">
                                     @foreach(app('cars')->brands as $item)
                                         <li class="col-lg-3">
-                                            <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
+                                            <a class="dropdown-item"
+                                                href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
                                                 <picture>
-                                                    <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}" alt="{{ $item->name }}" class="mw-100">
+                                                    <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}"
+                                                        alt="{{ $item->name }}" class="mw-100">
                                                 </picture>
                                                 {{$item->title}}
                                             </a>
@@ -546,348 +374,567 @@
                             </ul>
                         </div>
                     </li>
+
                     @if ($type = Type::whereSlug('with-driver')->first())
                         <li class="nav-item active">
                             <a class="nav-link"
-                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers')) }}">{{__('lang.Rent a car with driver')}}</a>
+                                href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers')) }}">{{__('lang.Rent a car with driver')}}</a>
                         </li>
                     @endif
 
                     @if ($type = Type::whereSlug('yachts')->first())
                         <li class="nav-item active">
                             <a class="nav-link"
-                               href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent yacht')}}</a>
+                                href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent yacht')}}</a>
                         </li>
                     @endif
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
+                        <a class="nav-link"
+                            href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
                     </li>
 
                     <li class="nav-item ">
                         <div class="dropdown ">
                             <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                                aria-expanded="false">
                                 {{__('lang.Quick Links')}}
                             </a>
                             <ul class="dropdown-menu">
                                 <a class="dropdown-item"
-                                   href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
+                                    href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
                                 @foreach(app('settings')->getHeaderPages() as $item)
                                     <a class="dropdown-item"
-                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
+                                        href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
                                 @endforeach
                             </ul>
                         </div>
                     </li>
                 </ul>
-                <div class="account-info d-flex flex-column gap-3 w-100 ">
-                    @auth('customers')
-                        <div class="dropdown">
-                            <a href="#" class="my-account d-flex align-items-center gap-2 dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-regular fa-circle-user"></i>
-                                <p class="mb-0">{{ auth('customers')->user()->name ?? __('lang.My Account') }}</p>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    @else
-                        <a href="#" class="my-account d-flex align-items-center gap-2">
-                            <i class="fa-regular fa-circle-user"></i>
-                            <p class="mb-0">{{__('lang.My Account')}}</p>
-                        </a>
-                        <div class="auth-btns d-flex align-items-center justify-content-around "
-                             data-bs-toggle="modal" data-bs-target="#login-modal">
-                            <a href=" #" class="main-btn">
-                                {{__('lang.Sign in')}}
-                            </a>
-                            <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
-                                {{__('lang.Sign up')}}
-                            </a>
-                        </div>
-                    @endauth
-                </div>
-                <div class=" nav-icons my-2 my-lg-0 flex-column mt-lg-0 d-flex w-100 justify-content-center
-                                    align-items-center ">
-                    <ul class=" mb-4 mb-xlg-0 ">
+                <div class="nav-icons my-2 my-lg-0 flex-column mt-5 mt-lg-0   ">
+                    <ul class="mb-4 mb-lg-0 ">
                         <li>
-                            <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
+                            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
                                 <img width="36" height="36" alt="call"
-                                     src="https://tajeercarrent.com/website/images/icons/call.png">
+                                    src="{{asset('/website/images/icons/call.png')}}">
                             </a>
                         </li>
                         <li>
                             <a href="{{app('settings')->get('contact_facebook')}}">
                                 <img width="36" height="36" alt="fb"
-                                     src="{{asset('/website/images/icons/facebook.png')}}">
+                                    src="{{asset('/website/images/icons/facebook.png')}}">
                             </a>
                         </li>
                         <li>
                             <a href="{{app('settings')->get('contact_twitter')}}">
                                 <img width="36" height="36" alt="twitter"
-                                     src="{{asset('/website/images/icons/twitter.png')}}">
+                                    src="{{asset('/website/images/icons/twitter.png')}}">
                             </a>
                         </li>
                         <li>
                             <a href="{{app('settings')->get('contact_instagram')}}">
                                 <img width="36" height="36" alt="instagrm"
-                                     src="{{asset('/website/images/icons/instagram.png')}}">
+                                    src="{{asset('/website/images/icons/instagram.png')}}">
                             </a>
                         </li>
                     </ul>
-                    <ul>
+                    <ul class="apps">
                         <li>
                             <a href="{{app('settings')->get('app_google_play')}}">
                                 <img width="125" height="37" alt="app" class="apps-image"
-                                     src="{{asset('/website/images/icons/googleplay.webp')}}">
+                                    src="{{asset('/website/images/icons/googleplay.webp')}}">
                             </a>
                         </li>
                         <li>
                             <a href="{{app('settings')->get('app_apple_store')}}">
                                 <img alt="app" width="115" height="41" class="apps-image"
-                                     src="{{asset('/website/images/icons/appstore.webp')}}">
+                                    src="{{asset('/website/images/icons/appstore.webp')}}">
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+            <button class="navbar-toggler bar-icon" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="header__actions desktop__header_actions mobile-view-btns">
+                <li class="header__actions_list_item">
+                    <p>
+                        <i class="fa-solid fa-location-dot"></i>
+                    </p>
+                    <div class="dropdown ">
+                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{app('country')->getCountry()->title}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach(app('country')->getAllCountries() as $country)
+                                @if(count($country->cities) > 0)
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <a href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.switch.country', ['country' => $country])) }}"
+                                                class="title-dropdown">{{app('country')->getCountry()->title}}</a>
+                                            <ul>
+                                                @foreach($country->cities as $city)
+                                                    <li
+                                                        class="@if(app('country')->getCity() && $city->id == app('country')->getCity()->id) active @endif">
+                                                        <a
+                                                            href="{{ LaravelLocalization::getLocalizedURL(null, route('website.switch.city', ['city' => $city])) }}">
+                                                            {{$city->title}}
+                                                        </a>
+                                                        @if (app('country')->getCity() && $city->id == app('country')->getCity()->id)
+                                                            <i class="fa-solid fa-check"></i>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                <li class="header__actions_list_item">
+                    <p>
+                        <i class="far fa-money-bill-alt"></i>
+                    </p>
+                    <div class="dropdown ">
+                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{app('currencies')->getCurrency()->code}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach(app('currencies')->getAllCurrencies() as $currency)
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="{{ LaravelLocalization::getLocalizedURL(null, route("website.switch.currency", ['currency' => $currency])) }}">{{$currency->code}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                <li class="header__actions_list_item">
+                    <p>
+                        <i class="fa fa-language"></i>
+                    </p>
+                    <div class="dropdown ">
+                        <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{config('app.languages')[app()->getLocale()]}}
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            @foreach (LaravelLocalization::getSupportedLocales() as $langCode => $langDetails)
+                                <li>
+                                    <a href="{{ LaravelLocalization::getLocalizedURL($langCode, null, [], true)  }}"
+                                        class="dropdown-item">
+                                        <picture>
+                                            <img src="/assets/icons/lang_{{$langCode}}.png" alt="{{ $langCode }}"
+                                                class="mw-100 nosize" data-nosize="1">
+                                        </picture>
+                                        {{$langDetails['name']}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="offcanvas offcanvas-end mobile-view" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <div class="logo">
+                        <img width="197" height="60"
+                            src="{{asset('/storage/' . app("settings")->get("header_logo")) }}" alt="logo">
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="offcanvas-body d-flex align-items-center">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url(app()->getLocale())}}">{{__('lang.Home')}}</a>
+                        </li>
+                        <li class="nav-item ">
+                            <div class="dropdown">
+                                <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{__('lang.Car Brands')}}
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu brands-logo">
+                                    <ul class="row">
+                                        @foreach(app('cars')->brands as $item)
+                                            <li class="col-lg-3">
+                                                <a class="dropdown-item"
+                                                    href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.cars.brands.show', ['brand' => $item]))}}">
+                                                    <picture>
+                                                        <img src="/storage/{{\App\Helpers\WebpImage::generateUrl($item->image)}}"
+                                                            alt="{{ $item->name }}" class="mw-100">
+                                                    </picture>
+                                                    {{$item->title}}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </ul>
+                            </div>
+                        </li>
+                        @if ($type = Type::whereSlug('with-driver')->first())
+                            <li class="nav-item active">
+                                <a class="nav-link"
+                                    href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.with-drivers')) }}">{{__('lang.Rent a car with driver')}}</a>
+                            </li>
+                        @endif
+
+                        @if ($type = Type::whereSlug('yachts')->first())
+                            <li class="nav-item active">
+                                <a class="nav-link"
+                                    href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent yacht')}}</a>
+                            </li>
+                        @endif
+
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                                href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index')) }}">{{__('lang.Blog')}}</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <div class="dropdown ">
+                                <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{__('lang.Quick Links')}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item"
+                                        href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.contact-us')) }}">{{__('lang.Contact Us')}}</a>
+                                    @foreach(app('settings')->getHeaderPages() as $item)
+                                        <a class="dropdown-item"
+                                            href="{{ LaravelLocalization::getLocalizedURL(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="account-info d-flex flex-column gap-3 w-100 ">
+                        @auth('customers')
+                            <div class="dropdown">
+                                <a href="#" class="my-account d-flex align-items-center gap-2 dropdown-toggle" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                    <p class="mb-0">{{ auth('customers')->user()->name ?? __('lang.My Account') }}</p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.wishlist')) }}">{{ __('lang.Wishlist') }}</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{ LaravelLocalization::getLocalizedURL(null, route('website.account.logout')) }}">{{ __('lang.Logout') }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @else
+                            <a href="#" class="my-account d-flex align-items-center gap-2">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <p class="mb-0">{{__('lang.My Account')}}</p>
+                            </a>
+                            <div class="auth-btns d-flex align-items-center justify-content-around " data-bs-toggle="modal"
+                                data-bs-target="#login-modal">
+                                <a href=" #" class="main-btn">
+                                    {{__('lang.Sign in')}}
+                                </a>
+                                <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#sign-up-modal">
+                                    {{__('lang.Sign up')}}
+                                </a>
+                            </div>
+                        @endauth
+                    </div>
+                    <div class=" nav-icons my-2 my-lg-0 flex-column mt-lg-0 d-flex w-100 justify-content-center
+                                    align-items-center ">
+                        <ul class=" mb-4 mb-xlg-0 ">
+                            <li>
+                                <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
+                                    <img width="36" height="36" alt="call"
+                                        src="https://tajeercarrent.com/website/images/icons/call.png">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{app('settings')->get('contact_facebook')}}">
+                                    <img width="36" height="36" alt="fb"
+                                        src="{{asset('/website/images/icons/facebook.png')}}">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{app('settings')->get('contact_twitter')}}">
+                                    <img width="36" height="36" alt="twitter"
+                                        src="{{asset('/website/images/icons/twitter.png')}}">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{app('settings')->get('contact_instagram')}}">
+                                    <img width="36" height="36" alt="instagrm"
+                                        src="{{asset('/website/images/icons/instagram.png')}}">
+                                </a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="{{app('settings')->get('app_google_play')}}">
+                                    <img width="125" height="37" alt="app" class="apps-image"
+                                        src="{{asset('/website/images/icons/googleplay.webp')}}">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{app('settings')->get('app_apple_store')}}">
+                                    <img alt="app" width="115" height="41" class="apps-image"
+                                        src="{{asset('/website/images/icons/appstore.webp')}}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-@section("content")
-@show
+    @section("content")
+    @show
 
-<section>
-    <div class="container">
-        <div class="social-icons-new-box">
-            <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
-                <picture>
-                    <img src="{{asset('/assets/images/Group 2704.png')}}" alt="اتصال">
-                </picture>
-            </a>
-            <a href="{{app('settings')->get('contact_facebook')}}">
-                <picture>
-                    <img src="{{asset('/assets/images/Path 1072.png')}}" alt="فيسبوك">
-                </picture>
-            </a>
-            <a href="{{app('settings')->get('contact_twitter')}}">
-                <picture>
-                    <img src="{{asset('/assets/images/Group 2707.png')}}" alt="تويتر">
-                </picture>
-            </a>
-            <a href="{{app('settings')->get('contact_instagram')}}">
-                <picture>
-                    <img src="{{asset('/assets/images/XMLID_13_.png')}}" alt="انستجرام">
-                </picture>
-            </a>
+    <section>
+        <div class="container">
+            <div class="social-icons-new-box">
+                <a href="tel:{{str_replace(' ', '', app('settings')->get('contact_phone'))}}">
+                    <picture>
+                        <img src="{{asset('/assets/images/Group 2704.png')}}" alt="اتصال">
+                    </picture>
+                </a>
+                <a href="{{app('settings')->get('contact_facebook')}}">
+                    <picture>
+                        <img src="{{asset('/assets/images/Path 1072.png')}}" alt="فيسبوك">
+                    </picture>
+                </a>
+                <a href="{{app('settings')->get('contact_twitter')}}">
+                    <picture>
+                        <img src="{{asset('/assets/images/Group 2707.png')}}" alt="تويتر">
+                    </picture>
+                </a>
+                <a href="{{app('settings')->get('contact_instagram')}}">
+                    <picture>
+                        <img src="{{asset('/assets/images/XMLID_13_.png')}}" alt="انستجرام">
+                    </picture>
+                </a>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <img class="bg" loading="lazy" src="{{asset('/website/images/footer_bg.webp')}}" alt="bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 links-footer">
-                @php
-                    $types = Type::all();
-                    $pages = app('settings')->getFooterPages();
-                    $statics = collect([
-                        (object)['name' => __('lang.FAQ'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.faq'))],
-                        (object)['name' => __('lang.Blogs'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index'))],
-                        (object)['name' => __('lang.Contact Us'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us'))]
-                    ]);
+    <footer>
+        <img class="bg" loading="lazy" src="{{asset('/website/images/footer_bg.webp')}}" alt="bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 links-footer">
+                    @php
+                        $types = Type::all();
+                        $pages = app('settings')->getFooterPages();
+                        $statics = collect([
+                            (object) ['name' => __('lang.FAQ'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.faq'))],
+                            (object) ['name' => __('lang.Blogs'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.blogs.index'))],
+                            (object) ['name' => __('lang.Contact Us'), 'static' => 1, 'link' => LaravelLocalization::getLocalizedUrl(null, route('website.pages.contact-us'))]
+                        ]);
 
-                    $items = collect();
-                    $items = $items->merge($types);
-                    $items = $items->merge($pages);
-                    $items = $items->merge($statics)
-                @endphp
-                @foreach ($items->chunk(10) as $chunk)
-                    <ul>
-                        @foreach ($chunk as $item)
-                            @if ($item instanceof Type)
-                                @if ($item->slug == 'yachts')
+                        $items = collect();
+                        $items = $items->merge($types);
+                        $items = $items->merge($pages);
+                        $items = $items->merge($statics)
+                    @endphp
+                    @foreach ($items->chunk(10) as $chunk)
+                        <ul>
+                            @foreach ($chunk as $item)
+                                @if ($item instanceof Type)
+                                    @if ($item->slug == 'yachts')
+                                        <li>
+                                            <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
+                                                href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent')}}
+                                                {{$item->title}} {{app('country')->getCity()->title}}</a>
+                                        </li>
+                                        @continue
+                                    @endif
                                     <li>
                                         <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
-                                           href="{{ LaravelLocalization::getLocalizedURL(null, route('website.yachts.index')) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
+                                            href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}}
+                                            {{$item->title}} {{app('country')->getCity()->title}}</a>
                                     </li>
-                                    @continue
+                                @elseif($item instanceof \App\Models\Page)
+                                    <li>
+                                        <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
+                                            href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
+                                            href="{{ $item->link }}">{{$item->name}}</a>
+                                    </li>
                                 @endif
-                                <li>
-                                    <a data-toggle="tooltip" data-placement="left" title="{{__('lang.Rent')}} {{$item->title}}"
-                                       href="{{ LaravelLocalization::getLocalizedURL(null, route('website.cars.types.show', ['type' => $item])) }}">{{__('lang.Rent')}} {{$item->title}} {{app('country')->getCity()->title}}</a>
-                                </li>
-                            @elseif($item instanceof \App\Models\Page)
-                                <li>
-                                    <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
-                                       href="{{ LaravelLocalization::getLocalizedUrl(null, route('website.pages.show', ['page' => $item])) }}">{{$item->name}}</a>
-                                </li>
-                            @else
-                                <li>
-                                    <a data-toggle="tooltip" data-placement="left" title="{{$item->name}}"
-                                       href="{{ $item->link }}">{{$item->name}}</a>
-                                </li>
-                            @endif
-                        @endforeach
+                            @endforeach
+                        </ul>
+                    @endforeach
+
+                    <ul class="justify-content-center">
+                        <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
+                        <li>
+                            <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
+                                <i class="fa fa-phone"></i> {{app('settings')->get('contact_phone')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}"
+                                rel="nofollow noopener">
+                                <i class="fa-brands fa-whatsapp whatsapp-contact"></i>
+                                {{app('settings')->get('contact_whatsapp')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:{{app('settings')->get('contact_email')}}">
+                                <i class="fa-solid fa-envelope"></i>
+                                {{app('settings')->get('contact_email')}}
+                            </a>
+                        </li>
                     </ul>
-                @endforeach
+                </div>
 
-                <ul class="justify-content-center">
-                    <li><a href="#">{{__('lang.For Inquires and Support')}}</a></li>
-                    <li>
-                        <a href="tel:{{str_replace(['+', ' '], '', app('settings')->get('contact_phone'))}}">
-                            <i class="fa fa-phone"></i> {{app('settings')->get('contact_phone')}}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wa.me/{{str_replace(['+', ' '], '', app('settings')->get('contact_whatasapp'))}}" rel="nofollow noopener">
-                            <i class="fa-brands fa-whatsapp whatsapp-contact"></i> {{app('settings')->get('contact_whatsapp')}}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="mailto:{{app('settings')->get('contact_email')}}">
-                            <i class="fa-solid fa-envelope"></i>
-                            {{app('settings')->get('contact_email')}}
-                        </a>
-                    </li>
-                </ul>
+                <div class="col-lg-3 d-flex align-items-end justify-content-center">
+                    <div class="footer-apps" style="max-width: 170px">
+                        <p>
+                            <span class="text-white"
+                                style="display: inline-block; text-align: start">{{__('lang.Downloads')}}</span>
+                            <a style="margin-top:15px;display:block" href="{{app('settings')->get('app_google_play')}}">
+                                <img alt="app" width="125" height="37"
+                                    src="{{asset('/website/images/icons/googleplay.webp')}}">
+                            </a>
+                            <a href="{{app('settings')->get('app_apple_store')}}">
+                                <img loading="lazy" width="125" height="37" style="margin-top:10px" alt="app"
+                                    src="{{asset('/website/images/icons/appstore2.webp')}}">
+
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-lg-3 d-flex align-items-end justify-content-center">
-                <div class="footer-apps" style="max-width: 170px">
-                    <p>
-                        <span class="text-white" style="display: inline-block; text-align: start">{{__('lang.Downloads')}}</span>
-                        <a style="margin-top:15px;display:block"
-                           href="{{app('settings')->get('app_google_play')}}">
-                            <img alt="app" width="125" height="37"
-                                 src="{{asset('/website/images/icons/googleplay.webp')}}">
-                        </a>
-                        <a href="{{app('settings')->get('app_apple_store')}}">
-                            <img loading="lazy" width="125" height="37" style="margin-top:10px" alt="app"
-                                 src="{{asset('/website/images/icons/appstore2.webp')}}">
-
-                        </a>
-                    </p>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-bottom">
+                        <p class="fs-6">
+                            <i class="fa fa-location-dot text-white mx-2"></i>
+                            {{app('settings')->get('footer_address')}}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="footer-bottom">
-                    <p class="fs-6">
-                        <i class="fa fa-location-dot text-white mx-2"></i> {{app('settings')->get('footer_address')}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<script type="text/javascript" src="{{asset('/js/jquery-3.7.1.js')}}"></script>
-<script type="text/javascript" src="{{asset('/js/slick-1.8.1/slick/slick.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('/js/bootstrap/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/intlTelInputWithUtils.min.js')}}"/>
-<script src="{{asset('/js/main.js')}}"></script>
-<script src="{{asset('js/wow.js')}}"></script>
-<script>
-    new WOW().init();
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.read-more-btn').forEach(btn => {
-            const descriptionText = btn.previousElementSibling;
-            const lineHeight = parseFloat(getComputedStyle(descriptionText).lineHeight);
-            const lines = descriptionText.scrollHeight / lineHeight;
+    <script type="text/javascript" src="{{asset('/js/jquery-3.7.1.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/js/slick-1.8.1/slick/slick.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/js/bootstrap/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/intlTelInputWithUtils.min.js')}}" />
+    <script src="{{asset('/js/main.js')}}"></script>
+    <script src="{{asset('js/wow.js')}}"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                const descriptionText = btn.previousElementSibling;
+                const lineHeight = parseFloat(getComputedStyle(descriptionText).lineHeight);
+                const lines = descriptionText.scrollHeight / lineHeight;
 
-            if (lines <= 2.5) {
-                btn.style.display = 'none';
+                if (lines <= 2.5) {
+                    btn.style.display = 'none';
+                }
+
+                btn.addEventListener('click', function () {
+                    if (descriptionText.classList.contains('expanded')) {
+                        descriptionText.classList.remove('expanded');
+                        this.textContent = '{{__('lang.Read More')}}';
+                    } else {
+                        descriptionText.classList.add('expanded');
+                        this.textContent = '{{__('lang.Read Less')}}';
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.home-content-section').forEach(function (section) {
+            const contentWrapper = section.querySelector('.home-desc');
+            const btn = section.querySelector('.main-btn');
+            const image = section.querySelector('picture img');
+            let height = 500;
+
+            function checkHeight() {
+                height = image.offsetHeight || 500;
+                const contentHeight = contentWrapper.scrollHeight;
+
+                if (contentHeight <= height) {
+                    btn.style.display = 'none';
+                } else {
+                    btn.style.display = 'block';
+                    contentWrapper.style.maxHeight = height + 'px';
+                }
+            }
+
+            if (!image.complete) {
+                checkHeight();
+            } else {
+                image.onload = checkHeight;
             }
 
             btn.addEventListener('click', function () {
-                if (descriptionText.classList.contains('expanded')) {
-                    descriptionText.classList.remove('expanded');
-                    this.textContent = '{{__('lang.Read More')}}';
+                if (contentWrapper.classList.contains('show-more')) {
+                    contentWrapper.classList.remove('show-more');
+                    btn.textContent = '{{__('lang.Read More')}}';
+                    contentWrapper.style.maxHeight = height + 'px';
                 } else {
-                    descriptionText.classList.add('expanded');
-                    this.textContent = '{{__('lang.Read Less')}}';
+                    contentWrapper.classList.add('show-more');
+                    btn.textContent = '{{__('lang.Read Less')}}';
+                    contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
                 }
             });
         });
-    });
 
-    document.querySelectorAll('.home-content-section').forEach(function (section) {
-        const contentWrapper = section.querySelector('.home-desc');
-        const btn = section.querySelector('.main-btn');
-        const image = section.querySelector('picture img');
-        let height = 500;
-
-        function checkHeight() {
-            height = image.offsetHeight || 500;
-            const contentHeight = contentWrapper.scrollHeight;
-
-            if (contentHeight <= height) {
-                btn.style.display = 'none';
-            } else {
-                btn.style.display = 'block';
-                contentWrapper.style.maxHeight = height + 'px';
-            }
-        }
-
-        if (!image.complete) {
-            checkHeight();
-        } else {
-            image.onload = checkHeight;
-        }
-
-        btn.addEventListener('click', function () {
-            if (contentWrapper.classList.contains('show-more')) {
-                contentWrapper.classList.remove('show-more');
-                btn.textContent = '{{__('lang.Read More')}}';
-                contentWrapper.style.maxHeight = height + 'px';
-            } else {
-                contentWrapper.classList.add('show-more');
-                btn.textContent = '{{__('lang.Read Less')}}';
-                contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
-            }
-        });
-    });
-
-    $(function(){
-        $(".scroll-up").on('click', function (){
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(function () {
+            $(".scroll-up").on('click', function () {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            })
         })
-    })
-</script>
-
-@section("js")
-@show
-
-@if($errors->signup->any())
-    <script>
-        $('#signupModal').modal('show');
     </script>
-@endif
-@if($errors->login->any() || request()->get('login'))
-    <script>
-        $('#signinModal').modal('show');
-    </script>
-@endif
+
+    @section("js")
+    @show
+
+    @if($errors->signup->any())
+        <script>
+            $('#signupModal').modal('show');
+        </script>
+    @endif
+    @if($errors->login->any() || request()->get('login'))
+        <script>
+            $('#signinModal').modal('show');
+        </script>
+    @endif
 
 
-@section('breadcrumbs')
-@show
+    @section('breadcrumbs')
+    @show
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "LocalBusiness",
@@ -908,7 +955,7 @@
 </script>
 
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
         "@type": "ImageObject",
@@ -920,7 +967,8 @@
         }
 </script>
 
-@section('schemas')
-@show
+    @section('schemas')
+    @show
 </body>
+
 </html>

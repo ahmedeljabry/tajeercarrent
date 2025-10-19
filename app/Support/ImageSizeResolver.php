@@ -7,9 +7,44 @@ use Illuminate\Support\Str;
 
 class ImageSizeResolver
 {
+    /**
+     * Detect if the URL already encodes explicit width and height so we should not add them.
+     * Examples handled:
+     *  - Query params like ?w=800&h=600 or ?width=800&height=600
+     *  - Filename pattern like image-800x600.jpg
+     */
+    public static function hasDimensionsInUrl(string $src): bool
+    {
+        if (!$src) return false;
+
+        $path = (string) (parse_url($src, PHP_URL_PATH) ?? '');
+        $query = (string) (parse_url($src, PHP_URL_QUERY) ?? '');
+
+        // Pattern like -800x600 before file extension
+        if ($path && preg_match('/-(\d{1,5})x(\d{1,5})(?=\.[a-zA-Z]{2,5}\b)/', $path)) {
+            return true;
+        }
+
+        if ($query) {
+            parse_str($query, $params);
+            $w = $params['w'] ?? $params['width'] ?? null;
+            $h = $params['h'] ?? $params['height'] ?? null;
+            if (is_numeric($w) && is_numeric($h) && (int)$w > 0 && (int)$h > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function get(string $src, bool $allowExternalFetch = false): array
     {
         if (!$src) return [null, null];
+
+        // If URL already carries explicit dimensions, opt-out from adding attributes
+        if (self::hasDimensionsInUrl($src)) {
+            return [null, null];
+        }
 
         $cacheKey = 'imgsize:' . md5($src);
 
