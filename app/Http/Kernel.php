@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CanonicalUrl::class,
             \App\Http\Middleware\NoIndexForUtilityRoutes::class,
             \App\Http\Middleware\SecurityHeaders::class,
-            \App\Http\Middleware\HtmlImageSizer::class,
+            // \App\Http\Middleware\HtmlImageSizer::class,
             \App\Http\Middleware\HtmlAltShortener::class,
         ],
 

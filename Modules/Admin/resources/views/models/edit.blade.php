@@ -96,8 +96,6 @@
                                 "faq" => \App\Models\Faq::where([["type", "model"],["resource_id", $item->id]])->get()
                             ])  
                         </div>  
-              
-              
                     </div>
 
                 </form>
