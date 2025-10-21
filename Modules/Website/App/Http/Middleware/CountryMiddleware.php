@@ -24,56 +24,83 @@ class CountryMiddleware
             return $next($request);
 
         $route = $request->route();
+        $routeName = $route?->getName();
 
         $segments = $request->segments();
-        $country = Country::whereSlug($segments[1] ?? null)->first();
-        $city = City::whereSlug($segments[2] ?? null)->first();
+        $localeKeys = \LaravelLocalization::getSupportedLanguagesKeys();
+        $offset = in_array($segments[0] ?? '', $localeKeys, true) ? 1 : 0;
+
+        $country = Country::whereSlug($segments[$offset] ?? null)->first();
+        $city = City::whereSlug($segments[$offset + 1] ?? null)->first();
+        $hadCountryInUrl = isset($segments[$offset]) && ($segments[$offset] !== null && $segments[$offset] !== '');
+        $hadCityInUrl = isset($segments[$offset + 1]) && ($segments[$offset + 1] !== null && $segments[$offset + 1] !== '');
 
         if (!$country) {
-            $country = Country::whereDefault(true)->first() ?? Country::first();
-            $city =  $country?->cities()->whereDefault(true)->first() ?? $country?->cities()->first();
+            $defaultCountrySlug = config('website.default_country_slug');
+            $defaultCitySlug = config('website.default_city_slug');
+
+            $country = ($defaultCountrySlug ? Country::whereSlug($defaultCountrySlug)->first() : null)
+                ?? Country::whereDefault(true)->first()
+                ?? Country::first();
+
+            if ($country) {
+                $city = $defaultCitySlug
+                    ? $country->cities()->whereSlug($defaultCitySlug)->first()
+                    : null;
+                $city = $city
+                    ?? $country->cities()->whereDefault(true)->first()
+                    ?? $country->cities()->first();
+            }
             if ($country && $city) {
                 Cookie::queue('country_id', $country->id, 60 * 60 * 24 * 30);
                 Cookie::queue('city_id', $city->id, 60 * 60 * 24 * 30);
-                return redirect()->route($route->getName(), [
-                    'country' => $country,
-                    'city' => $city,
-                ]);
+                // Redirect to include defaults on all routes except home
+                if ($routeName && $routeName !== 'home') {
+                    $params = $route->parameters();
+                    $params['country'] = $country;
+                    $params['city'] = $city;
+                    return redirect()->route($routeName, $params);
+                }
             }
         }
 
         if ($country && !$city) {
-            $city = $country->cities()->whereDefault(true)->first() ?? $country->cities()->first();
+            $defaultCitySlug = config('website.default_city_slug');
+            $city = $defaultCitySlug
+                ? $country->cities()->whereSlug($defaultCitySlug)->first()
+                : null;
+            $city = $city ?? $country->cities()->whereDefault(true)->first() ?? $country->cities()->first();
             if ($city) {
                 Cookie::queue('country_id', $country->id, 60 * 60 * 24 * 30);
                 Cookie::queue('city_id', $city->id, 60 * 60 * 24 * 30);
-            
-                if ($route->getName() == 'website.cars.show') {
-                    return redirect()->route($route->getName(), [
-                        'country' => $country,
-                        'city' => $city,
-                        'brand' => $request->route('brand'),
-                        'car' => $request->route('car'),
-                    ]);
-                } else {
-                    return redirect()->route($route->getName(), [
-                        'country' => $country,
-                        'city' => $city,
-                    ]);
+                // Redirect to include defaults on all routes except home
+                if ($routeName && $routeName !== 'home') {
+                    $params = $route->parameters();
+                    $params['country'] = $country;
+                    $params['city'] = $city;
+                    return redirect()->route($routeName, $params);
                 }
-                
             }
         }
 
         if ($country && $city) {
-            URL::defaults([
-                'locale' => \LaravelLocalization::getCurrentLocale(),
-                'country' => $country->slug,
-                'city' => $city->slug,
-            ]);
+            // Keep clean URL only on home when segments missing; include otherwise
+            $isHome = ($routeName === 'home');
+            if (!$isHome || ($hadCountryInUrl && $hadCityInUrl)) {
+                URL::defaults([
+                    'locale' => \LaravelLocalization::getCurrentLocale(),
+                    'country' => $country->slug,
+                    'city' => $city->slug,
+                ]);
+            } else {
+                URL::defaults([
+                    'locale' => \LaravelLocalization::getCurrentLocale(),
+                ]);
+            }
             app('country')->setCountry($country->id);
             app('country')->setCity($city->id);
         }
         return $next($request);
     }
 }
+

@@ -55,7 +55,7 @@ Route::group([
             Route::get("/account/wishlist/toggle", [UsersController::class, 'toggle_wish_list'])->name('website.account.toggleWishlist');
             Route::get("/account/logout", [UsersController::class, 'logout'])->name('website.account.logout');
         });
-
+        
         Route::group([
             'prefix' => '{country?}/{city?}',
             'middleware' => \Modules\Website\App\Http\Middleware\CountryMiddleware::class,

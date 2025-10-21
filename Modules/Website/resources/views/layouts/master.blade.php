@@ -33,6 +33,25 @@
     <link rel="icon" href="{{asset('/website/images/fav.jpg')}}" type="image/x-icon">
     <link href="{{url()->current()}}" rel="canonical" />
 
+    @php
+        $supportedLocales = LaravelLocalization::getSupportedLocales();   
+        $defaultLocale    = LaravelLocalization::getDefaultLocale();      
+        $hideDefault      = config('laravellocalization.hideDefaultLocaleInURL'); 
+    @endphp
+
+    @foreach($supportedLocales as $localeCode => $props)
+        @php
+            $hreflang = $props['regional'] ?? $localeCode;
+            $url = LaravelLocalization::getLocalizedURL($localeCode,null,[],!($hideDefault && $localeCode === $defaultLocale));
+        @endphp
+        <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ $url }}" />
+    @endforeach
+
+    @php
+        $xDefaultUrl = LaravelLocalization::getLocalizedURL( $defaultLocale, null,[],! $hideDefault);
+    @endphp
+    <link rel="alternate" hreflang="x-default" href="{{ $xDefaultUrl }}" />
+
     {!!app('settings')->get('scripts')!!}
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11558027423">
@@ -45,7 +64,6 @@
         }
 
         gtag('js', new Date());
-
         gtag('config', 'AW-11558027423');
     </script>
 </head>
