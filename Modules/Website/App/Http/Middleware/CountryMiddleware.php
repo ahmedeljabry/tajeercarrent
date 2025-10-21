@@ -47,10 +47,21 @@ class CountryMiddleware
             if ($city) {
                 Cookie::queue('country_id', $country->id, 60 * 60 * 24 * 30);
                 Cookie::queue('city_id', $city->id, 60 * 60 * 24 * 30);
-                return redirect()->route($route->getName(), [
-                    'country' => $country,
-                    'city' => $city,
-                ]);
+            
+                if ($route->getName() == 'website.cars.show') {
+                    return redirect()->route($route->getName(), [
+                        'country' => $country,
+                        'city' => $city,
+                        'brand' => $request->route('brand'),
+                        'car' => $request->route('car'),
+                    ]);
+                } else {
+                    return redirect()->route($route->getName(), [
+                        'country' => $country,
+                        'city' => $city,
+                    ]);
+                }
+                
             }
         }
 
