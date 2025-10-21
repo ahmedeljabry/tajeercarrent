@@ -73,7 +73,6 @@ class CountryMiddleware
             if ($city) {
                 Cookie::queue('country_id', $country->id, 60 * 60 * 24 * 30);
                 Cookie::queue('city_id', $city->id, 60 * 60 * 24 * 30);
-                // Redirect to include defaults on all routes except home
                 if ($routeName && $routeName !== 'home') {
                     $params = $route->parameters();
                     $params['country'] = $country;
@@ -84,7 +83,6 @@ class CountryMiddleware
         }
 
         if ($country && $city) {
-            // Keep clean URL only on home when segments missing; include otherwise
             $isHome = ($routeName === 'home');
             if (!$isHome || ($hadCountryInUrl && $hadCityInUrl)) {
                 URL::defaults([
@@ -103,4 +101,3 @@ class CountryMiddleware
         return $next($request);
     }
 }
-
