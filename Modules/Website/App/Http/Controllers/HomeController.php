@@ -21,7 +21,38 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller
 {
-    public function sitemap(){
+    public function sitemap()
+    {
+        $urls = $this->buildSitemapUrls();
+        $defaultLocale = LaravelLocalization::getDefaultLocale() ?? LaravelLocalization::getCurrentLocale();
+        $xml = $this->generateSitemap($urls, [$defaultLocale]);
+
+        return response($xml, 200)
+            ->header('Content-Type', 'application/xml');
+    }
+
+    public function localizedSitemap(string $locale)
+    {
+        $supportedLocales = array_keys(LaravelLocalization::getSupportedLocales());
+        $defaultLocale = LaravelLocalization::getDefaultLocale() ?? LaravelLocalization::getCurrentLocale();
+
+        if (!in_array($locale, $supportedLocales, true)) {
+            abort(404);
+        }
+
+        if ($locale === $defaultLocale) {
+            return redirect()->route('sitemap', [], 301);
+        }
+
+        $urls = $this->buildSitemapUrls();
+        $xml = $this->generateSitemap($urls, [$locale]);
+
+        return response($xml, 200)
+            ->header('Content-Type', 'application/xml');
+    }
+
+    private function buildSitemapUrls(): array
+    {
         $urls = [];
         $urls[] = [
             'loc' => '/faq',
@@ -181,19 +212,18 @@ class HomeController extends Controller
             ];
         }
 
-        $xml = $this->generateSitemap($urls);
-
-        return response($xml, 200)
-            ->header('Content-Type', 'application/xml');
+        return $urls;
     }
 
-    private function generateSitemap($urls)
+    private function generateSitemap(array $urls, ?array $locales = null)
     {
+        $locales = $locales ?? array_keys(LaravelLocalization::getSupportedLocales());
+
         $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset/>');
         $xml->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
         foreach ($urls as $url) {
-            foreach (LaravelLocalization::getSupportedLocales() as $locale => $data) {
+            foreach ($locales as $locale) {
                 if ($url['add_prefix']){
                     foreach (Country::all() as $country) {
                         foreach ($country->cities as $city) {

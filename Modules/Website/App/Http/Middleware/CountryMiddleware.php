@@ -39,9 +39,7 @@ class CountryMiddleware
             $defaultCountrySlug = config('website.default_country_slug');
             $defaultCitySlug = config('website.default_city_slug');
 
-            $country = ($defaultCountrySlug ? Country::whereSlug($defaultCountrySlug)->first() : null)
-                ?? Country::whereDefault(true)->first()
-                ?? Country::first();
+            $country = ($defaultCountrySlug ? Country::whereSlug($defaultCountrySlug)->first() : null) ?? Country::whereDefault(true)->first() ?? Country::first();
 
             if ($country) {
                 $city = $defaultCitySlug
@@ -54,7 +52,6 @@ class CountryMiddleware
             if ($country && $city) {
                 Cookie::queue('country_id', $country->id, 60 * 60 * 24 * 30);
                 Cookie::queue('city_id', $city->id, 60 * 60 * 24 * 30);
-                // Redirect to include defaults on all routes except home
                 if ($routeName && $routeName !== 'home') {
                     $params = $route->parameters();
                     $params['country'] = $country;
@@ -98,6 +95,17 @@ class CountryMiddleware
             app('country')->setCountry($country->id);
             app('country')->setCity($city->id);
         }
+
+        if (!$hadCountryInUrl && !$hadCityInUrl) {
+             URL::defaults([
+                'locale' => \LaravelLocalization::getCurrentLocale(),
+                'country' => Country::whereDefault(true)->first()->slug,
+                'city' => City::whereDefault(true)->first()->slug
+            ]);
+            app('country')->setCountry($country->id);
+            app('country')->setCity($city->id);
+        }
+
         return $next($request);
     }
 }

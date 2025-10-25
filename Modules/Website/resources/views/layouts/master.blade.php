@@ -54,8 +54,7 @@
 
     {!!app('settings')->get('scripts')!!}
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11558027423">
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11558027423"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 

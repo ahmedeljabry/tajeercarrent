@@ -24,11 +24,18 @@ use Modules\Website\App\Http\Controllers\MinifyController;
 |
 */
 
+$__supportedLocales = array_keys(LaravelLocalization::getSupportedLocales());
+$__defaultLocale = LaravelLocalization::getDefaultLocale() ?? LaravelLocalization::getCurrentLocale();
+$__localizedSitemapLocales = array_values(array_diff($__supportedLocales, [$__defaultLocale]));
+
 Route::get('/sitemap.xml', [HomeController::class, 'sitemap'])->name('sitemap');
+
+if (!empty($__localizedSitemapLocales)) {
+    Route::get('/sitemap_{locale}.xml', [HomeController::class, 'localizedSitemap'])
+        ->where('locale', implode('|', $__localizedSitemapLocales));
+}
 Route::get('/storage/{path}', [StorageController::class, "show"])->where('path', '.*');
 Route::get('/minify/{any}', [MinifyController::class, 'minify'])->name('minify')->where('any', '.*');
-
-
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -54,12 +61,11 @@ Route::group([
             Route::get("/account/fcm/register", [UsersController::class, 'register_fcm_token'])->name('website.account.registerFCMToken');
             Route::get("/account/wishlist/toggle", [UsersController::class, 'toggle_wish_list'])->name('website.account.toggleWishlist');
             Route::get("/account/logout", [UsersController::class, 'logout'])->name('website.account.logout');
-        });
+});
         
         Route::group([
             'prefix' => '{country?}/{city?}',
             'middleware' => \Modules\Website\App\Http\Middleware\CountryMiddleware::class,
-            // Avoid DB queries during boot; validate slugs in middleware
             'where' => ['country' => '[A-Za-z0-9\-]+', 'city' => '[A-Za-z0-9\-]+'],
         ], function () {
 

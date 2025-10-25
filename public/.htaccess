@@ -10,6 +10,9 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    RewriteCond %{HTTP_HOST} ^tajeercarrent\.com [NC]
+    RewriteRule ^(.*)$ https://www.tajeercarrent.com/$1 [L,R=301]
+    
     # Redirect non-http to https
     RewriteCond %{HTTPS} off
     RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
